@@ -1,10 +1,10 @@
-import Navbar from "@/components/Navbar";
-const home = () => {
+import Header from "../components/Header";
+const Home = () => {
   return (
     <div>
-      <Navbar />
+      <Header />
     </div>
   );
 };
 
-export default home;
+export default Home;
