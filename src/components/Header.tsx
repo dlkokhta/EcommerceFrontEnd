@@ -22,7 +22,7 @@ const Header = () => {
             alt="hamburger"
           />
 
-          <h1 className="text-xl">dlzon</h1>
+          <h1 className="text-xl">DLK</h1>
 
           <div className="ml-auto">
             <button

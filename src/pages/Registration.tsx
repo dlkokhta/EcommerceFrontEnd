@@ -1,18 +1,19 @@
 import { useForm } from "react-hook-form";
-import { registratioTypes } from "../types/registrationTypes";
+import { registratioTypes } from "../types/registrationTypes.js";
 import { yupResolver } from "@hookform/resolvers/yup";
-import RegistrationSchema from "./RegistrationSchema";
+import RegistrationSchema from "./RegistrationSchema.js";
 import axios from "axios";
 
 const Registration = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
     reset,
   } = useForm({ resolver: yupResolver(RegistrationSchema) });
 
   const onSubmit = async (data: registratioTypes) => {
+    console.log("data", data);
     const url = "http://localhost:3000/api/register";
 
     const userData = {
