@@ -3,6 +3,7 @@ import { registratioTypes } from "../types/registrationTypes.js";
 import { yupResolver } from "@hookform/resolvers/yup";
 import RegistrationSchema from "./RegistrationSchema.js";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const {
@@ -11,6 +12,8 @@ const Registration = () => {
     // formState: { errors },
     reset,
   } = useForm({ resolver: yupResolver(RegistrationSchema) });
+
+  const navigate = useNavigate();
 
   const onSubmit = async (data: registratioTypes) => {
     console.log("data", data);
@@ -35,7 +38,7 @@ const Registration = () => {
   };
   return (
     <div>
-      <div className=" px-16 pt-28">
+      <div className=" px-16 pt-28 lg:px-60 xl:px-[600px] ">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mb-10 flex flex-col gap-5 border border-slate-400 px-5 py-5"
@@ -93,6 +96,18 @@ const Registration = () => {
           <button className=" w-full rounded-xl bg-yellow-300 px-5  py-2 text-sm">
             Submit
           </button>
+
+          <div className="text-sm">
+            Already have an account?{" "}
+            <a
+              onClick={() => {
+                navigate("/login");
+              }}
+              className="hover:text-red cursor-pointer text-blue-500 underline"
+            >
+              Sign in
+            </a>
+          </div>
         </form>
       </div>
       <div className="">

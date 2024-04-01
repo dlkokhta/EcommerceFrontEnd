@@ -2,6 +2,7 @@ import hamburher from "../assets/hamburger.svg";
 import close from "../assets/close.svg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import logo from "../assets/logo.png";
 
 const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
@@ -22,7 +23,7 @@ const Header = () => {
             alt="hamburger"
           />
 
-          <h1 className="text-xl">DLK</h1>
+          {/* <img className="w-15 h-10" src={logo} /> */}
 
           <div className="ml-auto">
             <button
