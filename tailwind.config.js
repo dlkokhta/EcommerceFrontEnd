@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 
-
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 
@@ -13,17 +12,19 @@ export default {
         semyDarck: "#161D2F",
         white: "#FFFFFF",
       },
-
-      // backgroundImage: {
-      //   destinationMobile: "url('./assets/destination/background-destination-mobile.jpg')",
-      //   destinationTablet: "url('./assets/destination/background-destination-tablet.jpg')",
-
-      // },
     },
 
     fontFamily: {
-      outfit: ["Outfit", "sans-serif"],
+      roboto: ['Roboto', 'sans-serif'],
     },
+    fontWeight: {
+      thin: 100,
+      light: 300,
+      normal: 400,
+      medium: 500,
+    },
+
+    // <uniquifier>: Use a unique and descriptive class name
 
     // fontSize: {
     //   "3.2xl": "32px",

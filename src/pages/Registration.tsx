@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import RegistrationSchema from "./RegistrationSchema.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Registration = () => {
   const {
@@ -16,7 +17,7 @@ const Registration = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data: registratioTypes) => {
-    console.log("data", data);
+    // console.log("data", data);
     const url = "http://localhost:3000/api/register";
 
     const userData = {
@@ -26,16 +27,22 @@ const Registration = () => {
       repeatPassword: data.repeatPassword,
     };
 
-    console.log("userData", userData);
-
     try {
       const response = await axios.post(url, userData);
-      console.log("response.data", response.data);
+      // console.log("response.data ", response.data);
+      setResponse(response.data);
       reset();
     } catch (error) {
       console.log(error);
     }
   };
+  const [Response, setResponse] = useState();
+  console.log("Response222222222222222", Response);
+  if (Response === "user registered succesfully") {
+    console.log("sworiaaaaaaaaaaaaaaa");
+  }
+  navigate("/login");
+
   return (
     <div>
       <div className=" px-16 pt-28 lg:px-60 xl:px-[600px] ">
@@ -83,7 +90,7 @@ const Registration = () => {
           </div>
           <div className="w-full">
             <label className="block text-sm " htmlFor="confirm-password">
-              repeat Password
+              Repeat Password
             </label>
             <input
               className="w-full border border-slate-400  outline-green-300 "
@@ -93,12 +100,12 @@ const Registration = () => {
               name="repeatPassword"
             />
           </div>
-          <button className=" w-full rounded-xl bg-yellow-300 px-5  py-2 text-sm">
+          <button className=" w-full rounded-xl bg-yellow-300 px-5 py-2  text-sm hover:bg-yellow-400">
             Submit
           </button>
 
           <div className="text-sm">
-            Already have an account?{" "}
+            have an account?{" "}
             <a
               onClick={() => {
                 navigate("/login");
@@ -107,11 +114,19 @@ const Registration = () => {
             >
               Sign in
             </a>
+            <a
+              onClick={() => {
+                navigate("/");
+              }}
+              className="hover:text-red ml-3 cursor-pointer text-blue-500 underline"
+            >
+              Home
+            </a>
           </div>
         </form>
       </div>
       <div className="">
-        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-slate-400 to-transparent"></div>
+        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
       </div>
     </div>
   );

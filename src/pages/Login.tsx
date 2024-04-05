@@ -4,12 +4,19 @@ import loginSchema from "./LoginSchema";
 import axios from "axios";
 import { loginTypes } from "../types/loginTypes.js";
 import { useNavigate } from "react-router-dom";
-// import logo from "../assets/logo.png";
+import { useDispatch } from "react-redux";
+import { setUserName } from "../store/userNameSlice.js";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
     resolver: yupResolver(loginSchema),
   });
+  const dispatch = useDispatch();
   const onSubmit = async (data: loginTypes) => {
     const url = "http://localhost:3000/api/login";
     console.log("data", data);
@@ -21,7 +28,12 @@ const Login = () => {
 
     try {
       const response = await axios.post(url, userData);
-      console.log("response.data", response.data);
+
+      navigate("/");
+      reset();
+      const authToken = response.data.token;
+      localStorage.setItem("authToken", authToken);
+      dispatch(setUserName(response.data.name));
     } catch (error) {
       console.log(error);
     }
@@ -35,7 +47,6 @@ const Login = () => {
 
   return (
     <div>
-      {/* <img className="w-15 h-10" src={logo} /> */}
       <div className="px-16 pt-28 lg:px-60 xl:px-[600px] ">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -68,7 +79,7 @@ const Login = () => {
             />
           </div>
 
-          <button className=" w-full rounded-xl bg-yellow-300 px-5  py-2 text-sm">
+          <button className=" w-full rounded-xl bg-yellow-300 px-5 py-2  text-sm hover:bg-yellow-400">
             Submit
           </button>
         </form>
@@ -76,14 +87,14 @@ const Login = () => {
       <div className="px-16 lg:px-60 xl:px-[580px]">
         <button
           onClick={() => handleClick("/registration")}
-          className="mb-10 w-full rounded-xl bg-gradient-to-r from-transparent via-slate-300 to-transparent px-5  py-2 text-sm"
+          className="mb-10 w-full rounded-xl bg-gradient-to-r from-transparent via-slate-200  to-transparent px-5 py-2  text-sm hover:via-slate-300"
         >
           Create your account
         </button>
       </div>
 
       <div className="">
-        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-slate-400 to-transparent"></div>
+        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
       </div>
     </div>
   );
