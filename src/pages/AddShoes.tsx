@@ -25,17 +25,6 @@ const AddShoes = () => {
     userData.append("sizes", data.sizes);
     userData.append("image", data.image[0]);
 
-    // const userData = {
-    //   brand: data.brand,
-    //   model: data.model,
-    //   color: data.color,
-    //   description: data.description,
-    //   price: data.price,
-    //   sizes: data.sizes,
-    //   //   availability: data.availability,
-    //   image: data.image,
-    // };
-
     try {
       const response = await axios.post(url, userData);
       console.log("response.data", response.data);
@@ -46,7 +35,7 @@ const AddShoes = () => {
   };
   return (
     <div>
-      <div className=" px-16 pt-28">
+      <div className="px-16 pt-28 lg:px-60 xl:px-[600px]">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mb-10 flex flex-col gap-5 border border-slate-400 px-5 py-5"

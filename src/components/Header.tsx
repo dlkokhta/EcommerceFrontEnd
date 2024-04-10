@@ -26,11 +26,12 @@ const Header = () => {
   const [homeHovered, setHomeHovered] = useState(false);
   const [aboutHovered, setAboutHovered] = useState(false);
   const [contactHovered, setContactHovered] = useState(false);
+  const [brandHovered, setBrandHovered] = useState(false);
 
   return (
     <>
       <div className="mb-5">
-        <div className="flex items-center px-5 pt-5 lg:px-10 xl:px-40  ">
+        <div className="flex items-center px-5 pt-5 lg:px-20 xl:px-20  ">
           <img
             className="h-5 lg:hidden"
             onClick={() => {
@@ -40,9 +41,9 @@ const Header = () => {
             alt="hamburger"
           />
 
-          <h1 className="font-roboto hidden font-medium lg:block">eCommerce</h1>
+          <h1 className="hidden font-roboto font-medium lg:block">eCommerce</h1>
 
-          <div className="font-roboto ml-10 mt-1 hidden font-light lg:block">
+          <div className="ml-10 mt-1 hidden font-roboto font-light lg:block">
             <div className="items flex flex-row gap-2 lg:text-sm xl:gap-6">
               <div
                 onMouseEnter={() => setManHovered(true)}
@@ -103,12 +104,29 @@ const Header = () => {
                   setDestMenu("About");
                 }}
               >
-                About
+                Brand
                 {destMenu === "About" ? (
                   <div className="w-f h-[2px] bg-yellow-300"></div>
                 ) : (
                   <div
                     className={`w-f h-[2px] ${aboutHovered ? "bg-slate-300" : ""}`}
+                  ></div>
+                )}
+              </div>
+              <div
+                onMouseEnter={() => setBrandHovered(true)}
+                onMouseLeave={() => setBrandHovered(false)}
+                className=" cursor-pointer"
+                onClick={() => {
+                  setDestMenu("Brand");
+                }}
+              >
+                About
+                {destMenu === "Brand" ? (
+                  <div className="w-f h-[2px] bg-yellow-300"></div>
+                ) : (
+                  <div
+                    className={`w-f h-[2px] ${brandHovered ? "bg-slate-300" : ""}`}
                   ></div>
                 )}
               </div>
@@ -133,11 +151,11 @@ const Header = () => {
           </div>
 
           {token ? (
-            <div className="font-roboto ml-auto h-5 font-light">
+            <div className="ml-auto h-5 font-roboto font-light">
               <div className="flex flex-col items-center text-sm">
                 <div>hello, {name}</div>
                 <div
-                  className="hover:text-red cursor-pointer hover:underline"
+                  className="cursor-pointer hover:text-red hover:underline"
                   onClick={logOutClickhandler}
                 >
                   log out
