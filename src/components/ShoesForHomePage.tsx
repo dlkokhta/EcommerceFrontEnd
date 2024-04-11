@@ -10,7 +10,7 @@ const ShoesForHomePage = () => {
   const navigate = useNavigate();
   return (
     <div className="">
-      <div className="mt-5 grid px-5 pt-5 md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-20 ">
+      <div className="mt-5 px-10 pt-5 md:grid md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-20 ">
         {allShoes.map((shoes, index) => (
           <div key={index}>
             <div className="mb-2">
@@ -47,7 +47,7 @@ const ShoesForHomePage = () => {
             </div> */}
             <div className="mb-10 font-roboto text-sm font-light">
               <div>{shoes.brand}</div>
-              <div className=" ">{shoes.model}</div>
+              <div className="">{shoes.model}</div>
               <div>${shoes.price}</div>
             </div>
           </div>
