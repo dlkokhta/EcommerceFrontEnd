@@ -6,25 +6,14 @@ import Login from "./pages/Login";
 import AddShoes from "./pages/AddShoes";
 import axios from "axios";
 import { useEffect } from "react";
-
 import { setAllShoes } from "./store/allShoesSlice";
 import { useDispatch } from "react-redux";
-
-// interface allShoesTypes {
-//   brand: string;
-//   model: string;
-//   color: string;
-//   description: string;
-//   price: number;
-//   sizes: string[];
-//   availability: boolean;
-//   image: string[];
-//   id: string;
-// }
+import ShoesDetails from "./pages/ShoesDetails";
+import Header from "./components/Header";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const dispatch = useDispatch();
-  // const [allShoes, setAllShoes] = useState<allShoesTypes[]>([]);
 
   useEffect(() => {
     const fetchAllShoes = async () => {
@@ -41,34 +30,19 @@ function App() {
     fetchAllShoes();
   }, []);
 
+  const location = useLocation();
+
   return (
     <div>
+      {location.pathname === "/login" ||
+        (location.pathname === "/registration" ? "" : <Header />)}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/addShoes" element={<AddShoes />} />
+        <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
       </Routes>
-      {/* {allShoes.map((shoes, index) => (
-        <div key={index}>
-          <div>{shoes.brand}</div>
-          <div>{shoes.model}</div>
-          <div>{shoes.color}</div>
-          <div>{shoes.description}</div>
-          <div>{shoes.price}</div>
-          {shoes.sizes.map((size, sizeIndex) => (
-            <div key={sizeIndex}>{size}</div>
-          ))}
-          <div>{shoes.availability ? "Available" : "Not available"}</div>
-          {shoes.image.map((image, imageIndex) => (
-            <img
-              key={imageIndex}
-              src={`http://localhost:3000/public/storage/images/${image}`}
-              alt={image}
-            />
-          ))}
-        </div>
-      ))} */}
     </div>
   );
 }
