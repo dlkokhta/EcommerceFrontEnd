@@ -110,7 +110,7 @@ const Registration = () => {
               onClick={() => {
                 navigate("/login");
               }}
-              className="hover:text-red cursor-pointer text-blue-500 underline"
+              className="cursor-pointer text-blue-500 underline hover:text-red"
             >
               Sign in
             </a>
@@ -118,7 +118,7 @@ const Registration = () => {
               onClick={() => {
                 navigate("/");
               }}
-              className="hover:text-red ml-3 cursor-pointer text-blue-500 underline"
+              className="ml-3 cursor-pointer text-blue-500 underline hover:text-red"
             >
               Home
             </a>

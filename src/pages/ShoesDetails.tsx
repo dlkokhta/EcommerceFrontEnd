@@ -2,11 +2,14 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store.js";
 import { allShoesTypes } from "../types/allShoesTypes.js";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 const ShoesDetails = () => {
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
   );
+  const [selectedShoes, setSelectedShoes] = useState<string>("");
+  console.log("selectedShoes", selectedShoes);
 
   const { id } = useParams();
   console.log("iiiidd", id);
@@ -25,7 +28,7 @@ const ShoesDetails = () => {
                 ) => (
                   <div key={index}>
                     <img
-                      src={`http://localhost:3000/public/storage/images/${image}`}
+                      src={`http://localhost:3000/public/storage/images/${selectedShoes || shoes.image[0]}`}
                       alt={image}
                       className=""
                     />
@@ -34,16 +37,16 @@ const ShoesDetails = () => {
               )}
             </div>
             <div className=" flex max-w-60 gap-1">
-              {shoes.image.slice(1, 5).map(
+              {shoes.image.slice(0, 5).map(
                 (
                   image,
                   index, // Use slice to take only the first image
                 ) => (
-                  <div key={index}>
+                  <div onClick={() => setSelectedShoes(image)} key={index}>
                     <img
                       src={`http://localhost:3000/public/storage/images/${image}`}
                       alt={image}
-                      className=""
+                      className={`cursor-pointer border ${selectedShoes === image ? "border-blue-500" : ""}`}
                     />
                   </div>
                 ),

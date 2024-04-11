@@ -49,7 +49,6 @@ const ShoesForHomePage = () => {
               <div>{shoes.brand}</div>
               <div className=" ">{shoes.model}</div>
               <div>${shoes.price}</div>
-              <div>{shoes.id}</div>
             </div>
           </div>
         ))}
