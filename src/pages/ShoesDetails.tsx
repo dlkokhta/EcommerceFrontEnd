@@ -10,6 +10,7 @@ const ShoesDetails = () => {
   );
   const [selectedShoes, setSelectedShoes] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
+  const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
   console.log("selectedSize", selectedSize);
 
   const { id } = useParams();
@@ -81,17 +82,21 @@ const ShoesDetails = () => {
                 ))}
               </div>
 
-              <div>
-                <div> - </div>
-                <h1>Quantity:{}</h1>
-                <div> + </div>
+              <div className="mb-4 flex items-center justify-between rounded-full border  font-normal">
+                <div className="rounded-l-full border border-r bg-slate-100 px-5 py-0.5 text-center text-xl  hover:bg-slate-200">
+                  -
+                </div>
+                <h1>Quantity: {selectedQuantity}</h1>
+                <div className="rounded-r-full border border-l bg-slate-100 px-5 py-0.5 text-center text-xl hover:bg-slate-200 ">
+                  +
+                </div>
               </div>
 
-              <div className="mb-5 flex flex-col justify-center gap-3">
-                <button className=" w-full rounded-xl bg-yellow-300 px-5 py-2  text-sm hover:bg-yellow-400">
+              <div className="mb-5 flex flex-col justify-center gap-3 font-normal">
+                <button className=" w-full rounded-full bg-yellow-300 px-5 py-2  text-sm hover:bg-yellow-400">
                   Add to cart
                 </button>
-                <button className=" w-full rounded-xl bg-orange-500 px-5 py-2  text-sm hover:bg-orange-600">
+                <button className=" w-full rounded-full bg-orange-500 px-5 py-2  text-sm hover:bg-orange-600">
                   Buy now
                 </button>
               </div>

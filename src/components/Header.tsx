@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store.js";
+import cartIcon from "../assets/shoppingCart.png";
+import searchicon from "../assets/search.svg";
 
 const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
@@ -31,7 +33,7 @@ const Header = () => {
   return (
     <>
       <div className="mb-5">
-        <div className="flex items-center px-5 pt-5 lg:px-20 xl:px-20  ">
+        <div className="flex items-center gap-3 px-5 pt-5 lg:px-20 xl:px-20 ">
           <img
             className="h-5 lg:hidden"
             onClick={() => {
@@ -150,10 +152,26 @@ const Header = () => {
             </div>
           </div>
 
+          <div className=" w-full">
+            <div className="flex h-7 w-full rounded-full  border px-3 text-sm">
+              <input
+                className=" w-full font-light outline-none"
+                placeholder="search"
+              />
+              <div className="ml-auto  flex items-center">
+                <img className=" " src={searchicon} />
+              </div>
+            </div>
+          </div>
+          <img className=" h-6 w-6" src={cartIcon} />
+
           {token ? (
-            <div className="ml-auto h-5 font-roboto font-light">
-              <div className="flex flex-col items-center text-sm">
-                <div>hello, {name}</div>
+            <div className="font-thint font-roboto">
+              <div className="flex flex-col items-center text-xs">
+                <div className="min-w-[90px] whitespace-nowrap text-center">
+                  hello, {name}
+                </div>
+
                 <div
                   className="cursor-pointer hover:text-red hover:underline"
                   onClick={logOutClickhandler}
@@ -165,7 +183,7 @@ const Header = () => {
           ) : (
             <button
               onClick={() => handleClick("/login")}
-              className=" ml-auto rounded-xl bg-yellow-300 px-5 py-1 text-sm"
+              className="min-w-[90px] whitespace-normal rounded-xl bg-yellow-300 px-5 py-[6px] text-sm"
             >
               Sign in
             </button>
@@ -195,7 +213,6 @@ const Header = () => {
           )}
         </div>
       </div>
-
       <div className="to-transparen h-[0.5px] bg-gradient-to-r from-transparent via-slate-300"></div>
     </>
   );

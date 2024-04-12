@@ -31,7 +31,7 @@ export default {
     //   "3.2xl": "32px",
     // },
     screens: {
-      sm: "640px",
+      sm: "640px",  
       // => @media (min-width: 640px) { ... }
 
       md: "768px",
