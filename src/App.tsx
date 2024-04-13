@@ -12,9 +12,13 @@ import ShoesDetails from "./pages/ShoesDetails";
 import Header from "./components/Header";
 import { useLocation } from "react-router-dom";
 
+// import { useSelector } from "react-redux";
+// import { RootState } from "./store/store.js";
+// import { allShoesTypes } from "./types/allShoesTypes.js";
+
 function App() {
   const dispatch = useDispatch();
-
+  const location = useLocation();
   useEffect(() => {
     const fetchAllShoes = async () => {
       try {
@@ -28,9 +32,13 @@ function App() {
       }
     };
     fetchAllShoes();
-  }, []);
+  }, [location.pathname.startsWith("/shoesDetails/")]);
 
-  const location = useLocation();
+  // const allShoes: allShoesTypes[] = useSelector(
+  //   (state: RootState) => state.allShoes.shoes,
+  // );
+
+  // console.log("allShoes", allShoes);
 
   return (
     <div>

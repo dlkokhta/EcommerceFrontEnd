@@ -3,40 +3,50 @@ import { RootState } from "../store/store.js";
 import { allShoesTypes } from "../types/allShoesTypes.js";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+// import { useEffect } from "react";
+// import axios from "axios";
 
 const ShoesDetails = () => {
+  const { id } = useParams();
+
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
   );
   const [selectedShoes, setSelectedShoes] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
-  console.log("selectedSize", selectedSize);
+  console.log("allShoes", allShoes);
 
-  const { id } = useParams();
-  console.log("iiiidd", id);
+  // const [shoesById, setShoesById] = useState<allShoesTypes[]>([]);
+
+  // useEffect(() => {
+  //   const fetchShoesById = async () => {
+  //     const response = await axios.get(
+  //       `http://localhost:3000/api/shoesById/${id}`,
+  //     );
+  //     setShoesById(response.data);
+  //     console.log("response.data", response.data);
+  //   };
+  //   fetchShoesById();
+  // }, [id]);
+
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
-  console.log("shoesById", shoesById);
+  console.log("shoesById!!!!!!!!", shoesById);
   return (
     <div className="">
       <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-20 ">
         {shoesById.map((shoes, index) => (
           <div key={index}>
             <div className="mb-2">
-              {shoes.image.slice(0, 1).map(
-                (
-                  image,
-                  index, // Use slice to take only the first image
-                ) => (
-                  <div key={index}>
-                    <img
-                      src={`http://localhost:3000/public/storage/images/${selectedShoes || shoes.image[0]}`}
-                      alt={image}
-                      className=""
-                    />
-                  </div>
-                ),
-              )}
+              {shoes.image.slice(0, 1).map((image, index) => (
+                <div key={index}>
+                  <img
+                    src={`http://localhost:3000/public/storage/images/${selectedShoes || shoes.image[0]}`}
+                    alt={image}
+                    className=""
+                  />
+                </div>
+              ))}
             </div>
             <div className=" flex max-w-80 gap-2">
               {shoes.image.slice(0, 5).map(
