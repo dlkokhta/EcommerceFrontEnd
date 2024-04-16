@@ -3,6 +3,8 @@ import { RootState } from "../store/store.js";
 import { allShoesTypes } from "../types/allShoesTypes.js";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 // import { useEffect } from "react";
 // import axios from "axios";
 
@@ -32,6 +34,25 @@ const ShoesDetails = () => {
 
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
   console.log("shoesById!!!!!!!!", shoesById);
+
+  const handleClick = (shoesId: string) => {
+    console.log("id", shoesId);
+
+    const url = "http://localhost:3000/api/postCart";
+    const token = localStorage.getItem("authToken");
+    const userEmail = localStorage.getItem("data.email");
+
+    try {
+      axios.post(
+        url,
+        { email: userEmail, id: shoesId },
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="">
       <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-20 ">
@@ -70,8 +91,8 @@ const ShoesDetails = () => {
                 <span className="font-normal">Brand: </span>
                 {shoes.brand}
               </div>
-              <div>
-                <span className="font-normal">Model: </span>
+              <div className="font-bold">
+                <span className="font-bold">Model: </span>
                 {shoes.model}
               </div>
               <div>
@@ -103,7 +124,10 @@ const ShoesDetails = () => {
               </div>
 
               <div className="mb-5 flex flex-col justify-center gap-3 font-normal">
-                <button className=" w-full rounded-full bg-yellow-300 px-5 py-2  text-sm hover:bg-yellow-400">
+                <button
+                  onClick={() => handleClick(shoes.id)}
+                  className=" w-full rounded-full bg-yellow-300 px-5 py-2  text-sm hover:bg-yellow-400"
+                >
                   Add to cart
                 </button>
                 <button className=" w-full rounded-full bg-orange-500 px-5 py-2  text-sm hover:bg-orange-600">
