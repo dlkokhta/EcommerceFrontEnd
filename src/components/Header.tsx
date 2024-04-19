@@ -43,7 +43,12 @@ const Header = () => {
             alt="hamburger"
           />
 
-          <h1 className="hidden font-roboto font-medium lg:block">eCommerce</h1>
+          <h1
+            onClick={() => navigate("/")}
+            className="hidden cursor-pointer font-roboto font-medium lg:block"
+          >
+            eCommerce
+          </h1>
 
           <div className="ml-10 mt-1 hidden font-roboto font-light lg:block">
             <div className="items flex flex-row gap-2 lg:text-sm xl:gap-6">

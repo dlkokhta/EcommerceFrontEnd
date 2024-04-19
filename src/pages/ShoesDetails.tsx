@@ -4,7 +4,7 @@ import { allShoesTypes } from "../types/allShoesTypes.js";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+
 // import { useEffect } from "react";
 // import axios from "axios";
 
@@ -17,7 +17,8 @@ const ShoesDetails = () => {
   const [selectedShoes, setSelectedShoes] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
-  console.log("allShoes", allShoes);
+  // const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
+  console.log("selectedSize", selectedSize);
 
   // const [shoesById, setShoesById] = useState<allShoesTypes[]>([]);
 
@@ -45,7 +46,12 @@ const ShoesDetails = () => {
     try {
       axios.post(
         url,
-        { email: userEmail, id: shoesId },
+        {
+          email: userEmail,
+          cartItems: [
+            { itemId: shoesId, size: selectedSize, quantity: selectedQuantity },
+          ],
+        },
         { headers: { Authorization: `Bearer ${token}` } },
       );
     } catch (error) {
@@ -114,11 +120,17 @@ const ShoesDetails = () => {
               </div>
 
               <div className="mb-4 flex items-center justify-between rounded-full border  font-normal">
-                <div className="rounded-l-full border border-r bg-slate-100 px-5 py-0.5 text-center text-xl  hover:bg-slate-200">
+                <div
+                  onClick={() => setSelectedQuantity(selectedQuantity - 1)}
+                  className="rounded-l-full border border-r bg-slate-100 px-5 py-0.5 text-center text-xl  hover:bg-slate-200"
+                >
                   -
                 </div>
                 <h1>Quantity: {selectedQuantity}</h1>
-                <div className="rounded-r-full border border-l bg-slate-100 px-5 py-0.5 text-center text-xl hover:bg-slate-200 ">
+                <div
+                  onClick={() => setSelectedQuantity(selectedQuantity + 1)}
+                  className="rounded-r-full border border-l bg-slate-100 px-5 py-0.5 text-center text-xl hover:bg-slate-200 "
+                >
                   +
                 </div>
               </div>
