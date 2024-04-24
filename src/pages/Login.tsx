@@ -18,8 +18,7 @@ const Login = () => {
   });
   const dispatch = useDispatch();
   const onSubmit = async (data: loginTypes) => {
-    const url = "http://localhost:3000/api/login";
-    console.log("data", data);
+    const url = "https://ecommerceapi-production-844a.up.railway.app/api/login";
 
     const userData = {
       email: data.email,
@@ -28,11 +27,12 @@ const Login = () => {
 
     try {
       const response = await axios.post(url, userData);
-
       navigate("/");
       reset();
       const authToken = response.data.token;
       localStorage.setItem("authToken", authToken);
+      localStorage.setItem("data.email", data.email);
+
       dispatch(setUserName(response.data.name));
     } catch (error) {
       console.log(error);

@@ -23,7 +23,7 @@ function App() {
     const fetchAllShoes = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/getAllShoes",
+          "https://ecommerceapi-production-844a.up.railway.app/getAllShoes",
         );
 
         dispatch(setAllShoes(response.data));

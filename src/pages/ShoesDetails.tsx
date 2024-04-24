@@ -5,9 +5,6 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-// import { useEffect } from "react";
-// import axios from "axios";
-
 const ShoesDetails = () => {
   const { id } = useParams();
 
@@ -17,39 +14,30 @@ const ShoesDetails = () => {
   const [selectedShoes, setSelectedShoes] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
-  // const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
-  console.log("selectedSize", selectedSize);
-
-  // const [shoesById, setShoesById] = useState<allShoesTypes[]>([]);
-
-  // useEffect(() => {
-  //   const fetchShoesById = async () => {
-  //     const response = await axios.get(
-  //       `http://localhost:3000/api/shoesById/${id}`,
-  //     );
-  //     setShoesById(response.data);
-  //     console.log("response.data", response.data);
-  //   };
-  //   fetchShoesById();
-  // }, [id]);
 
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
-  console.log("shoesById!!!!!!!!", shoesById);
 
   const handleClick = (shoesId: string) => {
     console.log("id", shoesId);
-
-    const url = "http://localhost:3000/api/postCart";
+    const url =
+      "https://ecommerceapi-production-844a.up.railway.app/api/postCart";
     const token = localStorage.getItem("authToken");
     const userEmail = localStorage.getItem("data.email");
+    const userId = localStorage.getItem("userId");
+    console.log("userIDWEWEWEWE", localStorage);
 
     try {
       axios.post(
         url,
         {
+          userId: userId,
           email: userEmail,
           cartItems: [
-            { itemId: shoesId, size: selectedSize, quantity: selectedQuantity },
+            {
+              itemId: shoesId,
+              size: selectedSize,
+              quantity: selectedQuantity,
+            },
           ],
         },
         { headers: { Authorization: `Bearer ${token}` } },
@@ -121,14 +109,18 @@ const ShoesDetails = () => {
 
               <div className="mb-4 flex items-center justify-between rounded-full border  font-normal">
                 <div
-                  onClick={() => setSelectedQuantity(selectedQuantity - 1)}
+                  onClick={() => {
+                    setSelectedQuantity(selectedQuantity - 1);
+                  }}
                   className="rounded-l-full border border-r bg-slate-100 px-5 py-0.5 text-center text-xl  hover:bg-slate-200"
                 >
                   -
                 </div>
                 <h1>Quantity: {selectedQuantity}</h1>
                 <div
-                  onClick={() => setSelectedQuantity(selectedQuantity + 1)}
+                  onClick={() => {
+                    setSelectedQuantity(selectedQuantity + 1);
+                  }}
                   className="rounded-r-full border border-l bg-slate-100 px-5 py-0.5 text-center text-xl hover:bg-slate-200 "
                 >
                   +
