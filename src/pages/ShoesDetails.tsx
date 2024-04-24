@@ -56,7 +56,7 @@ const ShoesDetails = () => {
               {shoes.image.slice(0, 1).map((image, index) => (
                 <div key={index}>
                   <img
-                    src={`http://localhost:3000/public/storage/images/${selectedShoes || shoes.image[0]}`}
+                    src={`https://ecommerceapi-production-844a.up.railway.app/public/storage/images/${selectedShoes || shoes.image[0]}`}
                     alt={image}
                     className=""
                   />
@@ -71,7 +71,7 @@ const ShoesDetails = () => {
                 ) => (
                   <div onClick={() => setSelectedShoes(image)} key={index}>
                     <img
-                      src={`http://localhost:3000/public/storage/images/${image}`}
+                      src={`https://ecommerceapi-production-844a.up.railway.app/public/storage/images/${image}`}
                       alt={image}
                       className={`cursor-pointer border hover:border-green-300 ${selectedShoes === image ? "border-shad border-green-300" : ""}`}
                       onMouseOver={() => setSelectedShoes(image)}
