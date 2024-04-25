@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import ShoesDetails from "./pages/ShoesDetails";
 import Header from "./components/Header";
 import { useLocation } from "react-router-dom";
+import CartItems from "./pages/CartItems";
 
 // import { useSelector } from "react-redux";
 // import { RootState } from "./store/store.js";
@@ -50,6 +51,7 @@ function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/addShoes" element={<AddShoes />} />
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
+        <Route path="/cartItems" element={<CartItems />} />
       </Routes>
     </div>
   );
