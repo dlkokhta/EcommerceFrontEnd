@@ -18,8 +18,7 @@ const Registration = () => {
 
   const onSubmit = async (data: registratioTypes) => {
     // console.log("data", data);
-    const url =
-      "https://ecommerceapi-production-844a.up.railway.app/api/register";
+    const url = "http://localhost:3000/api/register";
 
     const userData = {
       name: data.name,

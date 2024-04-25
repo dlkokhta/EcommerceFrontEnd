@@ -13,8 +13,7 @@ const AddShoes = () => {
   } = useForm({ resolver: yupResolver(addShoesSchema) });
 
   const onSubmit = async (data: addShoesTypes) => {
-    const url =
-      "https://ecommerceapi-production-844a.up.railway.app/api/addItem";
+    const url = "http://localhost:3000/api/addItem";
     console.log("dataaaa1!!!!", data);
 
     const userData = new FormData();
