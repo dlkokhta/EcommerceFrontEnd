@@ -14,7 +14,6 @@ const AddShoes = () => {
 
   const onSubmit = async (data: addShoesTypes) => {
     const url = "http://localhost:3000/api/addItem";
-    console.log("dataaaa1!!!!", data);
 
     const userData = new FormData();
     userData.append("brand", data.brand);
