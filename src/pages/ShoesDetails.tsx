@@ -7,6 +7,7 @@ import axios from "axios";
 
 const ShoesDetails = () => {
   const { id } = useParams();
+  console.log("id", id);
 
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
@@ -18,7 +19,6 @@ const ShoesDetails = () => {
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
 
   const handleClick = (shoesId: string) => {
-    console.log("id", shoesId);
     const url = "http://localhost:3000/api/postCart";
     const token = localStorage.getItem("authToken");
     const userEmail = localStorage.getItem("data.email");

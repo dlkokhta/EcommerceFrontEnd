@@ -35,23 +35,36 @@ function App() {
     fetchAllShoes();
   }, [location.pathname.startsWith("/shoesDetails/")]);
 
-  // const allShoes: allShoesTypes[] = useSelector(
-  //   (state: RootState) => state.allShoes.shoes,
-  // );
+  const carticonClickHandler = async () => {
+    const userEmail = localStorage.getItem("data.email");
+    const url = `http://localhost:3000/api/getCartItems/`;
 
-  // console.log("allShoes", allShoes);
+    try {
+      const response = await axios.post(url, { email: userEmail });
+      console.log("response", response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
       {location.pathname === "/login" ||
-        (location.pathname === "/registration" ? "" : <Header />)}
+        (location.pathname === "/registration" ? (
+          ""
+        ) : (
+          <Header carticonClickHandler={carticonClickHandler} />
+        ))}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/addShoes" element={<AddShoes />} />
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
-        <Route path="/cartItems" element={<CartItems />} />
+        <Route
+          path="/cartItems/:email"
+          element={<CartItems carticonClickHandler={carticonClickHandler} />}
+        />
       </Routes>
     </div>
   );
