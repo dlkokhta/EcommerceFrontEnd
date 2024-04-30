@@ -1,15 +1,23 @@
 import { useEffect } from "react";
+import axios from "axios";
 
-interface CartItemsProps {
-  carticonClickHandler: () => void;
-}
-
-const CartItems = ({ carticonClickHandler }: CartItemsProps) => {
+const CartItems = () => {
   useEffect(() => {
-    carticonClickHandler();
-  }, [carticonClickHandler]);
+    const carticonClickHandler = async () => {
+      const userEmail = localStorage.getItem("data.email");
+      const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
 
-  return <h1>Cart Items Page</h1>;
+      try {
+        const response = await axios.get(url);
+        console.log("response.data", response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    carticonClickHandler();
+  }, []);
+
+  return <div>cart items page</div>;
 };
 
 export default CartItems;

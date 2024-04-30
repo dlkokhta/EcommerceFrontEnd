@@ -20,6 +20,7 @@ import CartItems from "./pages/CartItems";
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
+
   useEffect(() => {
     const fetchAllShoes = async () => {
       try {
@@ -35,36 +36,17 @@ function App() {
     fetchAllShoes();
   }, [location.pathname.startsWith("/shoesDetails/")]);
 
-  const carticonClickHandler = async () => {
-    const userEmail = localStorage.getItem("data.email");
-    const url = `http://localhost:3000/api/getCartItems/`;
-
-    try {
-      const response = await axios.post(url, { email: userEmail });
-      console.log("response", response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div>
       {location.pathname === "/login" ||
-        (location.pathname === "/registration" ? (
-          ""
-        ) : (
-          <Header carticonClickHandler={carticonClickHandler} />
-        ))}
+        (location.pathname === "/registration" ? "" : <Header />)}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/addShoes" element={<AddShoes />} />
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
-        <Route
-          path="/cartItems/:email"
-          element={<CartItems carticonClickHandler={carticonClickHandler} />}
-        />
+        <Route path="/cartItems/:email" element={<CartItems />} />
       </Routes>
     </div>
   );
