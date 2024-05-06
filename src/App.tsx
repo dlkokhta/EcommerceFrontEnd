@@ -13,10 +13,6 @@ import Header from "./components/Header";
 import { useLocation } from "react-router-dom";
 import CartItems from "./pages/CartItems";
 
-// import { useSelector } from "react-redux";
-// import { RootState } from "./store/store.js";
-// import { allShoesTypes } from "./types/allShoesTypes.js";
-
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
