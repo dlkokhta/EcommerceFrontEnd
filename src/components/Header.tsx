@@ -6,11 +6,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store.js";
 import cartIcon from "../assets/shoppingCart.png";
 import searchicon from "../assets/search.svg";
+import { cartItemsTypes } from "../types/cartItemsTypes";
 
 const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
   const [destMenu, setDestMenu] = useState<string>("");
-  const name = useSelector((store: RootState) => store.userName.userNameValue);
+  // const name = useSelector((store: RootState) => store.userName.userNameValue);
 
   const navigate = useNavigate();
 
@@ -18,6 +19,7 @@ const Header = () => {
     navigate(path);
   };
   const token = localStorage.getItem("authToken");
+  const name = localStorage.getItem("userName");
   const logOutClickhandler = () => {
     localStorage.removeItem("authToken");
     navigate("/");
@@ -34,6 +36,11 @@ const Header = () => {
     navigate("/cartItems/{email}");
   };
 
+  const cartItems: cartItemsTypes[] = useSelector(
+    (state: RootState) => state.cartItems.cartItems,
+  );
+  const cartItemCount = cartItems.length;
+  console.log("cartItemCount", cartItemCount);
   return (
     <>
       <div className="mb-5">
@@ -176,7 +183,7 @@ const Header = () => {
             <div onClick={cartIconClickhandler}>
               <img className="relative h-6 w-6" src={cartIcon} />
               <div className=" absolute top-[13px] ml-3 flex h-4 w-4 items-center justify-center rounded-full bg-red text-xs font-bold text-white">
-                {1}
+                {cartItemCount}
               </div>
             </div>
           </div>

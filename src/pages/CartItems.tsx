@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import axios from "axios";
-import { useState } from "react";
+
 import { RootState } from "../store/store.js";
 import { allShoesTypes } from "../types/allShoesTypes.js";
 import { useSelector } from "react-redux";
@@ -14,7 +14,6 @@ const CartItems = () => {
   const cartItems: cartItemsTypes[] = useSelector(
     (state: RootState) => state.cartItems.cartItems,
   );
-  console.log("cartItems", cartItems.length);
 
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
@@ -29,17 +28,12 @@ const CartItems = () => {
         const response = await axios.get(url);
 
         dispatch(setCartItems(response.data.cartItems));
-
-        // setCartItems(response.data.cartItems);
       } catch (error) {
         console.log(error);
       }
     };
     carticonClickHandler();
   }, []);
-
-  const cartItemCount = cartItems.length;
-  console.log("cartItemCount", cartItemCount);
 
   return (
     <div>
@@ -73,6 +67,11 @@ const CartItems = () => {
             </div>
           );
         })}
+      </div>
+      <div className="flex justify-center">
+        <button className=" min-w-[150px] whitespace-normal rounded-xl bg-red px-5 py-[6px] text-sm text-white">
+          checkout
+        </button>
       </div>
     </div>
   );

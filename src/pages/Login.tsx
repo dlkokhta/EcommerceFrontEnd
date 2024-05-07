@@ -4,8 +4,8 @@ import loginSchema from "./LoginSchema";
 import axios from "axios";
 import { loginTypes } from "../types/loginTypes.js";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setUserName } from "../store/userNameSlice.js";
+// import { useDispatch } from "react-redux";
+// import { setUserName } from "../store/userNameSlice.js";
 
 const Login = () => {
   const {
@@ -16,7 +16,8 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(loginSchema),
   });
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+
   const onSubmit = async (data: loginTypes) => {
     const url = "http://localhost:3000/api/login";
 
@@ -32,8 +33,9 @@ const Login = () => {
       const authToken = response.data.token;
       localStorage.setItem("authToken", authToken);
       localStorage.setItem("data.email", data.email);
+      localStorage.setItem("userName", response.data.name);
 
-      dispatch(setUserName(response.data.name));
+      // Check if name is null and provide a default value
     } catch (error) {
       console.log(error);
     }
