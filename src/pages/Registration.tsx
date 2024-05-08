@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import RegistrationSchema from "./RegistrationSchema.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+// import { useState } from "react";
 
 const Registration = () => {
   const {
@@ -17,7 +17,6 @@ const Registration = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data: registratioTypes) => {
-    // console.log("data", data);
     const url = "http://localhost:3000/api/register";
 
     const userData = {
@@ -29,18 +28,13 @@ const Registration = () => {
 
     try {
       const response = await axios.post(url, userData);
-      // console.log("response.data ", response.data);
-      setResponse(response.data);
+
       reset();
     } catch (error) {
       console.log(error);
     }
   };
-  const [Response, setResponse] = useState();
-  console.log("Response222222222222222", Response);
-  if (Response === "user registered succesfully") {
-    console.log("sworiaaaaaaaaaaaaaaa");
-  }
+
   navigate("/login");
 
   return (

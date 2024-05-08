@@ -7,7 +7,6 @@ import axios from "axios";
 
 const ShoesDetails = () => {
   const { id } = useParams();
-  console.log("id", id);
 
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
@@ -46,8 +45,8 @@ const ShoesDetails = () => {
   return (
     <div className="">
       <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-20 ">
-        {shoesById.map((shoes, index) => (
-          <div key={index}>
+        {shoesById.map((shoes) => (
+          <div key={shoes.id}>
             <div className="mb-2">
               {shoes.image.slice(0, 1).map((image, index) => (
                 <div key={index}>
@@ -60,21 +59,16 @@ const ShoesDetails = () => {
               ))}
             </div>
             <div className=" flex max-w-80 gap-2">
-              {shoes.image.slice(0, 5).map(
-                (
-                  image,
-                  index, // Use slice to take only the first image
-                ) => (
-                  <div onClick={() => setSelectedShoes(image)} key={index}>
-                    <img
-                      src={`http://localhost:3000/public/storage/images/${image}`}
-                      alt={image}
-                      className={`cursor-pointer border hover:border-green-300 ${selectedShoes === image ? "border-shad border-green-300" : ""}`}
-                      onMouseOver={() => setSelectedShoes(image)}
-                    />
-                  </div>
-                ),
-              )}
+              {shoes.image.slice(0, 5).map((image, index) => (
+                <div key={index} onClick={() => setSelectedShoes(image)}>
+                  <img
+                    src={`http://localhost:3000/public/storage/images/${image}`}
+                    alt={image}
+                    className={`cursor-pointer border hover:border-green-300 ${selectedShoes === image ? "border-shad border-green-300" : ""}`}
+                    onMouseOver={() => setSelectedShoes(image)}
+                  />
+                </div>
+              ))}
             </div>
             <div className="mb-10 font-roboto text-sm font-light">
               <div>
@@ -95,6 +89,7 @@ const ShoesDetails = () => {
               <div className="mb-7 grid grid-cols-4 gap-1">
                 {shoes.sizes.map((size) => (
                   <div
+                    key={size}
                     onClick={() => setSelectedSize(size)}
                     className={` inline-block border-2 text-center ${selectedSize === size ? "bg-slate-500 text-white" : ""}`}
                   >

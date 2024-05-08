@@ -2,16 +2,15 @@ import hamburher from "../assets/hamburger.svg";
 import close from "../assets/close.svg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store.js";
 import cartIcon from "../assets/shoppingCart.png";
 import searchicon from "../assets/search.svg";
+import { RootState } from "../store/store.js";
 import { cartItemsTypes } from "../types/cartItemsTypes";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
   const [destMenu, setDestMenu] = useState<string>("");
-  // const name = useSelector((store: RootState) => store.userName.userNameValue);
 
   const navigate = useNavigate();
 
@@ -35,12 +34,10 @@ const Header = () => {
   const cartIconClickhandler = () => {
     navigate("/cartItems/{email}");
   };
-
   const cartItems: cartItemsTypes[] = useSelector(
     (state: RootState) => state.cartItems.cartItems,
   );
-  const cartItemCount = cartItems.length;
-  console.log("cartItemCount", cartItemCount);
+
   return (
     <>
       <div className="mb-5">
@@ -183,7 +180,7 @@ const Header = () => {
             <div onClick={cartIconClickhandler}>
               <img className="relative h-6 w-6" src={cartIcon} />
               <div className=" absolute top-[13px] ml-3 flex h-4 w-4 items-center justify-center rounded-full bg-red text-xs font-bold text-white">
-                {cartItemCount}
+                {cartItems.length}
               </div>
             </div>
           </div>

@@ -1,11 +1,12 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import axios from "axios";
-
 import { RootState } from "../store/store.js";
 import { allShoesTypes } from "../types/allShoesTypes.js";
 import { useSelector } from "react-redux";
 import { cartItemsTypes } from "../types/cartItemsTypes";
 import { setCartItems } from "../store/cartItemsSlice";
+import { useEffect } from "react";
+
 import { useDispatch } from "react-redux";
 
 const CartItems = () => {
@@ -14,6 +15,8 @@ const CartItems = () => {
   const cartItems: cartItemsTypes[] = useSelector(
     (state: RootState) => state.cartItems.cartItems,
   );
+
+  console.log("cartItems", cartItems);
 
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
@@ -34,6 +37,14 @@ const CartItems = () => {
     };
     carticonClickHandler();
   }, []);
+
+  const totalAmount = cartItems.reduce((total, item) => {
+    const shoe = allShoes.find((shoe) => shoe.id === item.itemId);
+    if (!shoe) {
+      return total;
+    }
+    return total + item.quantity * shoe.price;
+  }, 0);
 
   return (
     <div>
@@ -62,16 +73,17 @@ const CartItems = () => {
                 <h1>quantity: {item.quantity}</h1>
                 <p>Model: {shoe.model}</p>
                 <p>Color: {shoe.color}</p>
-                <p>Price: {shoe.price}</p>
+                <p>Price: ${shoe.price}</p>
               </div>
             </div>
           );
         })}
-      </div>
-      <div className="flex justify-center">
-        <button className=" min-w-[150px] whitespace-normal rounded-xl bg-red px-5 py-[6px] text-sm text-white">
-          checkout
-        </button>
+        <div className="flex flex-col items-center justify-center pb-10">
+          <div className="mb-5">total amount: ${totalAmount}</div>
+          <button className=" min-w-[150px] whitespace-normal rounded-xl bg-red px-5 py-[6px] text-sm text-white">
+            checkout
+          </button>
+        </div>
       </div>
     </div>
   );
