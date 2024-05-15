@@ -12,6 +12,7 @@ import ShoesDetails from "./pages/ShoesDetails";
 import Header from "./components/Header";
 import { useLocation } from "react-router-dom";
 import CartItems from "./pages/CartItems";
+import { setCartItems } from "./store/cartItemsSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,7 +31,22 @@ function App() {
       }
     };
     fetchAllShoes();
-  }, [location.pathname.startsWith("/shoesDetails/")]);
+  }, []);
+
+  const handleGetCartItems = async () => {
+    const userEmail = localStorage.getItem("data.email");
+    const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
+
+    try {
+      const response = await axios.get(url);
+
+      dispatch(setCartItems(response.data.cartItems));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  handleGetCartItems();
 
   return (
     <div>
@@ -41,7 +57,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/addShoes" element={<AddShoes />} />
-        <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
+        <Route
+          path="/shoesDetails/:id"
+          element={<ShoesDetails />}
+          onAddToCart={handleGetCartItems()}
+        />
         <Route path="/cartItems/:email" element={<CartItems />} />
       </Routes>
     </div>

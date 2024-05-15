@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import RegistrationSchema from "./RegistrationSchema.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import { useState } from "react";
 
 const Registration = () => {
   const {

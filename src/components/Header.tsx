@@ -37,6 +37,7 @@ const Header = () => {
   const cartItems: cartItemsTypes[] = useSelector(
     (state: RootState) => state.cartItems.cartItems,
   );
+  console.log("cartItems from Headerrrrr", cartItems);
 
   return (
     <>
@@ -180,7 +181,7 @@ const Header = () => {
             <div onClick={cartIconClickhandler}>
               <img className="relative h-6 w-6" src={cartIcon} />
               <div className=" absolute top-[13px] ml-3 flex h-4 w-4 items-center justify-center rounded-full bg-red text-xs font-bold text-white">
-                {cartItems.length}
+                {cartItems === undefined ? 0 : cartItems.length}
               </div>
             </div>
           </div>
