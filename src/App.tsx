@@ -57,11 +57,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/addShoes" element={<AddShoes />} />
-        <Route
-          path="/shoesDetails/:id"
-          element={<ShoesDetails />}
-          onAddToCart={handleGetCartItems()}
-        />
+        <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
         <Route path="/cartItems/:email" element={<CartItems />} />
       </Routes>
     </div>

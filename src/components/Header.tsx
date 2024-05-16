@@ -42,7 +42,7 @@ const Header = () => {
   return (
     <>
       <div className="mb-5">
-        <div className="flex items-center gap-3 px-5 pt-5 lg:px-20 xl:px-20 ">
+        <div className="flex items-center gap-3 px-5 pt-5 lg:px-10  xl:px-10 ">
           <img
             className="h-5 lg:hidden"
             onClick={() => {
@@ -167,7 +167,7 @@ const Header = () => {
           </div>
 
           <div className=" w-full">
-            <div className="flex h-7 w-full rounded-full  border px-3 text-sm">
+            <div className="flex h-7 rounded-full  border px-3 text-sm">
               <input
                 className=" w-full font-light outline-none"
                 placeholder="search"
@@ -177,7 +177,7 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div className="w-12">
+          <div className="w-12 lg:mr-2 lg:w-14">
             <div onClick={cartIconClickhandler}>
               <img className="relative h-6 w-6" src={cartIcon} />
               <div className=" absolute top-[13px] ml-3 flex h-4 w-4 items-center justify-center rounded-full bg-red text-xs font-bold text-white">

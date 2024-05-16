@@ -2,10 +2,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store.js";
 import { allShoesTypes } from "../types/allShoesTypes.js";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
-const ShoesDetails = ({ onAddToCart }: { onAddToCart: () => void }) => {
+const ShoesDetails = () => {
   const { id } = useParams();
 
   console.log("id", id);
@@ -40,15 +40,10 @@ const ShoesDetails = ({ onAddToCart }: { onAddToCart: () => void }) => {
 
         { headers: { Authorization: `Bearer ${token}` } },
       );
-      onAddToCart();
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    onAddToCart;
-  }, [onAddToCart]);
 
   // useEffect(() => {
   //   const handleClick = async () => {
@@ -69,10 +64,10 @@ const ShoesDetails = ({ onAddToCart }: { onAddToCart: () => void }) => {
 
   return (
     <div className="">
-      <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-20 ">
+      <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-10 ">
         {shoesById.map((shoes) => (
           <div key={shoes.id}>
-            <div className="md:flex md:gap-10">
+            <div className="md:flex md:gap-10 lg:gap-20">
               <div className="flex flex-col">
                 <div className="mb-2">
                   {shoes.image.slice(0, 1).map((image, index) => (
@@ -115,7 +110,7 @@ const ShoesDetails = ({ onAddToCart }: { onAddToCart: () => void }) => {
                   <span className="font-normal">Color: </span>
                   {shoes.color}
                 </div>
-                <div className="mb-7 grid grid-cols-4 gap-1">
+                <div className="mb-7 grid grid-cols-4 gap-1 lg:gap-2">
                   {shoes.sizes.map((size) => (
                     <div
                       key={size}
