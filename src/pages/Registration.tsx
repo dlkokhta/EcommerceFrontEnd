@@ -26,7 +26,7 @@ const Registration = () => {
     };
 
     try {
-      const response = await axios.post(url, userData);
+      await axios.post(url, userData);
 
       reset();
     } catch (error) {
