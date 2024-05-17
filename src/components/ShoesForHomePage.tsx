@@ -10,7 +10,7 @@ const ShoesForHomePage = () => {
   const navigate = useNavigate();
   return (
     <div className="">
-      <div className="mt-5 px-5 pt-5 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-3 lg:px-10 ">
+      <div className="mt-5 px-5 pt-5 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-3 lg:px-10 xl:px-20">
         {allShoes.map((shoes, index) => (
           <div key={index}>
             <div className="mb-2">

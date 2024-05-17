@@ -64,10 +64,10 @@ const ShoesDetails = () => {
 
   return (
     <div className="">
-      <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-10 ">
+      <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-40 ">
         {shoesById.map((shoes) => (
           <div key={shoes.id}>
-            <div className="md:flex md:gap-10 lg:gap-20">
+            <div className="md:flex md:gap-10 lg:gap-20 xl:gap-[100px] ">
               <div className="flex flex-col">
                 <div className="mb-2">
                   {shoes.image.slice(0, 1).map((image, index) => (
@@ -80,13 +80,13 @@ const ShoesDetails = () => {
                     </div>
                   ))}
                 </div>
-                <div className=" flex max-w-80 gap-2">
+                <div className=" flex max-w-80 gap-2 xl:w-full">
                   {shoes.image.slice(0, 5).map((image, index) => (
                     <div key={index} onClick={() => setSelectedShoes(image)}>
                       <img
                         src={`http://localhost:3000/public/storage/images/${image}`}
                         alt={image}
-                        className={`cursor-pointer border hover:border-green-300 ${selectedShoes === image ? "border-shad border-green-300" : ""}`}
+                        className={`cursor-pointer border hover:border-green-300 xl:h-20  ${selectedShoes === image ? "border-shad border-green-300" : ""}`}
                         onMouseOver={() => setSelectedShoes(image)}
                       />
                     </div>
