@@ -11,8 +11,11 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
   const [destMenu, setDestMenu] = useState<string>("");
-
   const navigate = useNavigate();
+
+  const cartItems: cartItemsTypes[] = useSelector(
+    (state: RootState) => state.cartItems.cartItems,
+  );
 
   const handleClick = (path: string) => {
     navigate(path);
@@ -33,16 +36,17 @@ const Header = () => {
 
   const cartIconClickhandler = () => {
     navigate("/cartItems/{email}");
+    console.log("cartItems");
   };
-  const cartItems: cartItemsTypes[] = useSelector(
-    (state: RootState) => state.cartItems.cartItems,
-  );
-  console.log("cartItems from Headerrrrr", cartItems);
+  // const cartItems: cartItemsTypes[] = useSelector(
+  //   (state: RootState) => state.cartItems.cartItems,
+  // );
+  // console.log("cartItems upadted ", cartItems.length);
 
   return (
     <>
       <div className="mb-5">
-        <div className="flex items-center gap-3 px-5 pt-5 lg:px-10  xl:px-20 ">
+        <div className="flex items-center gap-3 px-5 pt-5 lg:px-10  xl:px-20 2xl:px-[100px]">
           <img
             className="h-5 lg:hidden"
             onClick={() => {
@@ -59,7 +63,7 @@ const Header = () => {
             eCommerce
           </h1>
 
-          <div className="ml-10 mt-1 hidden font-roboto font-light lg:block">
+          <div className="ml-10 mt-1 hidden font-roboto font-light lg:block ">
             <div className="items flex flex-row gap-2 lg:text-sm xl:gap-6">
               <div
                 onMouseEnter={() => setManHovered(true)}

@@ -25,7 +25,7 @@ const CartItems = () => {
   return (
     <div>
       {cartItems ? (
-        <div className="px-5 pt-5 md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-20">
+        <div className="3xl:px-[400px] px-5 pt-5 md:grid-cols-2 md:gap-2 xl:mt-20 xl:grid-cols-3 xl:px-20">
           {cartItems.map((item, index) => {
             // Find the corresponding shoe in allShoes based on itemId
             const shoe = allShoes.find((shoe) => shoe.id === item.itemId);

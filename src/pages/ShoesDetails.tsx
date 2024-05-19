@@ -4,11 +4,12 @@ import { allShoesTypes } from "../types/allShoesTypes.js";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { setCartItems } from "../store/cartItemsSlice";
+import { useDispatch } from "react-redux";
 
 const ShoesDetails = () => {
   const { id } = useParams();
-
-  console.log("id", id);
+  const dispatch = useDispatch();
 
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
@@ -18,6 +19,19 @@ const ShoesDetails = () => {
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
 
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
+
+  const fetchItems = async () => {
+    const userEmail = localStorage.getItem("data.email");
+    const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
+
+    try {
+      const response = await axios.get(url);
+
+      dispatch(setCartItems(response.data.cartItems));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleClick = async (shoesId: string) => {
     const postUrl = "http://localhost:3000/api/postCart";
@@ -40,31 +54,16 @@ const ShoesDetails = () => {
 
         { headers: { Authorization: `Bearer ${token}` } },
       );
+
+      fetchItems();
     } catch (error) {
       console.log(error);
     }
   };
 
-  // useEffect(() => {
-  //   const handleClick = async () => {
-  //     const userEmail = localStorage.getItem("data.email");
-  //     const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
-
-  //     try {
-  //       const response = await axios.get(url);
-
-  //       dispatch(setCartItems(response.data.cartItems));
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   handleClick();
-  // }, []);
-
   return (
     <div className="">
-      <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-40 ">
+      <div className=" 3xl:px-[400px] mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-40">
         {shoesById.map((shoes) => (
           <div key={shoes.id}>
             <div className="md:flex md:gap-10 lg:gap-20 xl:gap-[100px] ">
@@ -86,7 +85,7 @@ const ShoesDetails = () => {
                       <img
                         src={`http://localhost:3000/public/storage/images/${image}`}
                         alt={image}
-                        className={`cursor-pointer border hover:border-green-300 xl:h-20  ${selectedShoes === image ? "border-shad border-green-300" : ""}`}
+                        className={`cursor-pointer border hover:border-green-300 ${selectedShoes === image ? "border-shad border-green-300" : ""}`}
                         onMouseOver={() => setSelectedShoes(image)}
                       />
                     </div>
