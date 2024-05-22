@@ -63,7 +63,7 @@ const ShoesDetails = () => {
 
   return (
     <div className="">
-      <div className=" 3xl:px-[400px] mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-40">
+      <div className=" mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-40 3xl:px-[400px]">
         {shoesById.map((shoes) => (
           <div key={shoes.id}>
             <div className="md:flex md:gap-10 lg:gap-20 xl:gap-[100px] ">

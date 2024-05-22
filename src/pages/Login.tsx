@@ -49,6 +49,12 @@ const Login = () => {
 
   return (
     <div>
+      <h1
+        onClick={() => navigate("/")}
+        className=" hidden cursor-pointer text-center font-roboto font-medium lg:block"
+      >
+        eCommerce
+      </h1>
       <div className="px-16 pt-28 lg:px-60 xl:px-[600px] ">
         <form
           onSubmit={handleSubmit(onSubmit)}

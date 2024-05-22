@@ -41,6 +41,8 @@ function App() {
       const response = await axios.get(url);
 
       dispatch(setCartItems(response.data.cartItems));
+      // const itemsQuantity = response.data.cartItems.length;
+      // localStorage.setItem("itemsQuantity", itemsQuantity);
     } catch (error) {
       console.log(error);
     }

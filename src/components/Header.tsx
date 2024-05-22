@@ -22,9 +22,14 @@ const Header = () => {
   };
   const token = localStorage.getItem("authToken");
   const name = localStorage.getItem("userName");
+  let itemsQuantity = 0;
+  if (localStorage.getItem("authToken") !== null) {
+    itemsQuantity = cartItems.length;
+  }
+
   const logOutClickhandler = () => {
     localStorage.removeItem("authToken");
-    navigate("/");
+    navigate("/login");
   };
 
   const [manHovered, setManHovered] = useState(false);
@@ -36,7 +41,6 @@ const Header = () => {
 
   const cartIconClickhandler = () => {
     navigate("/cartItems/{email}");
-    console.log("cartItems");
   };
   // const cartItems: cartItemsTypes[] = useSelector(
   //   (state: RootState) => state.cartItems.cartItems,
@@ -185,7 +189,8 @@ const Header = () => {
             <div onClick={cartIconClickhandler}>
               <img className="relative h-6 w-6" src={cartIcon} />
               <div className=" absolute top-[13px] ml-3 flex h-4 w-4 items-center justify-center rounded-full bg-red text-xs font-bold text-white">
-                {cartItems === undefined ? 0 : cartItems.length}
+                {/* {cartItems === undefined ? 0 : cartItems.length} */}
+                {itemsQuantity}
               </div>
             </div>
           </div>
