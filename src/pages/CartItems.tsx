@@ -24,7 +24,7 @@ const CartItems = () => {
 
   return (
     <div>
-      {localStorage.getItem("authToken") !== null ? (
+      {cartItems ? (
         <div className="px-5 pt-5 md:grid-cols-2 md:gap-2 xl:mt-20 xl:grid-cols-3 xl:px-20 3xl:px-[400px]">
           {cartItems.map((item, index) => {
             // Find the corresponding shoe in allShoes based on itemId

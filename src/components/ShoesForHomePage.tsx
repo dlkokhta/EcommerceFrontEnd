@@ -7,7 +7,6 @@ const ShoesForHomePage = () => {
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
   );
-
   const navigate = useNavigate();
   return (
     <div className="">
