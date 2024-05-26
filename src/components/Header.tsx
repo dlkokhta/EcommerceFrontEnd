@@ -25,6 +25,7 @@ const Header = () => {
 
   const logOutClickhandler = () => {
     localStorage.removeItem("authToken");
+    localStorage.removeItem("data.email");
     navigate("/login");
   };
 

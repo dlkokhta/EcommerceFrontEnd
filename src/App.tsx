@@ -35,6 +35,7 @@ function App() {
 
   const handleGetCartItems = async () => {
     const userEmail = localStorage.getItem("data.email");
+
     const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
 
     try {
@@ -49,6 +50,11 @@ function App() {
   };
 
   handleGetCartItems();
+
+  // console.log("data.email", localStorage.getItem("data.email"));
+  // if (localStorage.getItem("data.email")) {
+  // }
+  // handleGetCartItems();
 
   return (
     <div>
