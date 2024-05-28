@@ -3,7 +3,7 @@ import * as yup from "yup";
 const registrationSchema = yup.object({
   email: yup
     .string()
-    .email("email must be a valid email")
+    .email("email must be a valid")
     .required("email is required"),
 
   password: yup

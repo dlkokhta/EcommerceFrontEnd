@@ -4,10 +4,13 @@ import loginSchema from "./LoginSchema";
 import axios from "axios";
 import { loginTypes } from "../types/loginTypes.js";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 // import { useDispatch } from "react-redux";
 // import { setUserName } from "../store/userNameSlice.js";
 
 const Login = () => {
+  const [responseError, setResponseError] = useState(null);
+  console.log("responseError", responseError);
   const {
     register,
     handleSubmit,
@@ -36,8 +39,9 @@ const Login = () => {
       localStorage.setItem("userName", response.data.name);
 
       // Check if name is null and provide a default value
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      // console.log(error.response.data.message);
+      setResponseError(error.response.data);
     }
   };
 
@@ -62,7 +66,8 @@ const Login = () => {
         >
           <h1 className="text-xl ">Sign in</h1>
 
-          <div className="w-full">
+          <div className="w-full ">
+            <h1 className="absolute text-right text-red">{responseError}</h1>
             <label className="block text-sm" htmlFor="email">
               email
             </label>
