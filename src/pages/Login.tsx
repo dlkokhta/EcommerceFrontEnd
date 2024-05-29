@@ -67,7 +67,7 @@ const Login = () => {
           </h1>
         </div>
       )}
-      <div className="px-16 pt-10 lg:px-60 xl:px-[400px] ">
+      <div className="px-16 pt-10 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[580px] 3xl:px-[750px]">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mb-10 flex flex-col gap-5 border border-slate-400 px-5 py-5"
@@ -106,7 +106,7 @@ const Login = () => {
           </button>
         </form>
       </div>
-      <div className="px-16 lg:px-60 xl:px-[580px]">
+      <div className="px-16 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[580px] 3xl:px-[750px]">
         <button
           onClick={() => handleClick("/registration")}
           className="mb-10 w-full rounded-xl bg-gradient-to-r from-transparent via-slate-200  to-transparent px-5 py-2  text-sm hover:via-slate-300"
