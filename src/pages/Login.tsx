@@ -52,14 +52,22 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="pt-10">
       <h1
         onClick={() => navigate("/")}
-        className=" hidden cursor-pointer text-center font-roboto font-medium lg:block"
+        className="cursor-pointer text-center font-roboto font-medium"
       >
         eCommerce
       </h1>
-      <div className="px-16 pt-28 lg:px-60 xl:px-[600px] ">
+
+      {responseError && (
+        <div className="mt-10 px-16 text-center lg:px-60 xl:px-[400px]">
+          <h1 className="border border-red bg-rose-200 py-5 text-sm">
+            {responseError}
+          </h1>
+        </div>
+      )}
+      <div className="px-16 pt-10 lg:px-60 xl:px-[400px] ">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mb-10 flex flex-col gap-5 border border-slate-400 px-5 py-5"
@@ -67,10 +75,11 @@ const Login = () => {
           <h1 className="text-xl ">Sign in</h1>
 
           <div className="w-full ">
-            <h1 className="absolute text-right text-red">{responseError}</h1>
-            <label className="block text-sm" htmlFor="email">
-              email
-            </label>
+            <div className="flex justify-between">
+              <label className="block text-sm" htmlFor="email">
+                email
+              </label>
+            </div>
             <input
               className="w-full border  border-slate-400  outline-green-300  "
               type="email"
