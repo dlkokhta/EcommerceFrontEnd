@@ -6,8 +6,10 @@ import { useState } from "react";
 import axios from "axios";
 import { setCartItems } from "../store/cartItemsSlice";
 import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
 
 const ShoesDetails = () => {
+  // const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -17,7 +19,7 @@ const ShoesDetails = () => {
   const [selectedShoes, setSelectedShoes] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
-  const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
+  // const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
 
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
 
@@ -38,10 +40,10 @@ const ShoesDetails = () => {
     const postUrl = "http://localhost:3000/api/postCart";
     const token = localStorage.getItem("authToken");
     const userEmail = localStorage.getItem("data.email");
+    console.log("clicked");
+
     if (!token) {
-      setAddToCartAlert(true);
     }
-    // return alert("Please login to add items to cart");
 
     try {
       await axios.post(
@@ -67,8 +69,12 @@ const ShoesDetails = () => {
   };
 
   return (
-    <div className="">
-      {addToCartAlert && <div>"Please login to add items to cart"</div>}
+    <div className="relative">
+      {/* {addToCartAlert && (
+        <div className="absolute h-full w-full bg-slate-400 bg-opacity-50 pt-10 text-center">
+          "Please login to add items to cart"
+        </div>
+      )} */}
       <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 lg:px-60">
         {shoesById.map((shoes) => (
           <div key={shoes.id}>

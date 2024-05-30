@@ -184,7 +184,7 @@ const Header = () => {
           </div>
           <div className="w-12 lg:mr-2 lg:w-14">
             <div onClick={cartIconClickhandler}>
-              <img className="relative h-6 w-6" src={cartIcon} />
+              <img className="relative h-6 w-6 cursor-pointer" src={cartIcon} />
               <div className=" absolute top-[13px] ml-3 flex h-4 w-4 items-center justify-center rounded-full bg-red text-xs font-bold text-white">
                 {cartItems === undefined ? 0 : cartItems.length}
               </div>
