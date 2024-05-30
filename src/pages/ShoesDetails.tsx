@@ -17,6 +17,7 @@ const ShoesDetails = () => {
   const [selectedShoes, setSelectedShoes] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
+  const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
 
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
 
@@ -37,6 +38,10 @@ const ShoesDetails = () => {
     const postUrl = "http://localhost:3000/api/postCart";
     const token = localStorage.getItem("authToken");
     const userEmail = localStorage.getItem("data.email");
+    if (!token) {
+      setAddToCartAlert(true);
+    }
+    // return alert("Please login to add items to cart");
 
     try {
       await axios.post(
@@ -63,7 +68,8 @@ const ShoesDetails = () => {
 
   return (
     <div className="">
-      <div className=" mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 xl:grid-cols-3 xl:px-40 3xl:px-[400px]">
+      {addToCartAlert && <div>"Please login to add items to cart"</div>}
+      <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 lg:px-60">
         {shoesById.map((shoes) => (
           <div key={shoes.id}>
             <div className="md:flex md:gap-10 lg:gap-20 xl:gap-[100px] ">
@@ -109,7 +115,7 @@ const ShoesDetails = () => {
                   <span className="font-normal">Color: </span>
                   {shoes.color}
                 </div>
-                <div className="mb-7 grid grid-cols-4 gap-1 lg:gap-2">
+                <div className="mb-7 grid cursor-pointer grid-cols-4 gap-1 lg:gap-2">
                   {shoes.sizes.map((size) => (
                     <div
                       key={size}

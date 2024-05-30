@@ -46,8 +46,8 @@ const Header = () => {
 
   return (
     <>
-      <div className="mb-5">
-        <div className="flex items-center gap-3 px-5 pt-5 lg:px-10  xl:px-20 2xl:px-[100px]">
+      <div className="mb-5 overflow-hidden">
+        <div className="flex items-center gap-3 px-5 pt-5 lg:px-10">
           <img
             className="h-5 lg:hidden"
             onClick={() => {

@@ -15,14 +15,14 @@ export default {
     },
 
     fontFamily: {
-      roboto: ['Roboto', 'sans-serif'],
+      roboto: ["Roboto", "sans-serif"],
     },
     fontWeight: {
       thin: 100,
       light: 300,
       normal: 400,
       medium: 500,
-      bold:700,
+      bold: 700,
     },
 
     // <uniquifier>: Use a unique and descriptive class name
@@ -31,7 +31,7 @@ export default {
     //   "3.2xl": "32px",
     // },
     screens: {
-      sm: "640px",  
+      sm: "640px",
       // => @media (min-width: 640px) { ... }
 
       md: "768px",
@@ -45,7 +45,6 @@ export default {
       "2xl": "1536px",
       // => @media (min-width: 1280px) { ... }
       "3xl": "1836px",
-      
     },
   },
 
