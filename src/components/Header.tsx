@@ -39,10 +39,6 @@ const Header = () => {
   const cartIconClickhandler = () => {
     navigate("/cartItems/{email}");
   };
-  // const cartItems: cartItemsTypes[] = useSelector(
-  //   (state: RootState) => state.cartItems.cartItems,
-  // );
-  // console.log("cartItems upadted ", cartItems.length);
 
   return (
     <>
