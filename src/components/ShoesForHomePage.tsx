@@ -7,6 +7,7 @@ const ShoesForHomePage = () => {
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
   );
+
   const navigate = useNavigate();
   return (
     <div className="">
@@ -29,22 +30,7 @@ const ShoesForHomePage = () => {
                 ),
               )}
             </div>
-            {/* <div className=" flex max-w-60 gap-1">
-              {shoes.image.slice(1, 5).map(
-                (
-                  image,
-                  index, // Use slice to take only the first image
-                ) => (
-                  <div key={index}>
-                    <img
-                      src={`http://localhost:3000/public/storage/images/${image}`}
-                      alt={image}
-                      className=""
-                    />
-                  </div>
-                ),
-              )}
-            </div> */}
+
             <div className="mb-10 font-roboto text-sm font-light">
               <div>{shoes.brand}</div>
               <div className="">{shoes.model}</div>

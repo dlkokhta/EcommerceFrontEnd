@@ -19,6 +19,7 @@ const ShoesDetails = () => {
   const [selectedShoes, setSelectedShoes] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
+  const [unregisteredUserItems, setUnregisteredUserItems] = useState<any>([{}]);
   // const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
 
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
@@ -40,9 +41,15 @@ const ShoesDetails = () => {
     const postUrl = "http://localhost:3000/api/postCart";
     const token = localStorage.getItem("authToken");
     const userEmail = localStorage.getItem("data.email");
-    console.log("clicked");
 
     if (!token) {
+      const cartItems = {
+        itemId: shoesId,
+        size: selectedSize,
+        quantity: selectedQuantity,
+      };
+
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }
 
     try {
