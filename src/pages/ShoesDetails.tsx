@@ -43,14 +43,18 @@ const ShoesDetails = () => {
     const userEmail = localStorage.getItem("data.email");
 
     if (!token) {
-      const cartItems = {
-        itemId: shoesId,
-        size: selectedSize,
-        quantity: selectedQuantity,
-      };
-
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }
+
+    //for unregistered users
+    // if (!token) {
+    //   const cartItems = {
+    //     itemId: shoesId,
+    //     size: selectedSize,
+    //     quantity: selectedQuantity,
+    //   };
+
+    //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    // }
 
     try {
       await axios.post(
