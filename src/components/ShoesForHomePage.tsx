@@ -22,7 +22,7 @@ const ShoesForHomePage = () => {
                 ) => (
                   <div key={index}>
                     <img
-                      src={`http://localhost:3000/public/storage/images/${image}`}
+                      src={`https://ecommerceapi-production-7d9c.up.railway.app/public/storage/images/${image}`}
                       alt={image}
                       onClick={() => navigate(`/shoesDetails/${shoes.id}`)}
                     />
