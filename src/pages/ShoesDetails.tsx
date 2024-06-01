@@ -19,8 +19,8 @@ const ShoesDetails = () => {
   const [selectedShoes, setSelectedShoes] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
-  const [unregisteredUserItems, setUnregisteredUserItems] = useState<any>([{}]);
-  // const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
+  // const [unregisteredUserItems, setUnregisteredUserItems] = useState<any>([{}]);
+  const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
 
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
 
@@ -43,6 +43,8 @@ const ShoesDetails = () => {
     const userEmail = localStorage.getItem("data.email");
 
     if (!token) {
+      setAddToCartAlert(true);
+      setTimeout(() => setAddToCartAlert(false), 4000);
     }
 
     //for unregistered users
@@ -80,12 +82,17 @@ const ShoesDetails = () => {
   };
 
   return (
-    <div className="relative">
-      {/* {addToCartAlert && (
-        <div className="absolute h-full w-full bg-slate-400 bg-opacity-50 pt-10 text-center">
-          "Please login to add items to cart"
+    <div className="transition delay-150 ease-in-out">
+      {addToCartAlert && (
+        <div className="transition-transform">
+          <div
+            className=" top-26 fixed right-5 z-50 rounded-lg border border-orange-600 p-4  "
+            role="alert"
+          >
+            <div className="text-center">Please login to add items to cart</div>
+          </div>
         </div>
-      )} */}
+      )}
       <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 lg:px-60">
         {shoesById.map((shoes) => (
           <div key={shoes.id}>
