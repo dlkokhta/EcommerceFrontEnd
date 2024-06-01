@@ -22,7 +22,7 @@ function App() {
     const fetchAllShoes = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/getAllShoes",
+          "https://ecommerceapi-production-7d9c.up.railway.app/api/getAllShoes",
         );
 
         dispatch(setAllShoes(response.data));
@@ -36,7 +36,7 @@ function App() {
   const handleGetCartItems = async () => {
     const userEmail = localStorage.getItem("data.email");
 
-    const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
+    const url = `https://ecommerceapi-production-7d9c.up.railway.app/api/getCartItems/${userEmail}`;
 
     try {
       const response = await axios.get(url);
