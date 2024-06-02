@@ -19,6 +19,7 @@ const ShoesDetails = () => {
   const [selectedShoes, setSelectedShoes] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
+  const [isSizeSelected, setIsSizeSelected] = useState<boolean>(false);
   // const [unregisteredUserItems, setUnregisteredUserItems] = useState<any>([{}]);
   const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
 
@@ -26,7 +27,7 @@ const ShoesDetails = () => {
 
   const fetchItems = async () => {
     const userEmail = localStorage.getItem("data.email");
-    const url = `https://ecommerceapi-production-7d9c.up.railway.app/getCartItems/${userEmail}`;
+    const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
 
     try {
       const response = await axios.get(url);
@@ -38,10 +39,14 @@ const ShoesDetails = () => {
   };
 
   const handleClick = async (shoesId: string) => {
-    const postUrl =
-      "https://ecommerceapi-production-7d9c.up.railway.app/api/postCart";
+    const postUrl = "http://localhost:3000/api/postCart";
     const token = localStorage.getItem("authToken");
     const userEmail = localStorage.getItem("data.email");
+
+    if (!selectedSize) {
+      setIsSizeSelected(true);
+      setTimeout(() => setIsSizeSelected(false), 4000);
+    }
 
     if (!token) {
       setAddToCartAlert(true);
@@ -103,7 +108,7 @@ const ShoesDetails = () => {
                   {shoes.image.slice(0, 1).map((image, index) => (
                     <div key={index}>
                       <img
-                        src={`https://ecommerceapi-production-7d9c.up.railway.app/public/storage/images/${selectedShoes || shoes.image[0]}`}
+                        src={`http://localhost:3000/public/storage/images/${selectedShoes || shoes.image[0]}`}
                         alt={image}
                         className="md:max-w-[2440px]"
                       />
@@ -114,7 +119,7 @@ const ShoesDetails = () => {
                   {shoes.image.slice(0, 5).map((image, index) => (
                     <div key={index} onClick={() => setSelectedShoes(image)}>
                       <img
-                        src={`https://ecommerceapi-production-7d9c.up.railway.app/public/storage/images/${image}`}
+                        src={`http://localhost:3000/public/storage/images/${image}`}
                         alt={image}
                         className={`cursor-pointer border hover:border-green-300 ${selectedShoes === image ? "border-shad border-green-300" : ""}`}
                         onMouseOver={() => setSelectedShoes(image)}
@@ -140,6 +145,18 @@ const ShoesDetails = () => {
                   <span className="font-normal">Color: </span>
                   {shoes.color}
                 </div>
+
+                {isSizeSelected && (
+                  <div className="transition-transform">
+                    <div
+                      className=" top-26 fixed right-5 z-50 rounded-lg border border-orange-600 p-4  "
+                      role="alert"
+                    >
+                      <div className="text-center">please select size</div>
+                    </div>
+                  </div>
+                )}
+
                 <div className="mb-7 grid cursor-pointer grid-cols-4 gap-1 lg:gap-2">
                   {shoes.sizes.map((size) => (
                     <div

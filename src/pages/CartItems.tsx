@@ -69,7 +69,7 @@ const CartItems = () => {
                   <div>
                     <img
                       className="w-40"
-                      src={`https://ecommerceapi-production-7d9c.up.railway.app/public/storage/images/${shoe.image[0]}`}
+                      src={`http://localhost:3000/public/storage/images/${shoe.image[0]}`}
                       alt={shoe.model}
                     />
                   </div>

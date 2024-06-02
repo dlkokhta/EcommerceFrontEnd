@@ -22,7 +22,7 @@ const Login = () => {
   // const dispatch = useDispatch();
 
   const onSubmit = async (data: loginTypes) => {
-    const url = "https://ecommerceapi-production-7d9c.up.railway.app/api/login";
+    const url = "http://localhost:3000/api/login";
 
     const userData = {
       email: data.email,
