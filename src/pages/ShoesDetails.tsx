@@ -43,7 +43,7 @@ const ShoesDetails = () => {
     const token = localStorage.getItem("authToken");
     const userEmail = localStorage.getItem("data.email");
 
-    if (!selectedSize) {
+    if (token && !selectedSize) {
       setIsSizeSelected(true);
       setTimeout(() => setIsSizeSelected(false), 4000);
     }

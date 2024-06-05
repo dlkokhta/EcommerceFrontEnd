@@ -80,6 +80,7 @@ const CartItems = () => {
                     <p>Model: {shoe.model}</p>
                     <p>Color: {shoe.color}</p>
                     <p>Price: ${shoe.price}</p>
+                    <div className="mt-2 cursor-pointer text-red">Remove</div>
                   </div>
                 </div>
               );
