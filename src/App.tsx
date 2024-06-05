@@ -35,7 +35,7 @@ function App() {
 
   const handleGetCartItems = async () => {
     const userEmail = localStorage.getItem("data.email");
-
+    console.log("sdfsdfsdfsdsdfdsdsds");
     const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
 
     try {
@@ -66,7 +66,10 @@ function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/addShoes" element={<AddShoes />} />
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
-        <Route path="/cartItems/:email" element={<CartItems />} />
+        <Route
+          path="/cartItems/:email"
+          element={<CartItems handleGetCartItems={handleGetCartItems} />}
+        />
       </Routes>
     </div>
   );

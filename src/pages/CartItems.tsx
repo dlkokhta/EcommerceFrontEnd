@@ -2,8 +2,10 @@ import { RootState } from "../store/store.js";
 import { allShoesTypes } from "../types/allShoesTypes.js";
 import { useSelector } from "react-redux";
 import { cartItemsTypes } from "../types/cartItemsTypes";
+import axios from "axios";
+import { useEffect } from "react";
 
-const CartItems = () => {
+const CartItems = ({ handleGetCartItems }: any) => {
   const cartItems: cartItemsTypes[] = useSelector(
     (state: RootState) => state.cartItems.cartItems,
   );
@@ -34,6 +36,20 @@ const CartItems = () => {
   // const unregisteredUserItems = allShoes.find(
   //   (shoe) => shoe.id === parsedCartItems.itemId,
   // );
+
+  const handleClick = async (id: string) => {
+    const userEmail = localStorage.getItem("data.email");
+
+    const url = `http://localhost:3000/api/deleteShoes/${userEmail}/${id}`;
+
+    try {
+      const response = await axios.delete(url);
+      await handleGetCartItems();
+      console.log("response", response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -80,7 +96,12 @@ const CartItems = () => {
                     <p>Model: {shoe.model}</p>
                     <p>Color: {shoe.color}</p>
                     <p>Price: ${shoe.price}</p>
-                    <div className="mt-2 cursor-pointer text-red">Remove</div>
+                    <div
+                      onClick={() => handleClick(item._id)}
+                      className="mt-2 cursor-pointer text-red"
+                    >
+                      Remove
+                    </div>
                   </div>
                 </div>
               );
