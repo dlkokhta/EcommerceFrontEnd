@@ -3,7 +3,6 @@ import { allShoesTypes } from "../types/allShoesTypes.js";
 import { useSelector } from "react-redux";
 import { cartItemsTypes } from "../types/cartItemsTypes";
 import axios from "axios";
-import { useEffect } from "react";
 
 const CartItems = ({ handleGetCartItems }: any) => {
   const cartItems: cartItemsTypes[] = useSelector(
@@ -40,7 +39,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
   const handleClick = async (id: string) => {
     const userEmail = localStorage.getItem("data.email");
 
-    const url = `http://localhost:3000/api/deleteShoes/${userEmail}/${id}`;
+    const url = `https://ecommerceapi-production-7d9c.up.railway.app/api/deleteShoes/${userEmail}/${id}`;
 
     try {
       const response = await axios.delete(url);
@@ -85,7 +84,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
                   <div>
                     <img
                       className="w-40"
-                      src={`http://localhost:3000/public/storage/images/${shoe.image[0]}`}
+                      src={`https://ecommerceapi-production-7d9c.up.railway.app/public/storage/images/${shoe.image[0]}`}
                       alt={shoe.model}
                     />
                   </div>
@@ -106,12 +105,18 @@ const CartItems = ({ handleGetCartItems }: any) => {
                 </div>
               );
             })}
-            <div className="flex flex-col items-center justify-center pb-10">
-              <div className="mb-5">total amount: ${totalAmount}</div>
-              <button className=" min-w-[150px] whitespace-normal rounded-xl bg-red px-5 py-[6px] text-sm text-white">
-                checkout
-              </button>
-            </div>
+            {totalAmount ? (
+              <div className="flex flex-col items-center justify-center pb-10">
+                <div className="mb-5">total amount: ${totalAmount}</div>
+                <button className=" min-w-[150px] whitespace-normal rounded-xl bg-red px-5 py-[6px] text-sm text-white">
+                  checkout
+                </button>
+              </div>
+            ) : (
+              <div className=" mt-10 flex justify-center">
+                <h1>Cart is empty</h1>
+              </div>
+            )}
           </div>
         ) : (
           <div className=" mt-10 flex justify-center">
