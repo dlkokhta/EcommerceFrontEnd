@@ -7,6 +7,7 @@ import searchicon from "../assets/search.svg";
 import { RootState } from "../store/store.js";
 import { cartItemsTypes } from "../types/cartItemsTypes";
 import { useSelector } from "react-redux";
+import logo from "../assets/logo.png";
 
 const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
@@ -54,13 +55,17 @@ const Header = () => {
             src={hamburher}
             alt="hamburger"
           />
-
-          <h1
+          <img
+            className="w-14 cursor-pointer"
+            src={logo}
+            onClick={() => navigate("/")}
+          />
+          {/* <h1
             onClick={() => navigate("/")}
             className="hidden cursor-pointer font-roboto font-medium lg:block"
           >
             eCommerce
-          </h1>
+          </h1> */}
 
           <div className="ml-10 mt-1 hidden font-roboto font-light lg:block ">
             <div className="items flex flex-row gap-2 lg:text-sm xl:gap-6">
