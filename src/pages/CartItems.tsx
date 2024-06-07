@@ -23,6 +23,8 @@ const CartItems = ({ handleGetCartItems }: any) => {
       }, 0)
     : 0;
 
+  const roundedTotalAmount = totalAmount.toFixed(2);
+
   //for unregistered users
   // const token = localStorage.getItem("authToken");
 
@@ -107,7 +109,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
             })}
             {totalAmount ? (
               <div className="flex flex-col items-center justify-center pb-10">
-                <div className="mb-5">total amount: ${totalAmount}</div>
+                <div className="mb-5">total amount: ${roundedTotalAmount}</div>
                 <button className=" min-w-[150px] whitespace-normal rounded-xl bg-red px-5 py-[6px] text-sm text-white">
                   checkout
                 </button>
