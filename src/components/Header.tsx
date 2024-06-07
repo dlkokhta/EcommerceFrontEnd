@@ -40,6 +40,9 @@ const Header = () => {
     navigate("/cartItems/{email}");
   };
 
+  const quantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+  console.log("cartItems quantity", quantity);
+
   return (
     <>
       <div className="mb-5 overflow-hidden">
@@ -183,7 +186,7 @@ const Header = () => {
               <img className="relative h-6 w-6 cursor-pointer" src={cartIcon} />
               {
                 <div className=" absolute top-[13px] ml-3 flex h-4 w-4 items-center justify-center rounded-full bg-red text-xs font-bold text-white">
-                  {cartItems === undefined ? 0 : cartItems.length}
+                  {quantity === undefined ? 0 : quantity}
                 </div>
               }
             </div>
