@@ -27,7 +27,7 @@ const ShoesDetails = () => {
 
   const fetchItems = async () => {
     const userEmail = localStorage.getItem("data.email");
-    const url = `https://ecommerceapi-production-7d9c.up.railway.app/api/getCartItems/${userEmail}`;
+    const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
 
     try {
       const response = await axios.get(url);
@@ -39,8 +39,7 @@ const ShoesDetails = () => {
   };
 
   const handleClick = async (shoesId: string) => {
-    const postUrl =
-      "https://ecommerceapi-production-7d9c.up.railway.app/api/postCart";
+    const postUrl = "http://localhost:3000/api/postCart";
     const token = localStorage.getItem("authToken");
     const userEmail = localStorage.getItem("data.email");
 
@@ -109,7 +108,7 @@ const ShoesDetails = () => {
                   {shoes.image.slice(0, 1).map((image, index) => (
                     <div key={index}>
                       <img
-                        src={`https://ecommerceapi-production-7d9c.up.railway.app/public/storage/images/${selectedShoes || shoes.image[0]}`}
+                        src={`http://localhost:3000/public/storage/images/${selectedShoes || shoes.image[0]}`}
                         alt={image}
                         className="md:max-w-[2440px]"
                       />
@@ -120,7 +119,7 @@ const ShoesDetails = () => {
                   {shoes.image.slice(0, 5).map((image, index) => (
                     <div key={index} onClick={() => setSelectedShoes(image)}>
                       <img
-                        src={`https://ecommerceapi-production-7d9c.up.railway.app/public/storage/images/${image}`}
+                        src={`http://localhost:3000/public/storage/images/${image}`}
                         alt={image}
                         className={`cursor-pointer border hover:border-green-300 ${selectedShoes === image ? "border-shad border-green-300" : ""}`}
                         onMouseOver={() => setSelectedShoes(image)}

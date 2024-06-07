@@ -16,8 +16,7 @@ const Registration = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data: registratioTypes) => {
-    const url =
-      "https://ecommerceapi-production-7d9c.up.railway.app/api/register";
+    const url = "http://localhost:3000/api/register";
 
     const userData = {
       name: data.name,
@@ -39,7 +38,7 @@ const Registration = () => {
 
   return (
     <div>
-      <div className=" px-16 pt-28 lg:px-60 xl:px-[600px] ">
+      <div className=" px-16 pt-28 lg:px-60 xl:px-[470px] 2xl:px-[580px] 3xl:px-[750px] ">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mb-10 flex flex-col gap-5 border border-slate-400 px-5 py-5"

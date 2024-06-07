@@ -39,7 +39,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
   const handleClick = async (id: string) => {
     const userEmail = localStorage.getItem("data.email");
 
-    const url = `https://ecommerceapi-production-7d9c.up.railway.app/api/deleteShoes/${userEmail}/${id}`;
+    const url = `http://localhost:3000/api/deleteShoes/${userEmail}/${id}`;
 
     try {
       const response = await axios.delete(url);
@@ -84,7 +84,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
                   <div>
                     <img
                       className="w-40"
-                      src={`https://ecommerceapi-production-7d9c.up.railway.app/public/storage/images/${shoe.image[0]}`}
+                      src={`http://localhost:3000/public/storage/images/${shoe.image[0]}`}
                       alt={shoe.model}
                     />
                   </div>
