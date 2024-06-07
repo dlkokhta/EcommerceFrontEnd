@@ -14,8 +14,10 @@ const Header = () => {
   const navigate = useNavigate();
 
   const cartItems: cartItemsTypes[] = useSelector(
-    (state: RootState) => state.cartItems.cartItems,
+    (state: RootState) => state.cartItems.cartItems || [],
   );
+
+  const quantity = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   const handleClick = (path: string) => {
     navigate(path);
@@ -31,17 +33,14 @@ const Header = () => {
 
   const [manHovered, setManHovered] = useState(false);
   const [womanHovered, setWomanHovered] = useState(false);
-  const [homeHovered, setHomeHovered] = useState(false);
+  const [newHovered, setNewHovered] = useState(false);
   const [aboutHovered, setAboutHovered] = useState(false);
-  const [contactHovered, setContactHovered] = useState(false);
+  // const [contactHovered, setContactHovered] = useState(false);
   const [brandHovered, setBrandHovered] = useState(false);
 
   const cartIconClickhandler = () => {
     navigate("/cartItems/{email}");
   };
-
-  const quantity = cartItems.reduce((total, item) => total + item.quantity, 0);
-  console.log("cartItems quantity", quantity);
 
   return (
     <>
@@ -65,6 +64,23 @@ const Header = () => {
 
           <div className="ml-10 mt-1 hidden font-roboto font-light lg:block ">
             <div className="items flex flex-row gap-2 lg:text-sm xl:gap-6">
+              <div
+                onMouseEnter={() => setNewHovered(true)}
+                onMouseLeave={() => setNewHovered(false)}
+                className=" cursor-pointer"
+                onClick={() => {
+                  setDestMenu("New");
+                }}
+              >
+                New
+                {destMenu === "New" ? (
+                  <div className="w-f h-[2px] bg-yellow-300"></div>
+                ) : (
+                  <div
+                    className={`w-f h-[2px] ${newHovered ? "bg-slate-300" : ""}`}
+                  ></div>
+                )}
+              </div>
               <div
                 onMouseEnter={() => setManHovered(true)}
                 onMouseLeave={() => setManHovered(false)}
@@ -99,23 +115,7 @@ const Header = () => {
                   ></div>
                 )}
               </div>
-              <div
-                onMouseEnter={() => setHomeHovered(true)}
-                onMouseLeave={() => setHomeHovered(false)}
-                className=" cursor-pointer"
-                onClick={() => {
-                  setDestMenu("Home");
-                }}
-              >
-                Home
-                {destMenu === "Home" ? (
-                  <div className="w-f h-[2px] bg-yellow-300"></div>
-                ) : (
-                  <div
-                    className={`w-f h-[2px] ${homeHovered ? "bg-slate-300" : ""}`}
-                  ></div>
-                )}
-              </div>
+
               <div
                 onMouseEnter={() => setAboutHovered(true)}
                 onMouseLeave={() => setAboutHovered(false)}
@@ -150,7 +150,7 @@ const Header = () => {
                   ></div>
                 )}
               </div>
-              <div
+              {/* <div
                 onMouseEnter={() => setContactHovered(true)}
                 onMouseLeave={() => setContactHovered(false)}
                 className=" cursor-pointer"
@@ -166,7 +166,7 @@ const Header = () => {
                     className={`w-f h-[2px] ${contactHovered ? "bg-slate-300" : ""}`}
                   ></div>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
 
