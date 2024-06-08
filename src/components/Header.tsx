@@ -56,7 +56,7 @@ const Header = () => {
             alt="hamburger"
           />
           <img
-            className="w-14 cursor-pointer"
+            className="hidden w-16 cursor-pointer lg:block"
             src={logo}
             onClick={() => navigate("/")}
           />

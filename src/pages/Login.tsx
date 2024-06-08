@@ -5,6 +5,7 @@ import axios from "axios";
 import { loginTypes } from "../types/loginTypes.js";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import logo from "../assets/logo.png";
 // import { useDispatch } from "react-redux";
 // import { setUserName } from "../store/userNameSlice.js";
 
@@ -53,12 +54,20 @@ const Login = () => {
 
   return (
     <div className="pt-10">
-      <h1
+      {/* <h1
         onClick={() => navigate("/")}
         className="cursor-pointer text-center font-roboto font-medium"
       >
         eCommerce
-      </h1>
+      </h1> */}
+
+      <div className="flex justify-center">
+        <img
+          className="hidden w-16 cursor-pointer  lg:block"
+          src={logo}
+          onClick={() => navigate("/")}
+        />
+      </div>
 
       {responseError && (
         <div className="mt-10 px-16 text-center lg:px-60 xl:px-[470px] 2xl:px-[580px] 3xl:px-[750px]">
