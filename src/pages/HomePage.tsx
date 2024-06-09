@@ -15,9 +15,14 @@ const HomePage = () => {
         <div className="flex items-center justify-between pb-10 pt-10">
           <div className=" ">© 2024 DLK, Inc. All Rights Reserved</div>
           <div>
-            <div>Home:</div>
-            <div>Email:</div>
-            <div>Mobile:</div>
+            <div
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="cursor-pointer hover:text-yellow-400 "
+            >
+              Home
+            </div>
+            <div>Email: dl.kokhtashvili@gmail.com</div>
+            <div>Mobile: +995555331167</div>
           </div>
           <div className="flex gap-3">
             <img src={instagram} className="h-6 w-6" />
