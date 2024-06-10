@@ -122,23 +122,6 @@ const Header = () => {
               </div>
 
               <div
-                onMouseEnter={() => setAboutHovered(true)}
-                onMouseLeave={() => setAboutHovered(false)}
-                className=" cursor-pointer"
-                onClick={() => {
-                  setDestMenu("About");
-                }}
-              >
-                Brand
-                {destMenu === "About" ? (
-                  <div className="w-f h-[2px] bg-yellow-300"></div>
-                ) : (
-                  <div
-                    className={`w-f h-[2px] ${aboutHovered ? "bg-slate-300" : ""}`}
-                  ></div>
-                )}
-              </div>
-              <div
                 onMouseEnter={() => setBrandHovered(true)}
                 onMouseLeave={() => setBrandHovered(false)}
                 className=" cursor-pointer"
@@ -146,7 +129,7 @@ const Header = () => {
                   setDestMenu("Brand");
                 }}
               >
-                About
+                Brand
                 {destMenu === "Brand" ? (
                   <div className="w-f h-[2px] bg-yellow-300"></div>
                 ) : (
@@ -155,6 +138,32 @@ const Header = () => {
                   ></div>
                 )}
               </div>
+
+              <div
+                onMouseEnter={() => setAboutHovered(true)}
+                onMouseLeave={() => setAboutHovered(false)}
+                className=" cursor-pointer"
+                onClick={() => {
+                  setDestMenu("About");
+                  navigate("/");
+                  setTimeout(() => {
+                    window.scrollTo({
+                      top: document.documentElement.scrollHeight,
+                      behavior: "smooth",
+                    });
+                  }, 100);
+                }}
+              >
+                About
+                {destMenu === "About" ? (
+                  <div className="w-f h-[2px] bg-yellow-300"></div>
+                ) : (
+                  <div
+                    className={`w-f h-[2px] ${aboutHovered ? "bg-slate-300" : ""}`}
+                  ></div>
+                )}
+              </div>
+
               {/* <div
                 onMouseEnter={() => setContactHovered(true)}
                 onMouseLeave={() => setContactHovered(false)}
