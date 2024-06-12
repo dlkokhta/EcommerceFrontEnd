@@ -10,6 +10,17 @@ const ShoesForHomePage = () => {
 
   const navigate = useNavigate();
   const placeholders = Array(8).fill(null);
+  let url;
+
+  if (process.env.NODE_ENV === "production") {
+    // Use production backend URL
+    url = `https://ecommerceapi-production-7d9c.up.railway.app`;
+  } else {
+    // Use local backend URL
+    url = `http://localhost:3000`;
+  }
+  console.log("url!", url);
+
   return (
     <div className="">
       {allShoes && allShoes.length > 0 ? (
@@ -24,7 +35,7 @@ const ShoesForHomePage = () => {
                   ) => (
                     <div key={index}>
                       <img
-                        src={`http://localhost:3000/public/storage/images/${image}`}
+                        src={`${url}/public/storage/images/${image}`}
                         alt={image}
                         onClick={() => navigate(`/shoesDetails/${shoes.id}`)}
                       />
