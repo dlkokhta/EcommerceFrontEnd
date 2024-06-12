@@ -42,10 +42,10 @@ const CartItems = ({ handleGetCartItems }: any) => {
 
   if (process.env.NODE_ENV === "production") {
     // Use production backend URL
-    url = `https://ecommerceapi-production-7d9c.up.railway.app/api`;
+    url = `https://ecommerceapi-production-7d9c.up.railway.app`;
   } else {
     // Use local backend URL
-    url = `http://localhost:3000/api`;
+    url = `http://localhost:3000`;
   }
 
   const handleClick = async (id: string) => {
@@ -55,7 +55,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
 
     try {
       const response = await axios.delete(
-        `${url}/deleteShoes/${userEmail}/${id}`,
+        `${url}/api/deleteShoes/${userEmail}/${id}`,
       );
       await handleGetCartItems();
       console.log("response", response);
