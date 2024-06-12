@@ -27,7 +27,6 @@ function App() {
     // Use local backend URL
     url = `http://localhost:3000/api`;
   }
-  console.log("url!", url);
 
   useEffect(() => {
     const fetchAllShoes = async () => {

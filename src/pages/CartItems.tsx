@@ -38,13 +38,25 @@ const CartItems = ({ handleGetCartItems }: any) => {
   //   (shoe) => shoe.id === parsedCartItems.itemId,
   // );
 
+  let url;
+
+  if (process.env.NODE_ENV === "production") {
+    // Use production backend URL
+    url = `https://ecommerceapi-production-7d9c.up.railway.app/api`;
+  } else {
+    // Use local backend URL
+    url = `http://localhost:3000/api`;
+  }
+
   const handleClick = async (id: string) => {
     const userEmail = localStorage.getItem("data.email");
 
-    const url = `http://localhost:3000/api/deleteShoes/${userEmail}/${id}`;
+    // const url = `http://localhost:3000/api/deleteShoes/${userEmail}/${id}`;
 
     try {
-      const response = await axios.delete(url);
+      const response = await axios.delete(
+        `${url}/deleteShoes/${userEmail}/${id}`,
+      );
       await handleGetCartItems();
       console.log("response", response);
     } catch (error) {
@@ -86,7 +98,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
                   <div>
                     <img
                       className="w-40"
-                      src={`http://localhost:3000/public/storage/images/${shoe.image[0]}`}
+                      src={`${url}/public/storage/images/${shoe.image[0]}`}
                       alt={shoe.model}
                     />
                   </div>

@@ -12,9 +12,17 @@ const AddShoes = () => {
     reset,
   } = useForm({ resolver: yupResolver(addShoesSchema) });
 
-  const onSubmit = async (data: addShoesTypes) => {
-    const url = "http://localhost:3000/api/addItem";
+  let url;
 
+  if (process.env.NODE_ENV === "production") {
+    // Use production backend URL
+    url = `https://ecommerceapi-production-7d9c.up.railway.app/api`;
+  } else {
+    // Use local backend URL
+    url = `http://localhost:3000/api`;
+  }
+
+  const onSubmit = async (data: addShoesTypes) => {
     const userData = new FormData();
     userData.append("brand", data.brand);
     userData.append("model", data.model);
@@ -25,7 +33,7 @@ const AddShoes = () => {
     userData.append("image", data.image[0]);
 
     try {
-      const response = await axios.post(url, userData);
+      const response = await axios.post(`${url}/api/addItem`, userData);
       console.log("response.data", response.data);
       reset();
     } catch (error) {
