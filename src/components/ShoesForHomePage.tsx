@@ -19,7 +19,6 @@ const ShoesForHomePage = () => {
     // Use local backend URL
     url = `http://localhost:3000`;
   }
-  console.log("url!", url);
 
   return (
     <div className="">

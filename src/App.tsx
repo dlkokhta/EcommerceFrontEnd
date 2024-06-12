@@ -18,12 +18,21 @@ function App() {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  let url;
+
+  if (process.env.NODE_ENV === "production") {
+    // Use production backend URL
+    url = `https://ecommerceapi-production-7d9c.up.railway.app/api`;
+  } else {
+    // Use local backend URL
+    url = `http://localhost:3000/api`;
+  }
+  console.log("url!", url);
+
   useEffect(() => {
     const fetchAllShoes = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/getAllShoes",
-        );
+        const response = await axios.get(`${url}/getAllShoes`);
 
         dispatch(setAllShoes(response.data));
       } catch (error) {
