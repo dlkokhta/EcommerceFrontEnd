@@ -22,16 +22,24 @@ const Login = () => {
   });
   // const dispatch = useDispatch();
 
-  const onSubmit = async (data: loginTypes) => {
-    const url = "http://localhost:3000/api/login";
+  let url;
 
+  if (process.env.NODE_ENV === "production") {
+    // Use production backend URL
+    url = `https://ecommerceapi-production-7d9c.up.railway.app`;
+  } else {
+    // Use local backend URL
+    url = `http://localhost:3000`;
+  }
+
+  const onSubmit = async (data: loginTypes) => {
     const userData = {
       email: data.email,
       password: data.password,
     };
 
     try {
-      const response = await axios.post(url, userData);
+      const response = await axios.post(`${url}/api/login`, userData);
       navigate("/");
       reset();
       const authToken = response.data.token;
