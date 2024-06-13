@@ -25,12 +25,22 @@ const ShoesDetails = () => {
 
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
 
+  let url;
+
+  if (process.env.NODE_ENV === "production") {
+    // Use production backend URL
+    url = `https://ecommerceapi-production-7d9c.up.railway.app`;
+  } else {
+    // Use local backend URL
+    url = `http://localhost:3000`;
+  }
+
   const fetchItems = async () => {
     const userEmail = localStorage.getItem("data.email");
-    const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
+    // const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
 
     try {
-      const response = await axios.get(url);
+      const response = await axios.get(`${url}/api/getCartItems/${userEmail}`);
 
       dispatch(setCartItems(response.data.cartItems));
     } catch (error) {
@@ -39,7 +49,7 @@ const ShoesDetails = () => {
   };
 
   const handleClick = async (shoesId: string) => {
-    const postUrl = "http://localhost:3000/api/postCart";
+    const postUrl = `${url}/api/postCart`;
     const token = localStorage.getItem("authToken");
     const userEmail = localStorage.getItem("data.email");
 
@@ -109,7 +119,7 @@ const ShoesDetails = () => {
                   {shoes.image.slice(0, 1).map((image, index) => (
                     <div key={index}>
                       <img
-                        src={`http://localhost:3000/public/storage/images/${selectedShoes || shoes.image[0]}`}
+                        src={`${url}/public/storage/images/${selectedShoes || shoes.image[0]}`}
                         alt={image}
                         className="md:max-w-[2440px]"
                       />
@@ -120,7 +130,7 @@ const ShoesDetails = () => {
                   {shoes.image.slice(0, 5).map((image, index) => (
                     <div key={index} onClick={() => setSelectedShoes(image)}>
                       <img
-                        src={`http://localhost:3000/public/storage/images/${image}`}
+                        src={`${url}/public/storage/images/${image}`}
                         alt={image}
                         className={`cursor-pointer border hover:border-green-300 ${selectedShoes === image ? "border-shad border-green-300" : ""}`}
                         onMouseOver={() => setSelectedShoes(image)}
