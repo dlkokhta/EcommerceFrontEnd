@@ -17,7 +17,17 @@ const Registration = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data: registratioTypes) => {
-    const url = "http://localhost:3000/api/register";
+    // const url = "http://localhost:3000/api/register";
+
+    let url;
+
+    if (process.env.NODE_ENV === "production") {
+      // Use production backend URL
+      url = `https://ecommerceapi-production-7d9c.up.railway.app`;
+    } else {
+      // Use local backend URL
+      url = `http://localhost:3000`;
+    }
 
     const userData = {
       name: data.name,
@@ -27,7 +37,7 @@ const Registration = () => {
     };
 
     try {
-      await axios.post(url, userData);
+      await axios.post(`${url}/api/register`, userData);
 
       reset();
     } catch (error) {
