@@ -10,8 +10,8 @@ const ShoesForHomePage = () => {
 
   const navigate = useNavigate();
   const placeholders = Array(8).fill(null);
-  let url;
 
+  let url;
   if (process.env.NODE_ENV === "production") {
     // Use production backend URL
     url = `https://ecommerceapi-production-7d9c.up.railway.app`;

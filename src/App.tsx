@@ -43,11 +43,11 @@ function App() {
 
   const handleGetCartItems = async () => {
     const userEmail = localStorage.getItem("data.email");
-    console.log("sdfsdfsdfsdsdfdsdsds");
-    const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
+
+    // const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
 
     try {
-      const response = await axios.get(url);
+      const response = await axios.get(`${url}/getCartItems/${userEmail}`);
 
       dispatch(setCartItems(response.data.cartItems));
       // const itemsQuantity = response.data.cartItems.length;
@@ -56,7 +56,7 @@ function App() {
       console.log(error);
     }
   };
-
+  console.log("sdfsdfsdfsdsdfdsdsds");
   handleGetCartItems();
 
   // console.log("data.email", localStorage.getItem("data.email"));

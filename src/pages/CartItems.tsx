@@ -39,7 +39,6 @@ const CartItems = ({ handleGetCartItems }: any) => {
   // );
 
   let url;
-
   if (process.env.NODE_ENV === "production") {
     // Use production backend URL
     url = `https://ecommerceapi-production-7d9c.up.railway.app`;
