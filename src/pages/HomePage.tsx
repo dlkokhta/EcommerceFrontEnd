@@ -21,14 +21,16 @@ const HomePage = () => {
             >
               Home
             </div>
-            <div>Email: dl.kokhtashvili@gmail.com</div>
+            <div className="cursor-pointer">
+              Email: dl.kokhtashvili@gmail.com
+            </div>
             <div>Mobile: +995555331167</div>
           </div>
-          <div className="flex gap-3">
-            <img src={instagram} className="h-6 w-6" />
-            <img src={facebook} className="h-6 w-6" />
-            <img src={x} className="h-6 w-6" />
-            <img src={linkedin} className="h-6 w-6" />
+          <div className="flex gap-5">
+            <img src={instagram} className="h-6 w-6 cursor-pointer" />
+            <img src={facebook} className="h-6 w-6 cursor-pointer" />
+            <img src={x} className="h-6 w-6 cursor-pointer" />
+            <img src={linkedin} className="h-6 w-6 cursor-pointer" />
           </div>
         </div>
       </footer>
