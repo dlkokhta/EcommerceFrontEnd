@@ -34,6 +34,7 @@ const ShoesForHomePage = () => {
                   ) => (
                     <div key={index}>
                       <img
+                        className="cursor-pointer xl:max-h-[429px]"
                         src={`${url}/public/storage/images/${image}`}
                         alt={image}
                         onClick={() => navigate(`/shoesDetails/${shoes.id}`)}
