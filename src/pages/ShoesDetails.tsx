@@ -142,6 +142,10 @@ const ShoesDetails = () => {
 
               <div className="mb-10 font-roboto text-sm font-light">
                 <div>
+                  <span className="font-normal"></span>
+                  {shoes.gender}
+                </div>
+                <div>
                   <span className="font-normal">Brand: </span>
                   {shoes.brand}
                 </div>

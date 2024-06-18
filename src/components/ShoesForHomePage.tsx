@@ -45,6 +45,7 @@ const ShoesForHomePage = () => {
               </div>
 
               <div className="mb-10 font-roboto text-sm font-light">
+                <div>{shoes.gender}</div>
                 <div>{shoes.brand}</div>
                 <div className="">{shoes.model}</div>
                 <div>${shoes.price}</div>

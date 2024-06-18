@@ -25,11 +25,13 @@ const AddShoes = () => {
     const userData = new FormData();
     userData.append("brand", data.brand);
     userData.append("model", data.model);
+    // userData.append("gender", data.gender);
     userData.append("color", data.color);
     userData.append("description", data.description);
     userData.append("price", data.price.toString());
     userData.append("sizes", data.sizes);
     userData.append("image", data.image[0]);
+    console.log("userData!!", data);
 
     try {
       const response = await axios.post(`${url}/api/addItem`, userData);
@@ -39,6 +41,7 @@ const AddShoes = () => {
       console.log(errors);
     }
   };
+
   return (
     <div>
       <div className="px-16 pt-28 lg:px-60 xl:px-[600px]">
@@ -72,6 +75,19 @@ const AddShoes = () => {
               name="model"
             />
           </div>
+          {/* 
+          <div className="w-full">
+            <label className="block text-sm" htmlFor="gender">
+              gender
+            </label>
+            <input
+              className="w-full border  border-slate-400  outline-green-300  "
+              type="text"
+              id="gender"
+              {...register("gender")}
+              name="gender"
+            />
+          </div> */}
           <div className="w-full">
             <label className="block text-sm" htmlFor="color">
               color

@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface allShoesTypes {
   brand: string;
   model: string;
+  gender: string;
   color: string;
   description: string;
   price: number;

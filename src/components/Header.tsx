@@ -45,7 +45,17 @@ const Header = () => {
 
   return (
     <>
-      <div className="mb-5 overflow-hidden">
+      <div className="relative mb-5">
+        {manHovered && (
+          <div className="absolute top-16 min-h-screen w-full bg-black/40">
+            <div>
+              <div className="bg-white pb-20 pl-10 pt-20">
+                <div className="">Shoes</div>
+                <div className="">Clothes</div>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="flex items-center gap-3 px-5 pt-5 lg:px-10">
           <img
             className="h-5 lg:hidden"
@@ -103,6 +113,7 @@ const Header = () => {
                   ></div>
                 )}
               </div>
+
               <div
                 onMouseEnter={() => setWomanHovered(true)}
                 onMouseLeave={() => setWomanHovered(false)}
@@ -242,7 +253,7 @@ const Header = () => {
                     src={close}
                   />
                   <div className="flex flex-col gap-2">
-                    <div>Man</div>
+                    <div>Man </div>
                     <div>Woman</div>
                     <div>Home</div>
                     <div>About</div>

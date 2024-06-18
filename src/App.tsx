@@ -34,6 +34,7 @@ function App() {
         const response = await axios.get(`${url}/getAllShoes`);
 
         dispatch(setAllShoes(response.data));
+        console.log("response.data", response.data);
       } catch (error) {
         console.error(error);
       }
