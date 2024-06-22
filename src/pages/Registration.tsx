@@ -49,14 +49,14 @@ const Registration = () => {
 
   return (
     <div>
-      <div className=" px-16 pt-28 lg:px-60 xl:px-[470px] 2xl:px-[580px] 3xl:px-[750px] ">
-        <div className="flex justify-center">
+      <div className=" px-16 pt-28 md:px-60 lg:px-[350px] ">
+        {/* <div className="flex justify-center">
           <img
-            className="hidden w-16 cursor-pointer  lg:block"
+            className="hidden w-16 cursor-pointer lg:block"
             src={logo}
             onClick={() => navigate("/")}
           />
-        </div>
+        </div> */}
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mb-10 flex flex-col gap-5 border border-slate-400 px-5 py-5"

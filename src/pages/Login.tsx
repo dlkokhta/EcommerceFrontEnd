@@ -77,7 +77,7 @@ const Login = () => {
       </div>
 
       {responseError && (
-        <div className="mt-10 px-16 text-center lg:px-60 xl:px-[470px] 2xl:px-[580px] 3xl:px-[750px]">
+        <div className="mt-10 px-16 text-center">
           <h1 className="border border-red bg-rose-200 py-5 text-sm">
             {responseError}
           </h1>
