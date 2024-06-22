@@ -101,9 +101,9 @@ const ShoesDetails = () => {
   return (
     <div className="">
       {addToCartAlert && (
-        <div className="hidden transition-transform">
+        <div className="hidden transition-transform ">
           <div
-            className=" top-26 fixed right-5 z-50 rounded-lg border border-orange-600 p-4  "
+            className="top-26 fixed right-5 z-50 rounded-lg border border-orange-600 p-4  "
             role="alert"
           >
             <div className="text-center">Please login to add items to cart</div>
@@ -207,7 +207,7 @@ const ShoesDetails = () => {
 
                 {addToCartAlert && (
                   <div
-                    className=" absolute top-[260px] ml-16 rounded-lg text-xs text-red sm:hidden"
+                    className="absolute top-[260px] ml-16 rounded-lg text-xs text-red md:ml-5"
                     role="alert"
                   >
                     <div className="">Please login to add items to cart</div>
@@ -217,7 +217,7 @@ const ShoesDetails = () => {
                 {isSizeSelected && (
                   <div className="transition-transform">
                     <div
-                      className=" absolute top-[260px] ml-28 rounded-lg text-xs text-red sm:hidden"
+                      className=" absolute top-[260px] ml-28 rounded-lg text-xs text-red md:ml-14 "
                       role="alert"
                     >
                       <div className="text-center">please select size</div>

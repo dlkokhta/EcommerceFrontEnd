@@ -262,7 +262,6 @@ const Header = () => {
                     <div>Woman</div>
                     <div>Home</div>
                     <div>About</div>
-                    <div>Contact</div>
                   </div>
                 </div>
               </div>
