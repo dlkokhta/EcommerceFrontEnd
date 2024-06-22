@@ -101,7 +101,7 @@ const ShoesDetails = () => {
   return (
     <div className="">
       {addToCartAlert && (
-        <div className="transition-transform">
+        <div className="hidden transition-transform">
           <div
             className=" top-26 fixed right-5 z-50 rounded-lg border border-orange-600 p-4  "
             role="alert"
@@ -110,6 +110,7 @@ const ShoesDetails = () => {
           </div>
         </div>
       )}
+
       <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 lg:px-60">
         {shoesById.map((shoes) => (
           <div key={shoes.id}>
@@ -140,7 +141,7 @@ const ShoesDetails = () => {
                 </div>
               </div>
 
-              <div className="mb-10 font-roboto text-sm font-light">
+              <div className="relative mb-10 font-roboto text-sm font-light">
                 <div>
                   <span className="font-normal"></span>
                   {shoes.gender}
@@ -162,7 +163,7 @@ const ShoesDetails = () => {
                 </div>
 
                 {isSizeSelected && (
-                  <div className="transition-transform">
+                  <div className="hidden transition-transform">
                     <div
                       className=" top-26 fixed right-5 z-50 rounded-lg border border-orange-600 p-4  "
                       role="alert"
@@ -184,7 +185,7 @@ const ShoesDetails = () => {
                   ))}
                 </div>
 
-                <div className="mb-4 flex items-center justify-between rounded-full border font-normal">
+                <div className="mb-8 flex items-center justify-between rounded-full border font-normal">
                   <div
                     onClick={() => {
                       setSelectedQuantity(selectedQuantity - 1);
@@ -203,6 +204,26 @@ const ShoesDetails = () => {
                     +
                   </div>
                 </div>
+
+                {addToCartAlert && (
+                  <div
+                    className=" absolute top-[260px] ml-16 rounded-lg text-xs text-red sm:hidden"
+                    role="alert"
+                  >
+                    <div className="">Please login to add items to cart</div>
+                  </div>
+                )}
+
+                {isSizeSelected && (
+                  <div className="transition-transform">
+                    <div
+                      className=" absolute top-[260px] ml-28 rounded-lg text-xs text-red sm:hidden"
+                      role="alert"
+                    >
+                      <div className="text-center">please select size</div>
+                    </div>
+                  </div>
+                )}
 
                 <div className="mb-5 flex flex-col justify-center gap-3 font-normal">
                   <button
