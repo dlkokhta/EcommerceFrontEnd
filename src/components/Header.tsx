@@ -33,6 +33,7 @@ const Header = () => {
   };
 
   const [manHovered, setManHovered] = useState(false);
+  const [manmenuHovered, setManmenuHovered] = useState(false);
   const [womanHovered, setWomanHovered] = useState(false);
   const [newHovered, setNewHovered] = useState(false);
   const [aboutHovered, setAboutHovered] = useState(false);
@@ -42,14 +43,18 @@ const Header = () => {
   const cartIconClickhandler = () => {
     navigate("/cartItems/{email}");
   };
-
+  const isManMenuVisible = manHovered || manmenuHovered;
   return (
     <>
       <div className="relative mb-5">
-        {manHovered && (
-          <div className="absolute top-16 min-h-screen w-full bg-black/40">
+        {isManMenuVisible && (
+          <div className="absolute top-[54px] min-h-screen w-full  bg-black/40">
             <div>
-              <div className="bg-white pb-20 pl-10 pt-20">
+              <div
+                className=" cursor-pointer bg-white pb-20 pl-10 pt-20"
+                onMouseEnter={() => setManmenuHovered(true)}
+                onMouseLeave={() => setManmenuHovered(false)}
+              >
                 <div className="">Shoes</div>
                 <div className="">Clothes</div>
               </div>
@@ -109,14 +114,14 @@ const Header = () => {
                   <div className="w-f h-[2px] bg-yellow-300"></div>
                 ) : (
                   <div
-                    className={`w-f h-[2px] ${manHovered ? "bg-slate-300" : ""}`}
+                    className={`w-f h-[3px] ${manHovered ? "bg-slate-300" : ""}`}
                   ></div>
                 )}
               </div>
 
               <div
                 onMouseEnter={() => setWomanHovered(true)}
-                onMouseLeave={() => setWomanHovered(false)}
+                // onMouseLeave={() => setWomanHovered(false)}
                 className=" cursor-pointer"
                 onClick={() => {
                   setDestMenu("Women");

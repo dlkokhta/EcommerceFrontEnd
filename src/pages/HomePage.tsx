@@ -12,7 +12,7 @@ const HomePage = () => {
         <div>
           <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
         </div>
-        <div className="flex items-center justify-between pb-10 pt-10">
+        <div className="flex flex-col-reverse items-center gap-5 pb-10 pt-10 md:flex-row md:justify-between md:px-40">
           <div className=" ">© 2024 DLK, Inc. All Rights Reserved</div>
           <div>
             <div
