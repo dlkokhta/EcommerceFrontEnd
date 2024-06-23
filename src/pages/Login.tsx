@@ -5,7 +5,7 @@ import axios from "axios";
 import { loginTypes } from "../types/loginTypes.js";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import logo from "../assets/logo.png";
+
 // import { useDispatch } from "react-redux";
 // import { setUserName } from "../store/userNameSlice.js";
 

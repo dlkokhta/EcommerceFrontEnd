@@ -7,7 +7,6 @@ import searchicon from "../assets/search.svg";
 import { RootState } from "../store/store.js";
 import { cartItemsTypes } from "../types/cartItemsTypes";
 import { useSelector } from "react-redux";
-import logo from "../assets/logo.png";
 
 const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
