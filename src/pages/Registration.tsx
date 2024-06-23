@@ -49,7 +49,7 @@ const Registration = () => {
 
   return (
     <div>
-      <div className=" px-16 pt-28 md:px-60 lg:px-[350px] ">
+      <div className=" px-16 pt-28 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[600px]">
         {/* <div className="flex justify-center">
           <img
             className="hidden w-16 cursor-pointer lg:block"

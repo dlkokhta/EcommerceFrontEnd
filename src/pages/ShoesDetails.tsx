@@ -100,18 +100,7 @@ const ShoesDetails = () => {
 
   return (
     <div className="">
-      {addToCartAlert && (
-        <div className="hidden transition-transform ">
-          <div
-            className="top-26 fixed right-5 z-50 rounded-lg border border-orange-600 p-4  "
-            role="alert"
-          >
-            <div className="text-center">Please login to add items to cart</div>
-          </div>
-        </div>
-      )}
-
-      <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 lg:px-20">
+      <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 lg:px-60">
         {shoesById.map((shoes) => (
           <div key={shoes.id}>
             <div className="md:flex md:gap-10 lg:gap-20 xl:gap-[100px] ">
@@ -162,17 +151,6 @@ const ShoesDetails = () => {
                   {shoes.color}
                 </div>
 
-                {isSizeSelected && (
-                  <div className="hidden transition-transform">
-                    <div
-                      className=" top-26 fixed right-5 z-50 rounded-lg border border-orange-600 p-4  "
-                      role="alert"
-                    >
-                      <div className="text-center">please select size</div>
-                    </div>
-                  </div>
-                )}
-
                 <div className="mb-7 grid cursor-pointer grid-cols-4 gap-1 lg:gap-2">
                   {shoes.sizes.map((size) => (
                     <div
@@ -185,7 +163,7 @@ const ShoesDetails = () => {
                   ))}
                 </div>
 
-                <div className="mb-8 flex items-center justify-between rounded-full border font-normal">
+                <div className=" flex items-center justify-between rounded-full border font-normal">
                   <div
                     onClick={() => {
                       setSelectedQuantity(selectedQuantity - 1);
@@ -205,27 +183,19 @@ const ShoesDetails = () => {
                   </div>
                 </div>
 
-                {addToCartAlert && (
-                  <div
-                    className="absolute top-[260px] ml-16 rounded-lg text-xs text-red md:ml-5"
-                    role="alert"
-                  >
-                    <div className="">Please login to add items to cart</div>
-                  </div>
-                )}
+                <div className="flex h-8 items-center justify-center text-xs md:text-base">
+                  {addToCartAlert ? (
+                    <h2 className=" text-red" role="alert">
+                      <div className="">Please login to add items to cart</div>
+                    </h2>
+                  ) : isSizeSelected ? (
+                    <h2 className=" text-red" role="alert">
+                      <div className="">please select size</div>
+                    </h2>
+                  ) : null}
+                </div>
 
-                {isSizeSelected && (
-                  <div className="transition-transform">
-                    <div
-                      className=" absolute top-[260px] ml-28 rounded-lg text-xs text-red md:ml-14 "
-                      role="alert"
-                    >
-                      <div className="text-center">please select size</div>
-                    </div>
-                  </div>
-                )}
-
-                <div className="mb-5 flex flex-col justify-center gap-3 font-normal">
+                <div className="mb-5 flex flex-col justify-center gap-5 font-normal">
                   <button
                     onClick={() => handleClick(shoes.id)}
                     className=" w-full rounded-full bg-yellow-300 px-5 py-2  text-sm hover:bg-yellow-400"

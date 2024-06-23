@@ -61,20 +61,12 @@ const Login = () => {
 
   return (
     <div className="pt-10">
-      {/* <h1
+      <h1
         onClick={() => navigate("/")}
         className="cursor-pointer text-center font-roboto font-medium"
       >
         eCommerce
-      </h1> */}
-
-      <div className="flex justify-center">
-        <img
-          className="hidden w-16 cursor-pointer  lg:block"
-          src={logo}
-          onClick={() => navigate("/")}
-        />
-      </div>
+      </h1>
 
       {responseError && (
         <div className="mt-10 px-16 text-center">
@@ -83,7 +75,7 @@ const Login = () => {
           </h1>
         </div>
       )}
-      <div className="px-16 pt-10 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[580px] 3xl:px-[750px]">
+      <div className="px-16 pt-10 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[600px] 3xl:px-[750px]">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mb-10 flex flex-col gap-5 border border-slate-400 px-5 py-5"

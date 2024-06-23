@@ -70,17 +70,13 @@ const Header = () => {
             src={hamburher}
             alt="hamburger"
           />
-          <img
-            className="hidden w-16 cursor-pointer lg:block"
-            src={logo}
-            onClick={() => navigate("/")}
-          />
-          {/* <h1
+
+          <h1
             onClick={() => navigate("/")}
             className="hidden cursor-pointer font-roboto font-medium lg:block"
           >
             eCommerce
-          </h1> */}
+          </h1>
 
           <div className="ml-10 mt-1 hidden font-roboto font-light lg:block ">
             <div className="items flex flex-row gap-2 lg:text-sm xl:gap-6">
