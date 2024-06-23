@@ -80,7 +80,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
           </div>
         </div>
       ) : ( */}
-      <div>
+      <div className="mt-24">
         {cartItems ? (
           <div className="px-5 pt-5 md:grid-cols-2 md:gap-2 xl:mt-20 xl:grid-cols-3 xl:px-20 3xl:px-[400px]">
             {cartItems.map((item, index) => {

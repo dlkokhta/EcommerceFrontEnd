@@ -17,13 +17,16 @@ const HomePage = () => {
           <div>
             <div
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="cursor-pointer hover:text-yellow-400 "
+              className="cursor-pointer  text-blue-500  hover:text-red "
             >
               Home
             </div>
-            <div className="cursor-pointer">
+            <a
+              href="mailto:dl.kokhtashvili@gmail.com"
+              className="cursor-pointer  text-blue-500  hover:text-red "
+            >
               Email: dl.kokhtashvili@gmail.com
-            </div>
+            </a>
             <div>Mobile: +995555331167</div>
           </div>
           <div className="flex gap-5">
