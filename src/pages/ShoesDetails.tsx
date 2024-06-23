@@ -99,7 +99,7 @@ const ShoesDetails = () => {
   };
 
   return (
-    <div className="">
+    <div className="mt-24">
       <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 lg:px-60">
         {shoesById.map((shoes) => (
           <div key={shoes.id}>

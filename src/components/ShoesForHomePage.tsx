@@ -21,7 +21,7 @@ const ShoesForHomePage = () => {
   }
 
   return (
-    <div className="">
+    <div className="mt-24">
       {allShoes && allShoes.length > 0 ? (
         <div className="mt-5 px-5 pt-5 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-4 lg:px-10 2xl:grid-cols-4">
           {allShoes.map((shoes, index) => (
