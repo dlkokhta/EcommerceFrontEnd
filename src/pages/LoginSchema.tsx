@@ -8,7 +8,7 @@ const registrationSchema = yup.object({
 
   password: yup
     .string()
-    .min(8, "password must be 8 or more characters")
+    // .min(8, "password must be 8 or more characters")
     .max(25, "password must contain 25 ot less charachters")
     .required("password is required"),
 });
