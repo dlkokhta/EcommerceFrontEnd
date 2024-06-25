@@ -52,16 +52,12 @@ const Login = () => {
       localStorage.setItem("authToken", authToken);
       localStorage.setItem("data.email", data.email);
       localStorage.setItem("userName", response.data.name);
-
-      // Check if name is null and provide a default value
     } catch (error: any) {
       // console.log(error.response.data.message);
       setResponseError(error.response.data);
     }
   };
-
   const navigate = useNavigate();
-
   const handleClick = (path: string) => {
     navigate(path);
   };
@@ -85,7 +81,7 @@ const Login = () => {
       <div className="px-16 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[600px] 3xl:px-[750px]">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="mb-10 flex flex-col gap-5 border border-slate-400 px-5 py-5"
+          className="mb-10 flex flex-col gap-4 border border-slate-400 px-5 py-5"
         >
           <h1 className="text-xl ">Sign in</h1>
 

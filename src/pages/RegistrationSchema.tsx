@@ -1,27 +1,31 @@
 import * as yup from "yup";
 
+const emailValidationRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 const registrationSchema = yup.object({
   name: yup
     .string()
-    .min(4, "name must be 4 or more characters")
+    .required("Enter your name")
+    .min(4, "must be 4 or more characters"),
 
-    .required("name is required"),
   email: yup
     .string()
-    .email("email must be a valid email")
-    .required("email is required"),
+    .matches(emailValidationRegex, "email must be a valid email")
+    // .email("email must be a valid email")
+    .required("Enter your email"),
 
   password: yup
     .string()
-    .min(8, "password must be 8 or more characters")
-    .max(25, "password must contain 25 ot less charachters")
-    .required("password is required"),
+    .required("password is required")
+    .min(8, "Minimum 8 characters required")
+    .max(25, "password must contain 25 ot less charachters"),
 
   repeatPassword: yup
     .string()
-    .min(8, "password must be 8 or more characters")
+    .required("Re-enter your password")
+    .min(8, "must be 8 or more characters")
     .max(25, "password must contain 25 ot less charachters")
-    .required("password is required"),
+    .oneOf([yup.ref("password")], "Passwords must match"),
 });
 
 export default registrationSchema;
