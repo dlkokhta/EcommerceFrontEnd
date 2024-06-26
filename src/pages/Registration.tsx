@@ -7,13 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const Registration = () => {
-  const [responseError, setResponseError] = useState<string>("");
+  const [responseError, setResponseError] = useState<string | null>("");
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm({ resolver: yupResolver(RegistrationSchema) });
+  console.log("responseError", responseError);
 
   const navigate = useNavigate();
 
@@ -35,7 +36,7 @@ const Registration = () => {
     try {
       await axios.post(`${url}/api/register`, userData);
       reset();
-    } catch (error) {
+    } catch (error: any) {
       setResponseError(error.response.data);
       console.log("backendError", error);
     }
@@ -85,8 +86,12 @@ const Registration = () => {
               {...register("email")}
               name="email"
             />
-            {errors.email && (
+            {errors.email ? (
               <div className="text-xs text-red">{errors.email.message}</div>
+            ) : (
+              responseError && (
+                <div className="text-xs text-red">{responseError}</div>
+              )
             )}
           </div>
           <div className="w-full">
