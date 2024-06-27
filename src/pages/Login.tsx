@@ -4,14 +4,14 @@ import loginSchema from "./LoginSchema";
 import axios from "axios";
 import { loginTypes } from "../types/loginTypes.js";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // import { useDispatch } from "react-redux";
 // import { setUserName } from "../store/userNameSlice.js";
 
 const Login = () => {
-  const [responseError, setResponseError] = useState(null);
-  const [frontEndErrors, setFrontEndErrors] = useState<string>("");
+  const [responseError, setResponseError] = useState<string | null>("");
+  console.log("responseError", responseError);
   const {
     register,
     handleSubmit,
@@ -22,23 +22,14 @@ const Login = () => {
   });
   // const dispatch = useDispatch();
 
-  useEffect(() => {
-    setFrontEndErrors(errors.email?.message || errors.password?.message || "");
-  }, [errors]);
-
-  console.log("errors", frontEndErrors);
-
   let url;
   if (process.env.NODE_ENV === "production") {
-    // Use production backend URL
     url = `https://ecommerceapi-production-7d9c.up.railway.app`;
   } else {
-    // Use local backend URL
     url = `http://localhost:3000`;
   }
 
   const onSubmit = async (data: loginTypes) => {
-    console.log("data", data);
     const userData = {
       email: data.email,
       password: data.password,
@@ -53,7 +44,6 @@ const Login = () => {
       localStorage.setItem("data.email", data.email);
       localStorage.setItem("userName", response.data.name);
     } catch (error: any) {
-      // console.log(error.response.data.message);
       setResponseError(error.response.data);
     }
   };
@@ -70,15 +60,8 @@ const Login = () => {
       >
         eCommerce
       </h1>
-      <div className="flex h-16 items-center justify-center font-roboto text-red ">
-        {responseError ? (
-          <h1 className=" ">{responseError}</h1>
-        ) : (
-          frontEndErrors && <h1 className="">{frontEndErrors}</h1>
-        )}
-      </div>
 
-      <div className="px-16 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[600px] 3xl:px-[750px]">
+      <div className="px-16 pt-16 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[600px] 3xl:px-[750px]">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mb-10 flex flex-col gap-4 border border-slate-400 px-5 py-5"
@@ -92,24 +75,34 @@ const Login = () => {
               </label>
             </div>
             <input
-              className="w-full border  border-slate-400  outline-green-300  "
+              className={`w-full border  ${errors.email ? ` border-red` : ` border-slate-400`}   outline-none`}
               type="email"
               id="email"
               {...register("email")}
               name="email"
             />
+            {errors.email ? (
+              <div className="text-xs text-red">{errors.email.message}</div>
+            ) : (
+              responseError && (
+                <div className="text-xs text-red">{responseError}</div>
+              )
+            )}
           </div>
           <div className="w-full">
             <label className="block text-sm" htmlFor="password">
               password
             </label>
             <input
-              className="w-full border  border-slate-400   outline-green-300 "
+              className={`w-full border  ${errors.password ? ` border-red` : ` border-slate-400`}   outline-none`}
               type="password"
               id="password"
               {...register("password")}
               name="password"
             />
+            {errors.password && (
+              <div className="text-xs text-red">{errors.password.message}</div>
+            )}
           </div>
 
           <button className=" w-full rounded-xl bg-yellow-300 px-5 py-2  text-sm hover:bg-yellow-400">

@@ -38,7 +38,6 @@ const Registration = () => {
       reset();
     } catch (error: any) {
       setResponseError(error.response.data);
-      console.log("backendError", error);
     }
   };
 
@@ -52,8 +51,8 @@ const Registration = () => {
       >
         eCommerce
       </h1>
-      <div className="flex  h-16 items-center justify-center font-roboto text-red "></div>
-      <div className=" px-16 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[600px]">
+
+      <div className="px-16 pt-16 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[600px]">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mb-10 flex flex-col gap-4 border border-slate-400 px-5 py-5"
