@@ -14,7 +14,6 @@ const Registration = () => {
     formState: { errors },
     reset,
   } = useForm({ resolver: yupResolver(RegistrationSchema) });
-  console.log("responseError", responseError);
 
   const navigate = useNavigate();
 
@@ -39,9 +38,8 @@ const Registration = () => {
     } catch (error: any) {
       setResponseError(error.response.data);
     }
+    navigate("/login");
   };
-
-  // navigate("/login");
 
   return (
     <div className="pt-10">

@@ -11,7 +11,7 @@ import { useState } from "react";
 
 const Login = () => {
   const [responseError, setResponseError] = useState<string | null>("");
-  console.log("responseError", responseError);
+
   const {
     register,
     handleSubmit,

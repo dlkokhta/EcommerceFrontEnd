@@ -8,6 +8,11 @@ const ShoesForHomePage = () => {
     (state: RootState) => state.allShoes.shoes,
   );
 
+  const shoesBygender: string = useSelector(
+    (state: RootState) => state.filterByGender.filterByGenderValue,
+  );
+  console.log(shoesBygender);
+
   const navigate = useNavigate();
   const placeholders = Array(8).fill(null);
 
@@ -20,11 +25,15 @@ const ShoesForHomePage = () => {
     url = `http://localhost:3000`;
   }
 
+  const filteredShoes = shoesBygender
+    ? allShoes.filter((shoes) => shoes.gender === shoesBygender)
+    : allShoes;
+
   return (
     <div className="mt-24">
       {allShoes && allShoes.length > 0 ? (
         <div className="mt-5 px-5 pt-5 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-4 lg:px-10 2xl:grid-cols-4">
-          {allShoes.map((shoes, index) => (
+          {filteredShoes.map((shoes, index) => (
             <div key={index}>
               <div className="mb-2">
                 {shoes.image.slice(0, 1).map(

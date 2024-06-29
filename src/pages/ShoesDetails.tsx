@@ -73,7 +73,6 @@ const ShoesDetails = () => {
 
     //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
     // }
-    console.log("selectedQuantity", selectedQuantity);
 
     try {
       await axios.post(

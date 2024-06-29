@@ -31,8 +31,6 @@ const CartItems = ({ handleGetCartItems }: any) => {
   const storedCartItems = localStorage.getItem("cartItems") as string;
   const parsedCartItems = JSON.parse(storedCartItems);
 
-  console.log("parsedCartItems", parsedCartItems);
-
   //for unregistered users
   // const unregisteredUserItems = allShoes.find(
   //   (shoe) => shoe.id === parsedCartItems.itemId,
@@ -53,11 +51,8 @@ const CartItems = ({ handleGetCartItems }: any) => {
     // const url = `http://localhost:3000/api/deleteShoes/${userEmail}/${id}`;
 
     try {
-      const response = await axios.delete(
-        `${url}/api/deleteShoes/${userEmail}/${id}`,
-      );
+      await axios.delete(`${url}/api/deleteShoes/${userEmail}/${id}`);
       await handleGetCartItems();
-      console.log("response", response);
     } catch (error) {
       console.log(error);
     }

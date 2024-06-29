@@ -31,11 +31,10 @@ const AddShoes = () => {
     userData.append("price", data.price.toString());
     userData.append("sizes", data.sizes);
     userData.append("image", data.image[0]);
-    console.log("userData!!", data);
 
     try {
-      const response = await axios.post(`${url}/api/addItem`, userData);
-      console.log("response.data", response.data);
+      await axios.post(`${url}/api/addItem`, userData);
+
       reset();
     } catch (error) {
       console.log(errors);

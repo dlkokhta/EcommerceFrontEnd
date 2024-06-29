@@ -7,10 +7,12 @@ import searchicon from "../assets/search.svg";
 import { RootState } from "../store/store.js";
 import { cartItemsTypes } from "../types/cartItemsTypes";
 import { useSelector } from "react-redux";
+import { setFilterByGender } from "../store/filterByGenderSlice.js";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
-  const [destMenu, setDestMenu] = useState<string>("");
+  const [destMenu, setDestMenu] = useState<string>("All");
   const navigate = useNavigate();
 
   const cartItems: cartItemsTypes[] = useSelector(
@@ -32,52 +34,28 @@ const Header = () => {
   };
 
   const [manHovered, setManHovered] = useState(false);
-  // const [manmenuHovered, setManmenuHovered] = useState(false);
+  const [allHovered, setAllHovered] = useState(false);
   const [womanHovered, setWomanHovered] = useState(false);
-  // const [womanManuHovered, setWomanManuHovered] = useState(false);
   const [newHovered, setNewHovered] = useState(false);
   const [aboutHovered, setAboutHovered] = useState(false);
-  // const [contactHovered, setContactHovered] = useState(false);
-  const [brandHovered, setBrandHovered] = useState(false);
 
   const cartIconClickhandler = () => {
     navigate("/cartItems/{email}");
   };
-  // const isManMenuVisible = manHovered || manmenuHovered;
-  // const isWomenMenuVisible = womanHovered || womanManuHovered;
+  const dispatch = useDispatch();
+  const manClickhandler = () => {
+    dispatch(setFilterByGender(`Man's`));
+  };
+  const womenClickhandler = () => {
+    dispatch(setFilterByGender(`Women's`));
+  };
+  const allClickhandler = () => {
+    dispatch(setFilterByGender(""));
+  };
   return (
     <>
       <div className="fixed top-0 z-40 w-full bg-white">
         <div className="relative mb-5">
-          {/* {isManMenuVisible && (
-          <div className="absolute top-[50px] z-10 min-h-screen w-full  bg-black/40">
-            <div>
-              <div
-                className=" cursor-pointer bg-white pb-20 pl-10 pt-20"
-                onMouseEnter={() => setManmenuHovered(true)}
-                onMouseLeave={() => setManmenuHovered(false)}
-              >
-                <div className="">Shoes</div>
-                <div className="">Clothes</div>
-              </div>
-            </div>
-          </div>
-        )} */}
-
-          {/* {isWomenMenuVisible && (
-          <div className="absolute top-[50px] z-10 min-h-screen w-full  bg-black/40">
-            <div>
-              <div
-                className=" cursor-pointer bg-white pb-20 pl-10 pt-20"
-                onMouseEnter={() => setWomanHovered(true)}
-                onMouseLeave={() => setWomanManuHovered(false)}
-              >
-                <div className="">Shoes</div>
-                <div className="">Clothes</div>
-              </div>
-            </div>
-          </div>
-        )} */}
           <div className="flex items-center gap-3 px-5 pt-5 lg:px-10">
             <img
               className="h-5 lg:hidden"
@@ -115,11 +93,29 @@ const Header = () => {
                   )}
                 </div>
                 <div
+                  onMouseEnter={() => setAllHovered(true)}
+                  onMouseLeave={() => setAllHovered(false)}
+                  className=" cursor-pointer"
+                  onClick={() => {
+                    setDestMenu("All");
+                    allClickhandler();
+                  }}
+                >
+                  All
+                  {destMenu === "All" ? (
+                    <div className="w-f h-[2px] bg-yellow-300"></div>
+                  ) : (
+                    <div
+                      className={`w-f h-[2px] ${allHovered ? "bg-slate-300" : ""}`}
+                    ></div>
+                  )}
+                </div>
+                <div
                   onMouseEnter={() => setManHovered(true)}
                   onMouseLeave={() => setManHovered(false)}
                   className=" cursor-pointer items-center"
                   onClick={() => {
-                    setDestMenu("Man");
+                    setDestMenu("Man"), manClickhandler();
                   }}
                 >
                   Man
@@ -138,6 +134,7 @@ const Header = () => {
                   className=" cursor-pointer"
                   onClick={() => {
                     setDestMenu("Women");
+                    womenClickhandler();
                   }}
                 >
                   Woman
@@ -146,24 +143,6 @@ const Header = () => {
                   ) : (
                     <div
                       className={`w-f h-[2px] ${womanHovered ? "bg-slate-300" : ""}`}
-                    ></div>
-                  )}
-                </div>
-
-                <div
-                  onMouseEnter={() => setBrandHovered(true)}
-                  onMouseLeave={() => setBrandHovered(false)}
-                  className=" cursor-pointer"
-                  onClick={() => {
-                    setDestMenu("Brand");
-                  }}
-                >
-                  Brand
-                  {destMenu === "Brand" ? (
-                    <div className="w-f h-[2px] bg-yellow-300"></div>
-                  ) : (
-                    <div
-                      className={`w-f h-[2px] ${brandHovered ? "bg-slate-300" : ""}`}
                     ></div>
                   )}
                 </div>
@@ -192,24 +171,6 @@ const Header = () => {
                     ></div>
                   )}
                 </div>
-
-                {/* <div
-                onMouseEnter={() => setContactHovered(true)}
-                onMouseLeave={() => setContactHovered(false)}
-                className=" cursor-pointer"
-                onClick={() => {
-                  setDestMenu("Contact");
-                }}
-              >
-                Contact
-                {destMenu === "Contact" ? (
-                  <div className="w-f h-[2px] bg-yellow-300"></div>
-                ) : (
-                  <div
-                    className={`w-f h-[2px] ${contactHovered ? "bg-slate-300" : ""}`}
-                  ></div>
-                )}
-              </div> */}
               </div>
             </div>
 
@@ -217,7 +178,7 @@ const Header = () => {
               <div className="flex h-7 rounded-full  border px-3 text-sm">
                 <input
                   className=" w-full font-light outline-none"
-                  placeholder="search"
+                  placeholder="Brand"
                 />
                 <div className="ml-auto  flex items-center">
                   <img className=" " src={searchicon} />
