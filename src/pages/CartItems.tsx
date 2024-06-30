@@ -28,8 +28,8 @@ const CartItems = ({ handleGetCartItems }: any) => {
   //for unregistered users
   // const token = localStorage.getItem("authToken");
 
-  const storedCartItems = localStorage.getItem("cartItems") as string;
-  const parsedCartItems = JSON.parse(storedCartItems);
+  // const storedCartItems = localStorage.getItem("cartItems") as string;
+  // const parsedCartItems = JSON.parse(storedCartItems);
 
   //for unregistered users
   // const unregisteredUserItems = allShoes.find(

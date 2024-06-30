@@ -7,8 +7,9 @@ import searchicon from "../assets/search.svg";
 import { RootState } from "../store/store.js";
 import { cartItemsTypes } from "../types/cartItemsTypes";
 import { useSelector } from "react-redux";
-import { setFilterByGender } from "../store/filterByGenderSlice.js";
+import { setFilterShoes } from "../store/filterShoesSlice.js";
 import { useDispatch } from "react-redux";
+import { setFilterShoesByBrand } from "../store/filterShoesByBrandSlice.js";
 
 const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
@@ -38,19 +39,29 @@ const Header = () => {
   const [womanHovered, setWomanHovered] = useState(false);
   const [newHovered, setNewHovered] = useState(false);
   const [aboutHovered, setAboutHovered] = useState(false);
+  const [search, setSearch] = useState("");
 
   const cartIconClickhandler = () => {
     navigate("/cartItems/{email}");
   };
   const dispatch = useDispatch();
   const manClickhandler = () => {
-    dispatch(setFilterByGender(`Man's`));
+    dispatch(setFilterShoes(`Man's`));
   };
   const womenClickhandler = () => {
-    dispatch(setFilterByGender(`Women's`));
+    dispatch(setFilterShoes(`Women's`));
   };
   const allClickhandler = () => {
-    dispatch(setFilterByGender(""));
+    dispatch(setFilterShoes(""));
+  };
+  const searchChnageHandler = (event: any) => {
+    event.preventDefault();
+    setSearch(event.target.value);
+    console.log("search", search);
+  };
+
+  const searchClickhandler = () => {
+    dispatch(setFilterShoesByBrand(search));
   };
   return (
     <>
@@ -115,6 +126,7 @@ const Header = () => {
                   onMouseLeave={() => setManHovered(false)}
                   className=" cursor-pointer items-center"
                   onClick={() => {
+                    navigate("/");
                     setDestMenu("Man"), manClickhandler();
                   }}
                 >
@@ -135,6 +147,7 @@ const Header = () => {
                   onClick={() => {
                     setDestMenu("Women");
                     womenClickhandler();
+                    navigate("/");
                   }}
                 >
                   Woman
@@ -179,9 +192,14 @@ const Header = () => {
                 <input
                   className=" w-full font-light outline-none"
                   placeholder="Brand"
+                  onChange={searchChnageHandler}
                 />
-                <div className="ml-auto  flex items-center">
-                  <img className=" " src={searchicon} />
+                <div className="ml-auto  flex cursor-pointer items-center">
+                  <img
+                    onClick={searchClickhandler}
+                    className=""
+                    src={searchicon}
+                  />
                 </div>
               </div>
             </div>

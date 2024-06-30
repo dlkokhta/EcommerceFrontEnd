@@ -8,10 +8,15 @@ const ShoesForHomePage = () => {
     (state: RootState) => state.allShoes.shoes,
   );
 
-  const shoesBygender: string = useSelector(
-    (state: RootState) => state.filterByGender.filterByGenderValue,
+  const shoesFilter: string = useSelector(
+    (state: RootState) => state.filterShoes.filterShoesValue,
   );
-  console.log(shoesBygender);
+
+  const shoesFilterByBrand: string = useSelector(
+    (state: RootState) => state.filterShoesByBrand.filterShoesByBrandValue,
+  );
+
+  console.log("shoesFilterByBrand", shoesFilterByBrand);
 
   const navigate = useNavigate();
   const placeholders = Array(8).fill(null);
@@ -25,9 +30,13 @@ const ShoesForHomePage = () => {
     url = `http://localhost:3000`;
   }
 
-  const filteredShoes = shoesBygender
-    ? allShoes.filter((shoes) => shoes.gender === shoesBygender)
-    : allShoes;
+  const filteredShoes = allShoes.filter((shoe) => {
+    const genderMatch = shoesFilter ? shoe.gender === shoesFilter : true;
+    const brandMatch = shoesFilterByBrand
+      ? shoe.brand.toLowerCase().includes(shoesFilterByBrand.toLowerCase())
+      : true;
+    return genderMatch && brandMatch;
+  });
 
   return (
     <div className="mt-24">

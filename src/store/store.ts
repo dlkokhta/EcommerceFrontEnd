@@ -2,14 +2,16 @@ import { configureStore } from "@reduxjs/toolkit";
 import userNameReducer from "./userNameSlice";
 import allShoesSlice from "./allShoesSlice";
 import cartItemsSlice from "./cartItemsSlice";
-import filterBygenderSlice from "./filterByGenderSlice";
+import filterShoesSlice from "./filterShoesSlice";
+import filterShoesByBrandSlice from "./filterShoesByBrandSlice";
 
 const store = configureStore({
   reducer: {
     userName: userNameReducer,
     allShoes: allShoesSlice,
     cartItems: cartItemsSlice,
-    filterByGender: filterBygenderSlice,
+    filterShoes: filterShoesSlice,
+    filterShoesByBrand: filterShoesByBrandSlice,
   },
 });
 
