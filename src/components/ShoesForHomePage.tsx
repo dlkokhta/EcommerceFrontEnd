@@ -8,17 +8,16 @@ const ShoesForHomePage = () => {
     (state: RootState) => state.allShoes.shoes,
   );
 
-  const test = allShoes.map((shoes) => shoes.isShoesNew);
-  console.log(test);
-
-  // const test = allShoes.map((shoes) => shoes)
-
   const shoesFilter: string = useSelector(
     (state: RootState) => state.filterShoes.filterShoesValue,
   );
 
   const shoesFilterByBrand: string = useSelector(
     (state: RootState) => state.filterShoesByBrand.filterShoesByBrandValue,
+  );
+
+  const isShoesNew = useSelector(
+    (state: RootState) => state.newShoes.newShoesValue,
   );
 
   const navigate = useNavigate();
@@ -38,7 +37,8 @@ const ShoesForHomePage = () => {
     const brandMatch = shoesFilterByBrand
       ? shoe.brand.toLowerCase().includes(shoesFilterByBrand.toLowerCase())
       : true;
-    return genderMatch && brandMatch;
+    const newShoesMatch = isShoesNew ? shoe.isShoesNew === isShoesNew : true;
+    return genderMatch && brandMatch && newShoesMatch;
   });
 
   return (
@@ -60,17 +60,15 @@ const ShoesForHomePage = () => {
                         alt={image}
                         onClick={() => navigate(`/shoesDetails/${shoes.id}`)}
                       />
-                      {shoes.isShoesNew && (
-                        <div className="bg-red-500 absolute right-0 top-0 px-2 py-1 text-xs text-white">
-                          New
-                        </div>
-                      )}
                     </div>
                   ),
                 )}
               </div>
 
               <div className="mb-10 font-roboto text-sm font-light">
+                {shoes.isShoesNew && (
+                  <div className="text-sm font-bold text-red">New</div>
+                )}
                 <div>{shoes.gender}</div>
                 <div>{shoes.brand}</div>
                 <div className="">{shoes.model}</div>

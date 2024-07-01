@@ -56,7 +56,7 @@ function App() {
       console.log(error);
     }
   };
-  console.log("sdfsdfsdfsdsdfdsdsds");
+
   handleGetCartItems();
 
   // console.log("data.email", localStorage.getItem("data.email"));

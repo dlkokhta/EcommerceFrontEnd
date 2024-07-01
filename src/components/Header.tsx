@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { setFilterShoes } from "../store/filterShoesSlice.js";
 import { useDispatch } from "react-redux";
 import { setFilterShoesByBrand } from "../store/filterShoesByBrandSlice.js";
+import { setnewShoes } from "../store/newShoesSlice.js";
 
 const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
@@ -47,17 +48,27 @@ const Header = () => {
   const dispatch = useDispatch();
   const manClickhandler = () => {
     dispatch(setFilterShoes(`Man's`));
+    dispatch(setFilterShoesByBrand(""));
+    dispatch(setnewShoes(false));
   };
   const womenClickhandler = () => {
     dispatch(setFilterShoes(`Women's`));
+
+    dispatch(setFilterShoesByBrand(""));
+    dispatch(setnewShoes(false));
   };
   const allClickhandler = () => {
     dispatch(setFilterShoes(""));
     dispatch(setFilterShoesByBrand(""));
+    dispatch(setnewShoes(false));
   };
   const searchChnageHandler = (event: any) => {
     event.preventDefault();
     setSearch(event.target.value);
+  };
+  const newClickhandler = () => {
+    dispatch(setnewShoes(true));
+    dispatch(setFilterShoes(""));
   };
 
   const searchClickhandler = () => {
@@ -93,6 +104,7 @@ const Header = () => {
                   className=" cursor-pointer"
                   onClick={() => {
                     setDestMenu("New");
+                    newClickhandler();
                   }}
                 >
                   New
