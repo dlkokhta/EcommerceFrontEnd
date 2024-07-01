@@ -53,15 +53,16 @@ const Header = () => {
   };
   const allClickhandler = () => {
     dispatch(setFilterShoes(""));
+    dispatch(setFilterShoesByBrand(""));
   };
   const searchChnageHandler = (event: any) => {
     event.preventDefault();
     setSearch(event.target.value);
-    console.log("search", search);
   };
 
   const searchClickhandler = () => {
     dispatch(setFilterShoesByBrand(search));
+    setSearch("");
   };
   return (
     <>
@@ -191,7 +192,8 @@ const Header = () => {
               <div className="flex h-7 rounded-full  border px-3 text-sm">
                 <input
                   className=" w-full font-light outline-none"
-                  placeholder="Brand"
+                  placeholder="Search by brand"
+                  value={search}
                   onChange={searchChnageHandler}
                 />
                 <div className="ml-auto  flex cursor-pointer items-center">

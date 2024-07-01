@@ -8,6 +8,11 @@ const ShoesForHomePage = () => {
     (state: RootState) => state.allShoes.shoes,
   );
 
+  const test = allShoes.map((shoes) => shoes.isShoesNew);
+  console.log(test);
+
+  // const test = allShoes.map((shoes) => shoes)
+
   const shoesFilter: string = useSelector(
     (state: RootState) => state.filterShoes.filterShoesValue,
   );
@@ -15,8 +20,6 @@ const ShoesForHomePage = () => {
   const shoesFilterByBrand: string = useSelector(
     (state: RootState) => state.filterShoesByBrand.filterShoesByBrandValue,
   );
-
-  console.log("shoesFilterByBrand", shoesFilterByBrand);
 
   const navigate = useNavigate();
   const placeholders = Array(8).fill(null);
@@ -50,13 +53,18 @@ const ShoesForHomePage = () => {
                     image,
                     index, // Use slice to take only the first image
                   ) => (
-                    <div key={index}>
+                    <div key={index} className="">
                       <img
                         className="cursor-pointer xl:max-h-[429px]"
                         src={`${url}/public/storage/images/${image}`}
                         alt={image}
                         onClick={() => navigate(`/shoesDetails/${shoes.id}`)}
                       />
+                      {shoes.isShoesNew && (
+                        <div className="bg-red-500 absolute right-0 top-0 px-2 py-1 text-xs text-white">
+                          New
+                        </div>
+                      )}
                     </div>
                   ),
                 )}

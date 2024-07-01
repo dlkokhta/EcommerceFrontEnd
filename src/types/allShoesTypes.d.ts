@@ -1,6 +1,7 @@
 export interface allShoesTypes {
   brand: string;
   model: string;
+  isShoesNew: boolean;
   gender: string;
   color: string;
   description: string;

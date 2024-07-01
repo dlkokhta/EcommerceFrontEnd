@@ -21,8 +21,10 @@ function App() {
   let url;
 
   if (process.env.NODE_ENV === "production") {
+    // Use production backend URL
     url = `https://ecommerceapi-production-7d9c.up.railway.app/api`;
   } else {
+    // Use local backend URL
     url = `http://localhost:3000/api`;
   }
 
@@ -32,7 +34,6 @@ function App() {
         const response = await axios.get(`${url}/getAllShoes`);
 
         dispatch(setAllShoes(response.data));
-        console.log("response.data", response.data);
       } catch (error) {
         console.error(error);
       }
@@ -55,7 +56,7 @@ function App() {
       console.log(error);
     }
   };
-
+  console.log("sdfsdfsdfsdsdfdsdsds");
   handleGetCartItems();
 
   // console.log("data.email", localStorage.getItem("data.email"));
