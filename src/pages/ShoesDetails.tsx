@@ -165,7 +165,9 @@ const ShoesDetails = () => {
                 <div className=" flex items-center justify-between rounded-full border font-normal">
                   <div
                     onClick={() => {
-                      setSelectedQuantity(selectedQuantity - 1);
+                      selectedQuantity === 1
+                        ? setSelectedQuantity(1)
+                        : setSelectedQuantity(selectedQuantity - 1);
                     }}
                     className="cursor-pointer rounded-l-full border border-r bg-slate-100 px-5 py-0.5 text-center  text-xl hover:bg-slate-200"
                   >
@@ -174,7 +176,9 @@ const ShoesDetails = () => {
                   <h1>Quantity: {selectedQuantity}</h1>
                   <div
                     onClick={() => {
-                      setSelectedQuantity(selectedQuantity + 1);
+                      selectedQuantity === 10
+                        ? setSelectedQuantity(10)
+                        : setSelectedQuantity(selectedQuantity + 1);
                     }}
                     className="cursor-pointer rounded-r-full border border-l bg-slate-100 px-5 py-0.5 text-center text-xl hover:bg-slate-200 "
                   >

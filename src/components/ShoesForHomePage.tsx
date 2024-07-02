@@ -35,8 +35,12 @@ const ShoesForHomePage = () => {
   const filteredShoes = allShoes.filter((shoe) => {
     const genderMatch = shoesFilter ? shoe.gender === shoesFilter : true;
     const brandMatch = shoesFilterByBrand
-      ? shoe.brand.toLowerCase().includes(shoesFilterByBrand.toLowerCase())
+      ? shoe.brand
+          .toLowerCase()
+          .replace(/\s+/g, "")
+          .includes(shoesFilterByBrand.toLowerCase().replace(/\s+/g, ""))
       : true;
+
     const newShoesMatch = isShoesNew ? shoe.isShoesNew === isShoesNew : true;
     return genderMatch && brandMatch && newShoesMatch;
   });

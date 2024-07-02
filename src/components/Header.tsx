@@ -66,6 +66,7 @@ const Header = () => {
     event.preventDefault();
     setSearch(event.target.value);
   };
+
   const newClickhandler = () => {
     dispatch(setnewShoes(true));
     dispatch(setFilterShoes(""));
@@ -73,6 +74,7 @@ const Header = () => {
 
   const searchClickhandler = () => {
     dispatch(setFilterShoesByBrand(search));
+
     setSearch("");
   };
   return (
