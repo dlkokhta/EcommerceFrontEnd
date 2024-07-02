@@ -105,6 +105,7 @@ const Header = () => {
                   onMouseLeave={() => setNewHovered(false)}
                   className=" cursor-pointer"
                   onClick={() => {
+                    navigate("/");
                     setDestMenu("New");
                     newClickhandler();
                   }}
@@ -123,6 +124,7 @@ const Header = () => {
                   onMouseLeave={() => setAllHovered(false)}
                   className=" cursor-pointer"
                   onClick={() => {
+                    navigate("/");
                     setDestMenu("All");
                     allClickhandler();
                   }}

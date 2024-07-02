@@ -13,6 +13,7 @@ import Header from "./components/Header";
 import { useLocation } from "react-router-dom";
 import CartItems from "./pages/CartItems";
 import { setCartItems } from "./store/cartItemsSlice";
+import AdminLogin from "./pages/adminLogin";
 
 function App() {
   const dispatch = useDispatch();
@@ -66,14 +67,16 @@ function App() {
 
   return (
     <div>
-      {location.pathname === "/login" ||
-        (location.pathname === "/registration" ? "" : <Header />)}
+      {location.pathname !== "/login" &&
+        location.pathname !== "/adminLogin" &&
+        location.pathname !== "/registration" && <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/addShoes" element={<AddShoes />} />
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
+        <Route path="/adminLogin" element={<AdminLogin />} />
         <Route
           path="/cartItems/:email"
           element={<CartItems handleGetCartItems={handleGetCartItems} />}
