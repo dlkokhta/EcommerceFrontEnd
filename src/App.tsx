@@ -14,7 +14,7 @@ import { useLocation } from "react-router-dom";
 import CartItems from "./pages/CartItems";
 import { setCartItems } from "./store/cartItemsSlice";
 import AdminLogin from "./pages/adminLogin";
-
+import AdminPanel from "./pages/adminPanel";
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -64,19 +64,26 @@ function App() {
   // if (localStorage.getItem("data.email")) {
   // }
   // handleGetCartItems();
-
+  console.log("user role", localStorage.getItem("role"));
   return (
     <div>
       {location.pathname !== "/login" &&
         location.pathname !== "/adminLogin" &&
+        location.pathname !== "/adminPanel" &&
+        location.pathname !== "/addShoes" &&
         location.pathname !== "/registration" && <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/addShoes" element={<AddShoes />} />
+        {localStorage.getItem("role") === "admin" && (
+          <Route path="/addShoes" element={<AddShoes />} />
+        )}
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
         <Route path="/adminLogin" element={<AdminLogin />} />
+        {localStorage.getItem("role") === "admin" && (
+          <Route path="/adminPanel" element={<AdminPanel />} />
+        )}
         <Route
           path="/cartItems/:email"
           element={<CartItems handleGetCartItems={handleGetCartItems} />}

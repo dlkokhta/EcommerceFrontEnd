@@ -37,12 +37,19 @@ const Login = () => {
 
     try {
       const response = await axios.post(`${url}/api/login`, userData);
-      navigate("/");
+      console.log("response data", response.data.role);
+      if (response.data.role === "admin") {
+        navigate("/adminPanel");
+      } else {
+        navigate("/");
+      }
+
       reset();
       const authToken = response.data.token;
       localStorage.setItem("authToken", authToken);
       localStorage.setItem("data.email", data.email);
       localStorage.setItem("userName", response.data.name);
+      localStorage.setItem("role", response.data.role);
     } catch (error: any) {
       setResponseError(error.response.data);
     }
