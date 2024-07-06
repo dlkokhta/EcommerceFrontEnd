@@ -39,8 +39,11 @@ const ShoesDetails = () => {
     const userEmail = localStorage.getItem("data.email");
     // const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
 
+    const token = localStorage.getItem("authToken");
     try {
-      const response = await axios.get(`${url}/api/getCartItems/${userEmail}`);
+      const response = await axios.get(`${url}/api/getCartItems/${userEmail}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       dispatch(setCartItems(response.data.cartItems));
     } catch (error) {

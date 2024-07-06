@@ -13,7 +13,7 @@ import Header from "./components/Header";
 import { useLocation } from "react-router-dom";
 import CartItems from "./pages/CartItems";
 import { setCartItems } from "./store/cartItemsSlice";
-import AdminLogin from "./pages/adminLogin";
+// import AdminLogin from "./pages/adminLogin";
 import AdminPanel from "./pages/adminPanel";
 function App() {
   const dispatch = useDispatch();
@@ -46,9 +46,11 @@ function App() {
     const userEmail = localStorage.getItem("data.email");
 
     // const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
-
+    const token = localStorage.getItem("authToken");
     try {
-      const response = await axios.get(`${url}/getCartItems/${userEmail}`);
+      const response = await axios.get(`${url}/getCartItems/${userEmail}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       dispatch(setCartItems(response.data.cartItems));
       // const itemsQuantity = response.data.cartItems.length;
@@ -70,17 +72,17 @@ function App() {
       {location.pathname !== "/login" &&
         location.pathname !== "/adminLogin" &&
         location.pathname !== "/adminPanel" &&
-        location.pathname !== "/addShoes" &&
+        location.pathname !== "/addItem" &&
         location.pathname !== "/registration" && <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         {localStorage.getItem("role") === "admin" && (
-          <Route path="/addShoes" element={<AddShoes />} />
+          <Route path="/addItem" element={<AddShoes />} />
         )}
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
-        <Route path="/adminLogin" element={<AdminLogin />} />
+        {/* <Route path="/adminLogin" element={<AdminLogin />} /> */}
         {localStorage.getItem("role") === "admin" && (
           <Route path="/adminPanel" element={<AdminPanel />} />
         )}

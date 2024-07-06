@@ -38,20 +38,18 @@ const CartItems = ({ handleGetCartItems }: any) => {
 
   let url;
   if (process.env.NODE_ENV === "production") {
-    // Use production backend URL
     url = `https://ecommerceapi-production-7d9c.up.railway.app`;
   } else {
-    // Use local backend URL
     url = `http://localhost:3000`;
   }
 
   const handleClick = async (id: string) => {
     const userEmail = localStorage.getItem("data.email");
-
-    // const url = `http://localhost:3000/api/deleteShoes/${userEmail}/${id}`;
-
+    const token = localStorage.getItem("authToken");
     try {
-      await axios.delete(`${url}/api/deleteShoes/${userEmail}/${id}`);
+      await axios.delete(`${url}/api/deleteShoes/${userEmail}/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       await handleGetCartItems();
     } catch (error) {
       console.log(error);
@@ -79,11 +77,9 @@ const CartItems = ({ handleGetCartItems }: any) => {
         {cartItems ? (
           <div className="px-5 pt-5 md:grid-cols-2 md:gap-2 xl:mt-20 xl:grid-cols-3 xl:px-20 3xl:px-[400px]">
             {cartItems.map((item, index) => {
-              // Find the corresponding shoe in allShoes based on itemId
               const shoe = allShoes.find((shoe) => shoe.id === item.itemId);
 
               if (!shoe) {
-                // If no matching shoe found, return null or handle the case as needed
                 return null;
               }
 
@@ -132,7 +128,6 @@ const CartItems = ({ handleGetCartItems }: any) => {
           </div>
         )}
       </div>
-      {/* )} */}
     </>
   );
 };

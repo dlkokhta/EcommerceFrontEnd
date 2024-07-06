@@ -50,10 +50,12 @@ const Login = () => {
       localStorage.setItem("data.email", data.email);
       localStorage.setItem("userName", response.data.name);
       localStorage.setItem("role", response.data.role);
+      console.log("authToken", authToken);
     } catch (error: any) {
       setResponseError(error.response.data);
     }
   };
+
   const navigate = useNavigate();
   const handleClick = (path: string) => {
     navigate(path);

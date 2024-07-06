@@ -25,15 +25,19 @@ const AddShoes = () => {
     const userData = new FormData();
     userData.append("brand", data.brand);
     userData.append("model", data.model);
-    // userData.append("gender", data.gender);
+    userData.append("gender", data.gender);
     userData.append("color", data.color);
     userData.append("description", data.description);
     userData.append("price", data.price.toString());
     userData.append("sizes", data.sizes);
     userData.append("image", data.image[0]);
+    console.log("userData", userData);
 
+    const token = localStorage.getItem("authToken");
     try {
-      await axios.post(`${url}/api/addItem`, userData);
+      await axios.post(`${url}/api/addItem`, userData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       reset();
     } catch (error) {
@@ -74,7 +78,7 @@ const AddShoes = () => {
               name="model"
             />
           </div>
-          {/* 
+
           <div className="w-full">
             <label className="block text-sm" htmlFor="gender">
               gender
@@ -86,7 +90,7 @@ const AddShoes = () => {
               {...register("gender")}
               name="gender"
             />
-          </div> */}
+          </div>
           <div className="w-full">
             <label className="block text-sm" htmlFor="color">
               color
