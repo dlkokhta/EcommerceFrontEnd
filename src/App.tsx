@@ -22,10 +22,8 @@ function App() {
   let url;
 
   if (process.env.NODE_ENV === "production") {
-    // Use production backend URL
     url = `https://ecommerceapi-production-7d9c.up.railway.app/api`;
   } else {
-    // Use local backend URL
     url = `http://localhost:3000/api`;
   }
 
@@ -45,7 +43,6 @@ function App() {
   const handleGetCartItems = async () => {
     const userEmail = localStorage.getItem("data.email");
 
-    // const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
     const token = localStorage.getItem("authToken");
     try {
       const response = await axios.get(`${url}/getCartItems/${userEmail}`, {
@@ -78,10 +75,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
-        {/* {localStorage.getItem("role") === "admin" && (
+        {localStorage.getItem("role") === "admin" && (
           <Route path="/addItem" element={<AddShoes />} />
-        )} */}
-        <Route path="/addItem" element={<AddShoes />} />
+        )}
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
         {/* <Route path="/adminLogin" element={<AdminLogin />} /> */}
         {localStorage.getItem("role") === "admin" && (

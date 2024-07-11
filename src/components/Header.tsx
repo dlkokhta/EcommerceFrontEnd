@@ -11,6 +11,7 @@ import { setFilterShoes } from "../store/filterShoesSlice.js";
 import { useDispatch } from "react-redux";
 import { setFilterShoesByBrand } from "../store/filterShoesByBrandSlice.js";
 import { setnewShoes } from "../store/newShoesSlice.js";
+import { setCartItems } from "../store/cartItemsSlice";
 
 const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
@@ -33,6 +34,7 @@ const Header = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("data.email");
     navigate("/login");
+    dispatch(setCartItems([]));
   };
 
   const [manHovered, setManHovered] = useState(false);
