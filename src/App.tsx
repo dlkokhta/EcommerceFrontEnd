@@ -78,9 +78,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
-        {localStorage.getItem("role") === "admin" && (
+        {/* {localStorage.getItem("role") === "admin" && (
           <Route path="/addItem" element={<AddShoes />} />
-        )}
+        )} */}
+        <Route path="/addItem" element={<AddShoes />} />
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
         {/* <Route path="/adminLogin" element={<AdminLogin />} /> */}
         {localStorage.getItem("role") === "admin" && (

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { addShoesTypes } from "../types/addShoesTypes.js";
+// import { addShoesTypes } from "../types/addShoesTypes.js";
 import { yupResolver } from "@hookform/resolvers/yup";
 import addShoesSchema from "./addShoesSchema.js";
 import axios from "axios";
@@ -14,30 +14,34 @@ const AddShoes = () => {
 
   let url;
   if (process.env.NODE_ENV === "production") {
-    // Use production backend URL
-    url = `https://ecommerceapi-production-7d9c.up.railway.app/api`;
+    url = `https://ecommerceapi-production-7d9c.up.railway.app`;
   } else {
-    // Use local backend URL
-    url = `http://localhost:3000/api`;
+    url = `http://localhost:3000`;
   }
 
-  const onSubmit = async (data: addShoesTypes) => {
-    const userData = new FormData();
-    userData.append("brand", data.brand);
-    userData.append("model", data.model);
-    userData.append("gender", data.gender);
-    userData.append("color", data.color);
-    userData.append("description", data.description);
-    userData.append("price", data.price.toString());
-    userData.append("sizes", data.sizes);
-    userData.append("image", data.image[0]);
-    console.log("userData", userData);
+  const onSubmit = async (data: any) => {
+    const formData = new FormData();
+    formData.append("brand", data.brand);
+    formData.append("model", data.model);
+    formData.append("gender", data.gender);
+    formData.append("color", data.color);
+    formData.append("description", data.description);
+    formData.append("price", data.price.toString());
+    formData.append("sizes", data.sizes);
+    for (let i = 0; i < data.image.length; i++) {
+      formData.append("image", data.image[i]);
+    }
+    console.log("dataa", data);
 
     const token = localStorage.getItem("authToken");
     try {
-      await axios.post(`${url}/api/addItem`, userData, {
-        headers: { Authorization: `Bearer ${token}` },
+      const response = await axios.post(`${url}/api/addItem`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
       });
+      console.log("response", response);
 
       reset();
     } catch (error) {
@@ -49,6 +53,7 @@ const AddShoes = () => {
     <div>
       <div className="px-16 pt-28 lg:px-60 xl:px-[600px]">
         <form
+          encType="multipart/form-data"
           onSubmit={handleSubmit(onSubmit)}
           className="mb-10 flex flex-col gap-5 border border-slate-400 px-5 py-5"
         >
@@ -64,6 +69,9 @@ const AddShoes = () => {
               {...register("brand")}
               name="brand"
             />
+            {errors.brand && (
+              <p className="text-xs text-red">{errors.brand.message}</p>
+            )}
           </div>
 
           <div className="w-full">
@@ -77,6 +85,9 @@ const AddShoes = () => {
               {...register("model")}
               name="model"
             />
+            {errors.model && (
+              <p className="text-xs text-red">{errors.model.message}</p>
+            )}
           </div>
 
           <div className="w-full">
@@ -90,6 +101,9 @@ const AddShoes = () => {
               {...register("gender")}
               name="gender"
             />
+            {errors.gender && (
+              <p className="text-xs text-red">{errors.gender.message}</p>
+            )}
           </div>
           <div className="w-full">
             <label className="block text-sm" htmlFor="color">
@@ -102,6 +116,9 @@ const AddShoes = () => {
               {...register("color")}
               name="color"
             />
+            {errors.color && (
+              <p className="text-xs text-red">{errors.color.message}</p>
+            )}
           </div>
           <div className="w-full">
             <label className="block text-sm " htmlFor="description">
@@ -114,6 +131,9 @@ const AddShoes = () => {
               {...register("description")}
               name="description"
             />
+            {errors.description && (
+              <p className="text-xs text-red">{errors.description.message}</p>
+            )}
           </div>
           <div className="w-full">
             <label className="block text-sm " htmlFor="price">
@@ -126,6 +146,9 @@ const AddShoes = () => {
               {...register("price")}
               name="price"
             />
+            {errors.price && (
+              <p className="text-xs text-red">{errors.price.message}</p>
+            )}
           </div>
           <div className="w-full">
             <label className="block text-sm " htmlFor="sizes">
@@ -139,6 +162,9 @@ const AddShoes = () => {
               name="sizes"
               placeholder="Enter sizes separated by comma (e.g., 8,9,10)"
             />
+            {errors.sizes && (
+              <p className="text-xs text-red">{errors.sizes.message}</p>
+            )}
           </div>
           {/* <div className="w-full">
             <label className="block text-sm " htmlFor="availability">
@@ -164,6 +190,9 @@ const AddShoes = () => {
               name="image"
               multiple
             />
+            {errors.image && (
+              <p className="text-xs text-red">{errors.image.message}</p>
+            )}
           </div>
           <button className=" w-full rounded-xl bg-yellow-300 px-5  py-2 text-sm">
             Submit

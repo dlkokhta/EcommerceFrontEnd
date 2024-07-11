@@ -7,5 +7,5 @@ export interface addShoesTypes {
   price: number;
   sizes: string;
   //   availability: boolean;
-  image: mixed;
+  image: string;
 }
