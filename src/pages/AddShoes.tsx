@@ -34,12 +34,10 @@ const AddShoes = () => {
     console.log("dataa", data);
 
     const token = localStorage.getItem("authToken");
+    console.log("addShoesToken", token);
     try {
       const response = await axios.post(`${url}/api/addItem`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
       console.log("response", response);
 
@@ -51,7 +49,7 @@ const AddShoes = () => {
 
   return (
     <div>
-      <div className="px-16 pt-28 lg:px-60 xl:px-[600px]">
+      <div className="px-16 pt-5 lg:px-60 xl:px-[600px]">
         <form
           encType="multipart/form-data"
           onSubmit={handleSubmit(onSubmit)}

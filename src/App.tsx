@@ -79,7 +79,6 @@ function App() {
           <Route path="/addItem" element={<AddShoes />} />
         )}
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
-        {/* <Route path="/adminLogin" element={<AdminLogin />} /> */}
         {localStorage.getItem("role") === "admin" && (
           <Route path="/adminPanel" element={<AdminPanel />} />
         )}

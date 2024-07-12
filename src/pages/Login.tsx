@@ -35,9 +35,12 @@ const Login = () => {
       password: data.password,
     };
 
+    console.log("userData", userData);
+
     try {
       const response = await axios.post(`${url}/api/login`, userData);
-      console.log("response data", response.data.role);
+      console.log("response data", response.data);
+
       if (response.data.role === "admin") {
         navigate("/adminPanel");
       } else {
@@ -45,12 +48,14 @@ const Login = () => {
       }
 
       reset();
-      const authToken = response.data.token;
+      const authToken =
+        response.data.role === "admin"
+          ? response.data.adminToken
+          : response.data.token;
       localStorage.setItem("authToken", authToken);
       localStorage.setItem("data.email", data.email);
       localStorage.setItem("userName", response.data.name);
       localStorage.setItem("role", response.data.role);
-      console.log("authToken", authToken);
     } catch (error: any) {
       setResponseError(error.response.data);
     }
