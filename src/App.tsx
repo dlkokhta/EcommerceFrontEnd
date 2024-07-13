@@ -3,7 +3,7 @@ import Home from "./pages/HomePage";
 import { Routes, Route } from "react-router-dom";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
-import AddShoes from "./pages/AddShoes";
+
 import axios from "axios";
 import { useEffect } from "react";
 import { setAllShoes } from "./store/allShoesSlice";
@@ -75,9 +75,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
-        {/* {localStorage.getItem("role") === "admin" && (
-          <Route path="/addItem" element={<AddShoes />} />
-        )} */}
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
         {localStorage.getItem("role") === "admin" &&
           localStorage.getItem("authToken") && (
