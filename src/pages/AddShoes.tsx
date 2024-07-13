@@ -49,7 +49,7 @@ const AddShoes = () => {
 
   return (
     <div>
-      <div className="px-16 pt-5 lg:px-60 xl:px-[600px]">
+      <div className="grid-flow-col px-16 pt-5 lg:px-60 xl:px-[600px]">
         <form
           encType="multipart/form-data"
           onSubmit={handleSubmit(onSubmit)}

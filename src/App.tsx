@@ -75,13 +75,14 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
-        {localStorage.getItem("role") === "admin" && (
+        {/* {localStorage.getItem("role") === "admin" && (
           <Route path="/addItem" element={<AddShoes />} />
-        )}
+        )} */}
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
-        {localStorage.getItem("role") === "admin" && (
-          <Route path="/adminPanel" element={<AdminPanel />} />
-        )}
+        {localStorage.getItem("role") === "admin" &&
+          localStorage.getItem("authToken") && (
+            <Route path="/adminPanel" element={<AdminPanel />} />
+          )}
         <Route
           path="/cartItems/:email"
           element={<CartItems handleGetCartItems={handleGetCartItems} />}
