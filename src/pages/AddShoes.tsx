@@ -53,7 +53,7 @@ const AddShoes = () => {
         <form
           encType="multipart/form-data"
           onSubmit={handleSubmit(onSubmit)}
-          className="mb-10 flex flex-col gap-5 border border-slate-400 px-5 py-5"
+          className="mb-10 flex flex-col gap-2 border border-slate-400 px-5 py-5"
         >
           <h1 className="text-xl ">Add Shoes</h1>
           <div className="w-full ">
