@@ -1,32 +1,44 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store.js";
-import { allShoesTypes } from "../types/allShoesTypes";
+import { allShoesTypes } from "../types/allShoesTypes.js";
+import axios from "axios";
 
-const shoesListAdminPanel = () => {
+const ShoesListAdminPanel = () => {
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
   );
+  console.log("allShoes", allShoes);
 
   let url;
   if (process.env.NODE_ENV === "production") {
-    // Use production backend URL
     url = `https://ecommerceapi-production-7d9c.up.railway.app`;
   } else {
-    // Use local backend URL
     url = `http://localhost:3000`;
   }
 
+  const handleClick = async (id: string) => {
+    console.log("id", id);
+    const token = localStorage.getItem("authToken");
+    try {
+      await axios.delete(`${url}/api/deleteShoesByAdmin/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="mt-24 px-40">
+    <div className="mt-24 px-60">
       {allShoes && allShoes.length > 0 ? (
         <div className="mt-5 px-5 pt-5">
           {allShoes.map((shoes, index) => (
-            <div key={index} className="flex gap-20">
+            <div key={index} className="flex gap-40">
               <div className="mb-10">
                 {shoes.image.slice(0, 1).map((image, index) => (
                   <div key={index} className="">
                     <img
-                      className="cursor-pointer xl:max-h-[200px]"
+                      className="xl:max-h-[200px]"
                       src={`${url}/public/storage/images/${image}`}
                       alt={image}
                     />
@@ -34,7 +46,7 @@ const shoesListAdminPanel = () => {
                 ))}
               </div>
 
-              <div className="mb-10 flex flex-col justify-center font-roboto text-sm font-light">
+              <div className="mb-10 flex flex-col font-roboto text-sm font-light">
                 {shoes.isShoesNew && (
                   <div className="text-sm font-bold text-red">New</div>
                 )}
@@ -43,8 +55,13 @@ const shoesListAdminPanel = () => {
                 <div className="">{shoes.model}</div>
                 <div>${shoes.price}</div>
               </div>
-              <div className="flex justify-center">
-                <button>Delete</button>
+              <div className="">
+                <button
+                  onClick={() => handleClick(shoes.id)}
+                  className="rounded-full bg-red px-5 py-1 text-white"
+                >
+                  Delete
+                </button>
               </div>
             </div>
           ))}
@@ -67,4 +84,4 @@ const shoesListAdminPanel = () => {
   );
 };
 
-export default shoesListAdminPanel;
+export default ShoesListAdminPanel;

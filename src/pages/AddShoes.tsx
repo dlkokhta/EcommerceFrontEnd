@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-// import { addShoesTypes } from "../types/addShoesTypes.js";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import addShoesSchema from "./addShoesSchema.js";
 import axios from "axios";
@@ -164,18 +164,7 @@ const AddShoes = () => {
               <p className="text-xs text-red">{errors.sizes.message}</p>
             )}
           </div>
-          {/* <div className="w-full">
-            <label className="block text-sm " htmlFor="availability">
-              availability
-            </label>
-            <input
-              className="w-full border border-slate-400  outline-green-300 "
-              type="text"
-              id="availability"
-              {...register("availability")}
-              name="availability"
-            />
-          </div> */}
+
           <div className="w-full">
             <label className="block text-sm " htmlFor="image">
               image

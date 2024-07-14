@@ -25,10 +25,8 @@ const ShoesForHomePage = () => {
 
   let url;
   if (process.env.NODE_ENV === "production") {
-    // Use production backend URL
     url = `https://ecommerceapi-production-7d9c.up.railway.app`;
   } else {
-    // Use local backend URL
     url = `http://localhost:3000`;
   }
 
@@ -52,21 +50,16 @@ const ShoesForHomePage = () => {
           {filteredShoes.map((shoes, index) => (
             <div key={index}>
               <div className="mb-2">
-                {shoes.image.slice(0, 1).map(
-                  (
-                    image,
-                    index, // Use slice to take only the first image
-                  ) => (
-                    <div key={index} className="">
-                      <img
-                        className="cursor-pointer xl:max-h-[429px]"
-                        src={`${url}/public/storage/images/${image}`}
-                        alt={image}
-                        onClick={() => navigate(`/shoesDetails/${shoes.id}`)}
-                      />
-                    </div>
-                  ),
-                )}
+                {shoes.image.slice(0, 1).map((image, index) => (
+                  <div key={index} className="">
+                    <img
+                      className="cursor-pointer xl:max-h-[429px]"
+                      src={`${url}/public/storage/images/${image}`}
+                      alt={image}
+                      onClick={() => navigate(`/shoesDetails/${shoes.id}`)}
+                    />
+                  </div>
+                ))}
               </div>
 
               <div className="mb-10 font-roboto text-sm font-light">

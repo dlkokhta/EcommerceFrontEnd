@@ -1,6 +1,6 @@
-import AdminPanelHeader from "../components/adminPanelHeader";
+import AdminPanelHeader from "../components/AdminPanelHeader";
 import AddShoes from "../pages/AddShoes";
-import ShoesListAdminPanel from "../components/shoesListAdminPanel";
+import ShoesListAdminPanel from "../components/ShoesListAdminPanel";
 import { useState } from "react";
 
 const adminPanel = () => {
