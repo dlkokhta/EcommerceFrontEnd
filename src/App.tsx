@@ -13,7 +13,7 @@ import Header from "./components/Header";
 import { useLocation } from "react-router-dom";
 import CartItems from "./pages/CartItems";
 import { setCartItems } from "./store/cartItemsSlice";
-// import { useState } from "react";
+import { useState } from "react";
 import AdminPanel from "./pages/adminPanel";
 function App() {
   const dispatch = useDispatch();
@@ -25,11 +25,11 @@ function App() {
   } else {
     url = `http://localhost:3000/api`;
   }
-  // const [update, setUpdate] = useState(false);
+  const [update, setUpdate] = useState(false);
 
-  // const updateAllShoesForAdmin = async () => {
-  //   setUpdate((prevUpdate) => !prevUpdate);
-  // };
+  const updateAllShoesForAdmin = async () => {
+    setUpdate((prevUpdate) => !prevUpdate);
+  };
 
   useEffect(() => {
     const fetchAllShoes = async () => {
@@ -41,12 +41,11 @@ function App() {
       }
     };
     fetchAllShoes();
-  }, []);
+  }, [update]);
 
   const handleGetCartItems = async () => {
     const userEmail = localStorage.getItem("data.email");
     const token = localStorage.getItem("authToken");
-    console.log("token", localStorage.getItem("authToken"));
     try {
       const response = await axios.get(`${url}/getCartItems/${userEmail}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -81,7 +80,12 @@ function App() {
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
         {localStorage.getItem("role") === "admin" &&
           localStorage.getItem("authToken") && (
-            <Route path="/adminPanel" element={<AdminPanel />} />
+            <Route
+              path="/adminPanel"
+              element={
+                <AdminPanel updateAllShoesForAdmin={updateAllShoesForAdmin} />
+              }
+            />
           )}
         <Route
           path="/cartItems/:email"
