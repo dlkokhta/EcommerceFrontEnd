@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCartItems } from "../store/cartItemsSlice";
 
-// interface AdminPanelHeaderProps {
-//   onDestMenuChange: (newDestMenu: string) => void;
-// }
+interface AdminPanelHeaderProps {
+  onDestMenuChange: (newDestMenu: string) => void;
+}
 
-const AdminPanelHeader = () => {
+const AdminPanelHeader: React.FC<AdminPanelHeaderProps> = ({
+  onDestMenuChange,
+}) => {
   const navigate = useNavigate();
   const [destMenu, setDestMenu] = useState<string>("AllShoes");
 
@@ -46,7 +48,7 @@ const AdminPanelHeader = () => {
                   onMouseLeave={() => setallShoesHovered(false)}
                   className=" cursor-pointer"
                   onClick={() => {
-                    setDestMenu("AllShoes");
+                    setDestMenu("AllShoes"), onDestMenuChange("AllShoes");
                   }}
                 >
                   All Shoes
@@ -64,7 +66,7 @@ const AdminPanelHeader = () => {
                   onMouseLeave={() => setAddShoesHovered(false)}
                   className=" cursor-pointer"
                   onClick={() => {
-                    setDestMenu("AddShoes");
+                    setDestMenu("AddShoes"), onDestMenuChange("AddShoes");
                   }}
                 >
                   Add Shoes
@@ -82,7 +84,7 @@ const AdminPanelHeader = () => {
                   onMouseLeave={() => setusersHovered(false)}
                   className=" cursor-pointer"
                   onClick={() => {
-                    setDestMenu("Users");
+                    setDestMenu("Users"), onDestMenuChange("Users");
                   }}
                 >
                   Users

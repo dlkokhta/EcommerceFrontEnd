@@ -13,7 +13,7 @@ import Header from "./components/Header";
 import { useLocation } from "react-router-dom";
 import CartItems from "./pages/CartItems";
 import { setCartItems } from "./store/cartItemsSlice";
-
+import { useState } from "react";
 import AdminPanel from "./pages/adminPanel";
 function App() {
   const dispatch = useDispatch();
@@ -25,28 +25,28 @@ function App() {
   } else {
     url = `http://localhost:3000/api`;
   }
-  // const [update, setUpdate] = useState(false);
+  const [update, setUpdate] = useState(false);
 
-  // const updateAllShoesForAdmin = async () => {
-  //   setUpdate((prevUpdate) => !prevUpdate);
-  // };
+  const updateAllShoesForAdmin = async () => {
+    setUpdate((prevUpdate) => !prevUpdate);
+  };
 
   useEffect(() => {
     const fetchAllShoes = async () => {
       try {
         const response = await axios.get(`${url}/getAllShoes`);
-
         dispatch(setAllShoes(response.data));
       } catch (error) {
         console.error(error);
       }
     };
     fetchAllShoes();
-  }, []);
+  }, [update]);
 
   const handleGetCartItems = async () => {
     const userEmail = localStorage.getItem("data.email");
     const token = localStorage.getItem("authToken");
+    console.log("token", localStorage.getItem("authToken"));
     try {
       const response = await axios.get(`${url}/getCartItems/${userEmail}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -66,7 +66,7 @@ function App() {
   // if (localStorage.getItem("data.email")) {
   // }
   // handleGetCartItems();
-  console.log("user role", localStorage.getItem("role"));
+
   return (
     <div>
       {location.pathname !== "/login" &&
@@ -77,14 +77,16 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-
         <Route path="/registration" element={<Registration />} />
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
         {localStorage.getItem("role") === "admin" &&
           localStorage.getItem("authToken") && (
             <Route path="/adminPanel" element={<AdminPanel />} />
           )}
-        <Route path="/cartItems/:email" element={<CartItems />} />
+        <Route
+          path="/cartItems/:email"
+          element={<CartItems handleGetCartItems={handleGetCartItems} />}
+        />
       </Routes>
     </div>
   );

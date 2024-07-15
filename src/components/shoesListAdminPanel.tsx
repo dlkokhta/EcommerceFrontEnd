@@ -3,7 +3,7 @@ import { RootState } from "../store/store.js";
 import { allShoesTypes } from "../types/allShoesTypes.js";
 import axios from "axios";
 
-const ShoesListAdminPanel = () => {
+const ShoesListAdminPanel = ({ updateAllShoesForAdmin }: any) => {
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
   );
@@ -16,12 +16,12 @@ const ShoesListAdminPanel = () => {
   }
 
   const handleClick = async (id: string) => {
-    console.log("id", id);
     const token = localStorage.getItem("authToken");
     try {
       await axios.delete(`${url}/api/deleteShoesByAdmin/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      await updateAllShoesForAdmin();
     } catch (error) {
       console.log(error);
     }

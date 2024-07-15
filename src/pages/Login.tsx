@@ -35,12 +35,9 @@ const Login = () => {
       password: data.password,
     };
 
-    console.log("userData", userData);
-
     try {
       const response = await axios.post(`${url}/api/login`, userData);
-      console.log("response data", response.data);
-
+      console.log("role", response.data.role);
       if (response.data.role === "admin") {
         navigate("/adminPanel");
       } else {
