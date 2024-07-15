@@ -2,10 +2,11 @@ import AdminPanelHeader from "../components/adminPanelHeader";
 import AddShoes from "../pages/AddShoes";
 import ShoesListAdminPanel from "../components/shoesListAdminPanel";
 import { useState } from "react";
+import UsersListForAdminPanel from "../components/UsersListForAdminPanel";
 
 const adminPanel = ({ updateAllShoesForAdmin }: any) => {
   const [destMenu, setDestMenu] = useState<string>("AllShoes");
-
+  console.log("destMenu", destMenu);
   const handleDestMenuChange = (newDestMenu: string) => {
     setDestMenu(newDestMenu);
   };
@@ -15,10 +16,12 @@ const adminPanel = ({ updateAllShoesForAdmin }: any) => {
       <div className="mt-10">
         {destMenu === "AddShoes" ? (
           <AddShoes updateAllShoesForAdmin={updateAllShoesForAdmin} />
-        ) : (
+        ) : destMenu === "AllShoes" ? (
           <ShoesListAdminPanel
             updateAllShoesForAdmin={updateAllShoesForAdmin}
           />
+        ) : (
+          <UsersListForAdminPanel />
         )}
       </div>
     </div>

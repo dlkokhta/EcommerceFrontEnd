@@ -78,12 +78,10 @@ const Login = () => {
       <div className="px-16 pt-16 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[600px] 3xl:px-[750px]">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="mb-5 flex flex-col gap-4 border border-slate-400 px-5 py-5"
+          className="mb-5 flex flex-col gap-3 border border-slate-400 px-5 py-5"
         >
-          <h1 className="text-xl ">
-            Sign in
-            <span className="text-xs"> Admins use your admin credentials</span>
-          </h1>
+          <h1 className="text-xl ">Sign in</h1>
+          <span className="text-xs"> Admins use your admin credentials</span>
           <h1 className="text-xs "></h1>
           <div className="w-full ">
             <div className="flex justify-between">

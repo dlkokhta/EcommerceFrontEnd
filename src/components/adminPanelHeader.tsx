@@ -3,13 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCartItems } from "../store/cartItemsSlice";
 
-interface AdminPanelHeaderProps {
-  onDestMenuChange: (newDestMenu: string) => void;
-}
+// interface AdminPanelHeaderProps {
+//   onDestMenuChange: (newDestMenu: string) => void;
+// }
 
-const AdminPanelHeader: React.FC<AdminPanelHeaderProps> = ({
-  onDestMenuChange,
-}) => {
+const AdminPanelHeader = ({ onDestMenuChange }: any) => {
   const navigate = useNavigate();
   const [destMenu, setDestMenu] = useState<string>("AllShoes");
 
@@ -23,7 +21,8 @@ const AdminPanelHeader: React.FC<AdminPanelHeaderProps> = ({
   };
 
   const [allShoesHovered, setallShoesHovered] = useState(false);
-  const [newHovered, setNewHovered] = useState(false);
+  const [addShoesHovered, setAddShoesHovered] = useState(false);
+  const [usersHovered, setusersHovered] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -61,8 +60,8 @@ const AdminPanelHeader: React.FC<AdminPanelHeaderProps> = ({
                 </div>
 
                 <div
-                  onMouseEnter={() => setNewHovered(true)}
-                  onMouseLeave={() => setNewHovered(false)}
+                  onMouseEnter={() => setAddShoesHovered(true)}
+                  onMouseLeave={() => setAddShoesHovered(false)}
                   className=" cursor-pointer"
                   onClick={() => {
                     setDestMenu("AddShoes"), onDestMenuChange("AddShoes");
@@ -73,7 +72,25 @@ const AdminPanelHeader: React.FC<AdminPanelHeaderProps> = ({
                     <div className="w-f h-[2px] bg-yellow-300"></div>
                   ) : (
                     <div
-                      className={`w-f h-[2px] ${newHovered ? "bg-slate-300" : ""}`}
+                      className={`w-f h-[2px] ${addShoesHovered ? "bg-slate-300" : ""}`}
+                    ></div>
+                  )}
+                </div>
+
+                <div
+                  onMouseEnter={() => setusersHovered(true)}
+                  onMouseLeave={() => setusersHovered(false)}
+                  className=" cursor-pointer"
+                  onClick={() => {
+                    setDestMenu("Users"), onDestMenuChange("Users");
+                  }}
+                >
+                  Users
+                  {destMenu === "Users" ? (
+                    <div className="w-f h-[2px] bg-yellow-300"></div>
+                  ) : (
+                    <div
+                      className={`w-f h-[2px] ${usersHovered ? "bg-slate-300" : ""}`}
                     ></div>
                   )}
                 </div>
