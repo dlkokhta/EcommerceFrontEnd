@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import addShoesSchema from "./addShoesSchema.js";
 import axios from "axios";
 
-const AddShoes = () => {
+const AddShoes = ({ updateAllShoesForAdmin }: any) => {
   const {
     register,
     handleSubmit,
@@ -39,6 +39,7 @@ const AddShoes = () => {
       const response = await axios.post(`${url}/api/addItem`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      await updateAllShoesForAdmin();
       console.log("response", response);
 
       reset();

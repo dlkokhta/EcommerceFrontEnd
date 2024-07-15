@@ -3,7 +3,7 @@ import AddShoes from "../pages/AddShoes";
 import ShoesListAdminPanel from "../components/shoesListAdminPanel";
 import { useState } from "react";
 
-const adminPanel = () => {
+const adminPanel = ({ updateAllShoesForAdmin }: any) => {
   const [destMenu, setDestMenu] = useState<string>("AllShoes");
 
   const handleDestMenuChange = (newDestMenu: string) => {
@@ -13,7 +13,13 @@ const adminPanel = () => {
     <div className="">
       <AdminPanelHeader onDestMenuChange={handleDestMenuChange} />;
       <div className="mt-10">
-        {destMenu === "AddShoes" ? <AddShoes /> : <ShoesListAdminPanel />}
+        {destMenu === "AddShoes" ? (
+          <AddShoes updateAllShoesForAdmin={updateAllShoesForAdmin} />
+        ) : (
+          <ShoesListAdminPanel
+            updateAllShoesForAdmin={updateAllShoesForAdmin}
+          />
+        )}
       </div>
     </div>
   );

@@ -80,8 +80,11 @@ const Login = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="mb-5 flex flex-col gap-4 border border-slate-400 px-5 py-5"
         >
-          <h1 className="text-xl ">Sign in</h1>
-
+          <h1 className="text-xl ">
+            Sign in
+            <span className="text-xs"> Admins use your admin credentials</span>
+          </h1>
+          <h1 className="text-xs "></h1>
           <div className="w-full ">
             <div className="flex justify-between">
               <label className="block text-sm" htmlFor="email">
@@ -131,15 +134,6 @@ const Login = () => {
           className="mb-5 w-full rounded-xl bg-gradient-to-r from-transparent via-slate-200  to-transparent px-5 py-2  text-sm hover:via-slate-300"
         >
           Create your account
-        </button>
-      </div>
-
-      <div className="px-16 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[580px] 3xl:px-[750px]">
-        <button
-          onClick={() => handleClick("/adminLogin")}
-          className="mb-5 w-full rounded-xl bg-gradient-to-r from-transparent via-slate-200  to-transparent px-5 py-2  text-sm hover:via-slate-300"
-        >
-          login as admin
         </button>
       </div>
 
