@@ -7,7 +7,7 @@ import { setCartItems } from "../store/cartItemsSlice";
 //   onDestMenuChange: (newDestMenu: string) => void;
 // }
 
-const AdminPanelHeader = ({ onDestMenuChange }: any) => {
+const AdminPanelHeader = () => {
   const navigate = useNavigate();
   const [destMenu, setDestMenu] = useState<string>("AllShoes");
 
@@ -46,7 +46,7 @@ const AdminPanelHeader = ({ onDestMenuChange }: any) => {
                   onMouseLeave={() => setallShoesHovered(false)}
                   className=" cursor-pointer"
                   onClick={() => {
-                    setDestMenu("AllShoes"), onDestMenuChange("AllShoes");
+                    setDestMenu("AllShoes");
                   }}
                 >
                   All Shoes
@@ -64,7 +64,7 @@ const AdminPanelHeader = ({ onDestMenuChange }: any) => {
                   onMouseLeave={() => setAddShoesHovered(false)}
                   className=" cursor-pointer"
                   onClick={() => {
-                    setDestMenu("AddShoes"), onDestMenuChange("AddShoes");
+                    setDestMenu("AddShoes");
                   }}
                 >
                   Add Shoes
@@ -82,7 +82,7 @@ const AdminPanelHeader = ({ onDestMenuChange }: any) => {
                   onMouseLeave={() => setusersHovered(false)}
                   className=" cursor-pointer"
                   onClick={() => {
-                    setDestMenu("Users"), onDestMenuChange("Users");
+                    setDestMenu("Users");
                   }}
                 >
                   Users

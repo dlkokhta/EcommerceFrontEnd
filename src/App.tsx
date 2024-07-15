@@ -25,11 +25,11 @@ function App() {
   } else {
     url = `http://localhost:3000/api`;
   }
-  const [update, setUpdate] = useState(false);
+  // const [update, setUpdate] = useState(false);
 
-  const updateAllShoesForAdmin = async () => {
-    setUpdate((prevUpdate) => !prevUpdate);
-  };
+  // const updateAllShoesForAdmin = async () => {
+  //   setUpdate((prevUpdate) => !prevUpdate);
+  // };
 
   useEffect(() => {
     const fetchAllShoes = async () => {
@@ -42,7 +42,7 @@ function App() {
       }
     };
     fetchAllShoes();
-  }, [update]);
+  }, []);
 
   const handleGetCartItems = async () => {
     const userEmail = localStorage.getItem("data.email");
@@ -82,17 +82,9 @@ function App() {
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
         {localStorage.getItem("role") === "admin" &&
           localStorage.getItem("authToken") && (
-            <Route
-              path="/adminPanel"
-              element={
-                <AdminPanel updateAllShoesForAdmin={updateAllShoesForAdmin} />
-              }
-            />
+            <Route path="/adminPanel" element={<AdminPanel />} />
           )}
-        <Route
-          path="/cartItems/:email"
-          element={<CartItems handleGetCartItems={handleGetCartItems} />}
-        />
+        <Route path="/cartItems/:email" element={<CartItems />} />
       </Routes>
     </div>
   );
