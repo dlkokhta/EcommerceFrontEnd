@@ -124,7 +124,7 @@ const ShoesDetails = () => {
                       <img
                         src={`${url}/public/storage/images/${image}`}
                         alt={image}
-                        className={`cursor-pointer border hover:border-green-300 ${selectedShoes === image ? "border-shad border-green-300" : ""}`}
+                        className={`cursor-pointer border hover:border-green-300 ${selectedShoes === image ? "border-shad border-green-300" : ""} duration-400 transition hover:-translate-y-2`}
                         onMouseOver={() => setSelectedShoes(image)}
                       />
                     </div>

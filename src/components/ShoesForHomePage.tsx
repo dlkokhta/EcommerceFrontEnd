@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store.js";
 import { allShoesTypes } from "../types/allShoesTypes";
 import { useNavigate } from "react-router-dom";
+// import "../App.css";
 
 const ShoesForHomePage = () => {
   const allShoes: allShoesTypes[] = useSelector(
@@ -48,7 +49,15 @@ const ShoesForHomePage = () => {
       {allShoes && allShoes.length > 0 ? (
         <div className="mt-5 px-5 pt-5 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-4 lg:px-10 2xl:grid-cols-4">
           {filteredShoes.map((shoes, index) => (
-            <div key={index}>
+            <div
+              key={index}
+              className="duration-400 transition hover:-translate-y-2"
+            >
+              {/* className={`duration-400 transition hover:-translate-y-2 ${
+                index % 4 < 2
+                  ? "animate-slide-in-left"
+                  : "animate-slide-in-right"
+              } `} */}
               <div className="mb-2">
                 {shoes.image.slice(0, 1).map((image, index) => (
                   <div key={index} className="">

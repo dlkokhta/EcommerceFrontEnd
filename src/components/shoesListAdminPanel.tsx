@@ -28,11 +28,14 @@ const ShoesListAdminPanel = ({ updateAllShoesForAdmin }: any) => {
   };
 
   return (
-    <div className="mt-24 px-60">
+    <div className="mt-24 px-60 pb-10">
       {allShoes && allShoes.length > 0 ? (
-        <div className="mt-5 px-5 pt-5">
+        <div className="mb-20 mt-5 flex flex-col gap-5 px-5 pt-5 ">
           {allShoes.map((shoes, index) => (
-            <div key={index} className="flex gap-40">
+            <div
+              key={index}
+              className="duration-400 flex gap-40 rounded-lg border border-gray-200 bg-white p-6 shadow transition duration-200 hover:-translate-y-2  hover:bg-gray-50"
+            >
               <div className="mb-10">
                 {shoes.image.slice(0, 1).map((image, index) => (
                   <div key={index} className="">
@@ -57,7 +60,7 @@ const ShoesListAdminPanel = ({ updateAllShoesForAdmin }: any) => {
               <div className="">
                 <button
                   onClick={() => handleClick(shoes.id)}
-                  className="rounded-full bg-red px-5 py-1 text-white"
+                  className="rounded-full bg-rose-400 px-5 py-1 text-white hover:bg-rose-600"
                 >
                   Delete
                 </button>
