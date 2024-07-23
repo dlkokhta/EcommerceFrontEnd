@@ -78,7 +78,7 @@ const ShoesDetails = () => {
     // }
 
     try {
-      const response = await axios.post(
+      await axios.post(
         postUrl,
         {
           email: userEmail,
