@@ -10,7 +10,8 @@ import { useState } from "react";
 // import { setUserName } from "../store/userNameSlice.js";
 
 const Login = () => {
-  const [responseError, setResponseError] = useState<string | null>("");
+  const [responseError, setResponseError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -54,11 +55,15 @@ const Login = () => {
       localStorage.setItem("userName", response.data.name);
       localStorage.setItem("role", response.data.role);
     } catch (error: any) {
-      setResponseError(error.response.data);
+      // setResponseError(error?.response?.data);old version of error it is working
+      if (error?.response?.data?.message) {
+        setResponseError(error.response.data.message);
+      } else {
+        setResponseError("An error occurred. Please try again.");
+      }
     }
   };
 
-  const navigate = useNavigate();
   const handleClick = (path: string) => {
     navigate(path);
   };
