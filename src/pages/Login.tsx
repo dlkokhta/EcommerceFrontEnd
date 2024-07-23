@@ -102,9 +102,18 @@ const Login = () => {
             )}
           </div>
           <div className="w-full">
-            <label className="block text-sm" htmlFor="password">
-              password
-            </label>
+            <div className="flex items-center">
+              <label className="block text-sm" htmlFor="password">
+                password
+              </label>
+              <label
+                className="ml-auto block cursor-pointer text-xs text-sky-500 hover:text-red"
+                htmlFor="password"
+              >
+                forgot your password?
+              </label>
+            </div>
+
             <input
               className={`w-full border  ${errors.password ? ` border-red` : ` border-slate-400`}   outline-none`}
               type="password"

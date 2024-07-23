@@ -78,7 +78,7 @@ const ShoesDetails = () => {
     // }
 
     try {
-      await axios.post(
+      const response = await axios.post(
         postUrl,
         {
           email: userEmail,
@@ -95,8 +95,8 @@ const ShoesDetails = () => {
       );
 
       fetchItems();
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.log(error.response.data);
     }
   };
 

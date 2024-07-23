@@ -15,6 +15,8 @@ import CartItems from "./pages/CartItems";
 import { setCartItems } from "./store/cartItemsSlice";
 import { useState } from "react";
 import AdminPanel from "./pages/adminPanel";
+import UserVerify from "./components/UserVerify";
+
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -45,10 +47,11 @@ function App() {
 
   const handleGetCartItems = async () => {
     const userEmail = localStorage.getItem("data.email");
+    console.log("userEmail", userEmail);
     const token = localStorage.getItem("authToken");
     try {
       const response = await axios.get(`${url}/getCartItems/${userEmail}`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}`, Email: userEmail },
       });
 
       dispatch(setCartItems(response.data.cartItems));
@@ -91,6 +94,8 @@ function App() {
           path="/cartItems/:email"
           element={<CartItems handleGetCartItems={handleGetCartItems} />}
         />
+        <Route path="/verify" Component={UserVerify} />
+        <Route path="/verify/:param" element={<UserVerify />} />
       </Routes>
     </div>
   );
