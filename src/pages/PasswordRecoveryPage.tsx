@@ -25,7 +25,7 @@ const PasswordRecoveryPage = () => {
 
   const onSubmit = async (data: passwordRecoveryTypes) => {
     try {
-      const response = await axios.post(`${url}/api/GenerateOTP`, {
+      await axios.post(`${url}/api/GenerateOTP`, {
         email: data.email,
       });
 

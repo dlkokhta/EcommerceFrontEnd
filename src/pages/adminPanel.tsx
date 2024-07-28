@@ -1,4 +1,4 @@
-import AdminPanelHeader from "../components/AdminPanelHeader";
+import AdminPanelHeader from "../components/adminPanelHeader";
 import AddShoes from "../pages/AddShoes";
 import ShoesListAdminPanel from "../components/shoesListAdminPanel";
 import { useState } from "react";
