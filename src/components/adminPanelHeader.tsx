@@ -7,7 +7,7 @@ interface AdminPanelHeaderProps {
   onDestMenuChange: (newDestMenu: string) => void;
 }
 
-const AdminPanelHeader: React.FC<AdminPanelHeaderProps> = ({
+const TempAdminPanelHeader: React.FC<AdminPanelHeaderProps> = ({
   onDestMenuChange,
 }) => {
   const navigate = useNavigate();
@@ -121,4 +121,4 @@ const AdminPanelHeader: React.FC<AdminPanelHeaderProps> = ({
   );
 };
 
-export default AdminPanelHeader;
+export default TempAdminPanelHeader;

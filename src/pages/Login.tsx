@@ -12,6 +12,7 @@ import { useState } from "react";
 const Login = () => {
   const [responseError, setResponseError] = useState<string | null>(null);
   const navigate = useNavigate();
+  console.log("responseErrrrrorrrr", responseError);
 
   const {
     register,
@@ -38,7 +39,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(`${url}/api/login`, userData);
-      console.log("role", response.data.role);
+      console.log("reposnse data loginnn", response.data);
       if (response.data.role === "admin") {
         navigate("/adminPanel");
       } else {
@@ -114,6 +115,7 @@ const Login = () => {
               <label
                 className="ml-auto block cursor-pointer text-xs text-sky-500 hover:text-red"
                 htmlFor="password"
+                onClick={() => navigate("/passwordRecovery")}
               >
                 forgot your password?
               </label>

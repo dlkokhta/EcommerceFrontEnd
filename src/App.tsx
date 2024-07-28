@@ -16,6 +16,8 @@ import { setCartItems } from "./store/cartItemsSlice";
 import { useState } from "react";
 import AdminPanel from "./pages/adminPanel";
 import UserVerify from "./components/UserVerify";
+import PasswordRecoveryPage from "./pages/PasswordRecoveryPage";
+import OTPPage from "./pages/OTPPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,7 +49,7 @@ function App() {
 
   const handleGetCartItems = async () => {
     const userEmail = localStorage.getItem("data.email");
-    console.log("userEmail", userEmail);
+
     const token = localStorage.getItem("authToken");
     try {
       const response = await axios.get(`${url}/getCartItems/${userEmail}`, {
@@ -75,6 +77,8 @@ function App() {
         location.pathname !== "/adminLogin" &&
         location.pathname !== "/adminPanel" &&
         location.pathname !== "/addItem" &&
+        location.pathname !== "/passwordRecovery" &&
+        location.pathname !== "/OTP" &&
         location.pathname !== "/registration" && <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -96,6 +100,8 @@ function App() {
         />
         <Route path="/verify" Component={UserVerify} />
         <Route path="/verify/:param" element={<UserVerify />} />
+        <Route path="/passwordRecovery" element={<PasswordRecoveryPage />} />
+        <Route path="/OTP" element={<OTPPage />} />
       </Routes>
     </div>
   );
