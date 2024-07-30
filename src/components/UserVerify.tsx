@@ -9,8 +9,8 @@ const UserVerify = () => {
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    const param = queryParams.get("param");
 
+    const param = queryParams.get("param");
     console.log("param", param);
     if (param) {
       let url;
@@ -19,11 +19,12 @@ const UserVerify = () => {
       } else {
         url = `http://localhost:3000`;
       }
-      navigate("/login");
+
       const sendRandomString = async () => {
         try {
           const response = await axios.post(`${url}/api/verify/${param}`);
           console.log(response.data.message);
+          navigate("/login");
         } catch (error) {
           console.error("Verification failed:", error);
         }
