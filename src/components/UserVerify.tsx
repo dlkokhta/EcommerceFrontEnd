@@ -22,11 +22,13 @@ const UserVerify = () => {
 
       const sendRandomString = async () => {
         try {
-          const response = await axios.post(`${url}/api/verify/${param}`);
-          console.log(response.data.message);
+          await axios.post(`${url}/api/verify/${param}`);
           navigate("/login");
-        } catch (error) {
-          console.error("Verification failed:", error);
+        } catch (error: any) {
+          console.error(
+            "Verification failed:",
+            error.response?.data || error.message,
+          );
         }
       };
 

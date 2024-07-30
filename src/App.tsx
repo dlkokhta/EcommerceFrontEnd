@@ -98,7 +98,7 @@ function App() {
           path="/cartItems/:email"
           element={<CartItems handleGetCartItems={handleGetCartItems} />}
         />
-        <Route path="/verify" element={<UserVerify />} />
+        <Route path="/verify" Component={UserVerify} />
         <Route path="/verify/:param" element={<UserVerify />} />
         <Route path="/passwordRecovery" element={<PasswordRecoveryPage />} />
         <Route path="/OTP" element={<OTPPage />} />
