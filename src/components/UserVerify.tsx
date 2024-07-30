@@ -7,11 +7,11 @@ const UserVerify = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const queryParams = new URLSearchParams(location.search);
-
-  const param = queryParams.get("param");
-  console.log("param", param);
   useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+
+    const param = queryParams.get("param");
+    console.log("param", param);
     if (param) {
       let url;
       if (process.env.NODE_ENV === "production") {
