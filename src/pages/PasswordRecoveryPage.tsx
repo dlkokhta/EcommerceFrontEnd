@@ -4,8 +4,11 @@ import PasswordRecoverySchema from "./PasswordRecoverySchema";
 import axios from "axios";
 import { passwordRecoveryTypes } from "../types/passwordRecoveryTypes.js";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const PasswordRecoveryPage = () => {
+  const [responseError, setResponseError] = useState<string>("");
+  console.log(responseError);
   const {
     register,
     handleSubmit,
@@ -25,19 +28,23 @@ const PasswordRecoveryPage = () => {
 
   const onSubmit = async (data: passwordRecoveryTypes) => {
     try {
-      await axios.post(`${url}/api/GenerateOTP`, {
+      const response = await axios.post(`${url}/api/GenerateOTP`, {
         email: data.email,
       });
-
+      console.log("response daaataaa", response);
       navigate("/OTP");
+
       reset();
     } catch (error: any) {
-      console.log("eeeeeeeeeeeee", error.response.data.message);
+      setResponseError(error.response.data.message);
     }
   };
   return (
     <div className="pt-10">
-      <h1 className="cursor-pointer text-center font-roboto font-medium">
+      <h1
+        onClick={() => navigate("/")}
+        className="cursor-pointer text-center font-roboto font-medium"
+      >
         eCommerce
       </h1>
 
@@ -64,6 +71,13 @@ const PasswordRecoveryPage = () => {
               {...register("email")}
               name="email"
             />
+            {errors.email ? (
+              <div className="text-xs text-red">{errors.email.message}</div>
+            ) : (
+              responseError && (
+                <div className="text-xs text-red">{responseError}</div>
+              )
+            )}
           </div>
 
           <button className=" w-full rounded-xl bg-yellow-300 px-5 py-2  text-sm hover:bg-yellow-400">

@@ -4,8 +4,11 @@ import OTPSchema from "./OTPSchema";
 import axios from "axios";
 import { OTPTypes } from "../types/OTPTypes.js";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const OTPPage = () => {
+  const [responseError, setResponseError] = useState<string>("");
+  console.log("responseError", responseError);
   const {
     register,
     handleSubmit,
@@ -31,7 +34,9 @@ const OTPPage = () => {
       console.log("reposnse data loginnn", response.data);
       navigate("/login");
       reset();
-    } catch (error: any) {}
+    } catch (error: any) {
+      setResponseError(error.response.data.message);
+    }
   };
   return (
     <div className="pt-10">
@@ -63,6 +68,13 @@ const OTPPage = () => {
               {...register("otp")}
               name="otp"
             />
+            {errors.otp ? (
+              <div className="text-xs text-red">{errors.otp.message}</div>
+            ) : (
+              responseError && (
+                <div className="text-xs text-red">{responseError}</div>
+              )
+            )}
           </div>
 
           <button className=" w-full rounded-xl bg-yellow-300 px-5 py-2  text-sm hover:bg-yellow-400">
