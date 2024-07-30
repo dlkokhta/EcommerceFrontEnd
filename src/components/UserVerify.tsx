@@ -7,11 +7,11 @@ const UserVerify = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
+  const queryParams = new URLSearchParams(location.search);
 
-    const param = queryParams.get("param");
-    console.log("param", param);
+  const param = queryParams.get("param");
+  console.log("param", param);
+  useEffect(() => {
     if (param) {
       let url;
       if (process.env.NODE_ENV === "production") {
@@ -19,7 +19,7 @@ const UserVerify = () => {
       } else {
         url = `http://localhost:3000`;
       }
-
+      navigate("/login");
       const sendRandomString = async () => {
         try {
           await axios.post(`${url}/api/verify/${param}`);
