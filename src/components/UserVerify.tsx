@@ -9,9 +9,10 @@ const UserVerify = () => {
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-
     const param = queryParams.get("param");
-    console.log("param", param);
+
+    console.log("parammmmmmm", param);
+
     if (param) {
       let url;
       if (process.env.NODE_ENV === "production") {
@@ -22,7 +23,7 @@ const UserVerify = () => {
       navigate("/login");
       const sendRandomString = async () => {
         try {
-          await axios.post(`${url}/api/verify/${param}`);
+          await axios.post(`${url}/api/verify`, { param: param });
           navigate("/login");
         } catch (error: any) {
           console.error(
