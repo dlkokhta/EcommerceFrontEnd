@@ -26,12 +26,11 @@ const OTPPage = () => {
   }
   const navigate = useNavigate();
   const onSubmit = async (data: OTPTypes) => {
-    console.log("otp", data.otp);
     try {
-      const response = await axios.post(`${url}/api/recoverPassword`, {
+      await axios.post(`${url}/api/recoverPassword`, {
         otp: data.otp,
       });
-      console.log("reposnse data loginnn", response.data);
+
       navigate("/login");
       reset();
     } catch (error: any) {

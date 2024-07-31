@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store.js";
 import { allShoesTypes } from "../types/allShoesTypes";
 import { useNavigate } from "react-router-dom";
-// import "../App.css";
 
 const ShoesForHomePage = () => {
   const allShoes: allShoesTypes[] = useSelector(

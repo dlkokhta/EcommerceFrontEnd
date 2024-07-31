@@ -5,9 +5,12 @@ import RegistrationSchema from "./RegistrationSchema.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import RegistrationSuccess from "../components/RegistrationSuccess";
 
 const Registration = () => {
   const [responseError, setResponseError] = useState<string | null>("");
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [responseMessage, setResponseMessage] = useState<string>("");
   const {
     register,
     handleSubmit,
@@ -33,16 +36,26 @@ const Registration = () => {
     };
 
     try {
-      await axios.post(`${url}/api/register`, userData);
+      const response = await axios.post(`${url}/api/register`, userData);
+      setResponseMessage(response.data.message);
       reset();
     } catch (error: any) {
       setResponseError(error.response.data);
     }
-    navigate("/login");
   };
+
+  showModal ? navigate("/login") : null;
 
   return (
     <div className="pt-10">
+      {responseMessage && !showModal ? (
+        <RegistrationSuccess
+          message="Registration successful! Please check your email to verify your account."
+          onClose={() => setShowModal(true)}
+        />
+      ) : (
+        ""
+      )}
       <h1
         onClick={() => navigate("/")}
         className="block cursor-pointer text-center font-roboto font-medium"

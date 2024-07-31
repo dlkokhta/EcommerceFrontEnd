@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const PasswordRecoveryPage = () => {
   const [responseError, setResponseError] = useState<string>("");
-  console.log(responseError);
+
   const {
     register,
     handleSubmit,
@@ -28,10 +28,10 @@ const PasswordRecoveryPage = () => {
 
   const onSubmit = async (data: passwordRecoveryTypes) => {
     try {
-      const response = await axios.post(`${url}/api/GenerateOTP`, {
+      await axios.post(`${url}/api/GenerateOTP`, {
         email: data.email,
       });
-      console.log(response);
+
       navigate("/OTP");
 
       reset();

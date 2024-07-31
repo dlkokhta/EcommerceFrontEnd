@@ -3,7 +3,6 @@ import Home from "./pages/HomePage";
 import { Routes, Route } from "react-router-dom";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
-
 import axios from "axios";
 import { useEffect } from "react";
 import { setAllShoes } from "./store/allShoesSlice";
@@ -99,7 +98,6 @@ function App() {
           element={<CartItems handleGetCartItems={handleGetCartItems} />}
         />
         <Route path="/verify" element={<UserVerify />} />
-        {/* <Route path="/verify/:param" element={<UserVerify />} /> */}
         <Route path="/passwordRecovery" element={<PasswordRecoveryPage />} />
         <Route path="/OTP" element={<OTPPage />} />
       </Routes>

@@ -12,7 +12,6 @@ import { useState } from "react";
 const Login = () => {
   const [responseError, setResponseError] = useState<string | null>(null);
   const navigate = useNavigate();
-  console.log("responseErrrrrorrrr", responseError);
 
   const {
     register,
@@ -39,7 +38,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(`${url}/api/login`, userData);
-      console.log("reposnse data loginnn", response.data);
+
       if (response.data.role === "admin") {
         navigate("/adminPanel");
       } else {

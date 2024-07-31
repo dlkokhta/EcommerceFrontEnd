@@ -31,16 +31,14 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
     for (let i = 0; i < data.image.length; i++) {
       formData.append("image", data.image[i]);
     }
-    console.log("dataa", data);
 
     const token = localStorage.getItem("authToken");
-    console.log("addShoesToken", token);
+
     try {
-      const response = await axios.post(`${url}/api/addItem`, formData, {
+      await axios.post(`${url}/api/addItem`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       await updateAllShoesForAdmin();
-      console.log("response", response);
 
       reset();
     } catch (error) {

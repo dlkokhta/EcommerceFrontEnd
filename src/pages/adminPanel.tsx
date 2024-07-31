@@ -6,7 +6,7 @@ import UsersListForAdminPanel from "../components/UsersListForAdminPanel";
 
 const adminPanel = ({ updateAllShoesForAdmin }: any) => {
   const [destMenu, setDestMenu] = useState<string>("AllShoes");
-  console.log("destMenu", destMenu);
+
   const handleDestMenuChange = (newDestMenu: string) => {
     setDestMenu(newDestMenu);
   };
