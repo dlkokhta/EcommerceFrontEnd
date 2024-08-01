@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { setFilterShoesByBrand } from "../store/filterShoesByBrandSlice.js";
 import { setnewShoes } from "../store/newShoesSlice.js";
 import { setCartItems } from "../store/cartItemsSlice";
+import ChangePassword from "./ChangePassword.js";
 
 const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
@@ -43,6 +44,7 @@ const Header = () => {
   const [newHovered, setNewHovered] = useState(false);
   const [aboutHovered, setAboutHovered] = useState(false);
   const [search, setSearch] = useState("");
+  const [isUserMenuVisible, setIsUserMenuVisible] = useState<boolean>(false);
 
   const cartIconClickhandler = () => {
     navigate("/cartItems/{email}");
@@ -79,6 +81,7 @@ const Header = () => {
 
     setSearch("");
   };
+
   return (
     <>
       <div className="fixed top-0 z-40 w-full bg-white">
@@ -92,14 +95,12 @@ const Header = () => {
               src={hamburher}
               alt="hamburger"
             />
-
             <h1
               onClick={() => navigate("/")}
               className="hidden cursor-pointer font-roboto font-medium lg:block"
             >
               eCommerce
             </h1>
-
             <div className="ml-10 mt-1 hidden font-roboto font-light lg:block ">
               <div className="items flex flex-row gap-2 lg:text-sm xl:gap-6">
                 <div
@@ -205,7 +206,6 @@ const Header = () => {
                 </div>
               </div>
             </div>
-
             <div className=" w-full">
               <div className="flex h-7 rounded-full  border px-3 text-sm">
                 <input
@@ -239,17 +239,36 @@ const Header = () => {
 
             {token ? (
               <div className="font-thint font-roboto">
-                <div className="flex flex-col items-center text-xs">
+                <div
+                  onMouseEnter={() => {
+                    setIsUserMenuVisible(true);
+                  }}
+                  onMouseLeave={() => {
+                    setIsUserMenuVisible(false);
+                  }}
+                  className="relative flex cursor-pointer flex-col items-center border py-1 text-xs"
+                >
                   <div className="min-w-[90px] whitespace-nowrap text-center">
                     hello, {name}
                   </div>
+                  {isUserMenuVisible ? (
+                    <div className="absolute top-[25px] bg-white  px-3 pb-2">
+                      <div className="mt-5 cursor-pointer hover:text-red hover:underline">
+                        <ChangePassword
+                          message="reset password"
+                          direction="/resetPassword"
+                        />
+                      </div>
+                      <div
+                        className="mt-5 cursor-pointer hover:text-red hover:underline "
+                        onClick={logOutClickhandler}
+                      >
+                        log out
+                      </div>
 
-                  <div
-                    className="cursor-pointer hover:text-red hover:underline"
-                    onClick={logOutClickhandler}
-                  >
-                    log out
-                  </div>
+                      <div className="mt-5 h-[1px] bg-gradient-to-r from-transparent via-slate-300 to-transparent"></div>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             ) : (
@@ -260,7 +279,6 @@ const Header = () => {
                 Sign in
               </button>
             )}
-
             {hamburgerOpen && (
               <div className=" absolute left-0  top-0  w-full bg-black bg-opacity-15 lg:hidden">
                 <div className="h-screen w-[150px] bg-slate-50 p-2">
