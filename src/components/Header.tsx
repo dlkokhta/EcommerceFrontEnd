@@ -281,7 +281,7 @@ const Header = () => {
             )}
             {hamburgerOpen && (
               <div className=" absolute left-0  top-0  w-full bg-black bg-opacity-15 lg:hidden">
-                <div className="h-screen w-[150px] bg-slate-50 p-2">
+                <div className="h-screen w-[150px] bg-slate-50 p-2 transition-all	 duration-200">
                   <div className="flex flex-col">
                     <img
                       onClick={() => {
@@ -290,11 +290,26 @@ const Header = () => {
                       className="ml-auto h-4 w-4"
                       src={close}
                     />
-                    <div className="flex flex-col gap-2">
-                      <div>Man </div>
-                      <div>Woman</div>
-                      <div>Home</div>
-                      <div>About</div>
+                    <div className="ml-2 flex flex-col gap-2">
+                      <div onClick={() => navigate("/")}>Home</div>
+                      <div onClick={() => newClickhandler()}>New</div>
+                      <div onClick={() => allClickhandler()}>All</div>
+                      <div onClick={() => manClickhandler()}>Man</div>
+                      <div onClick={() => womenClickhandler()}>Woman</div>
+                      <div
+                        onClick={() => {
+                          setDestMenu("About");
+                          navigate("/");
+                          setTimeout(() => {
+                            window.scrollTo({
+                              top: document.documentElement.scrollHeight,
+                              behavior: "smooth",
+                            });
+                          }, 100);
+                        }}
+                      >
+                        About
+                      </div>
                     </div>
                   </div>
                 </div>

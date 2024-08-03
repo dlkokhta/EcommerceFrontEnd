@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCartItems } from "../store/cartItemsSlice";
+import hamburher from "../assets/hamburger.svg";
+import close from "../assets/close.svg";
 
 interface AdminPanelHeaderProps {
   onDestMenuChange: (newDestMenu: string) => void;
@@ -25,6 +27,7 @@ const adminPanelHeader: React.FC<AdminPanelHeaderProps> = ({
   const [allShoesHovered, setallShoesHovered] = useState(false);
   const [addShoesHovered, setAddShoesHovered] = useState(false);
   const [usersHovered, setusersHovered] = useState(false);
+  const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -33,7 +36,15 @@ const adminPanelHeader: React.FC<AdminPanelHeaderProps> = ({
       <div className=""></div>
       <div className="fixed top-0 z-40 w-full bg-white">
         <div className="relative mb-5">
-          <div className="flex items-center gap-3 px-5 pt-5 lg:px-60">
+          <div className="flex items-center gap-3 px-5 pt-5 lg:px-40">
+            <img
+              className="h-5 lg:hidden"
+              onClick={() => {
+                setHamburgerOpen(true);
+              }}
+              src={hamburher}
+              alt="hamburger"
+            />
             <h1
               onClick={() => navigate("/adminPanel")}
               className="hidden cursor-pointer font-roboto font-medium lg:block"
@@ -113,6 +124,31 @@ const adminPanelHeader: React.FC<AdminPanelHeaderProps> = ({
                 </div>
               </div>
             </div>
+            {hamburgerOpen && (
+              <div className=" absolute left-0  top-0  w-full bg-black bg-opacity-15 lg:hidden">
+                <div className="h-screen w-[150px] bg-slate-50 p-2 transition-all	 duration-200">
+                  <div className="flex flex-col">
+                    <img
+                      onClick={() => {
+                        setHamburgerOpen(false);
+                      }}
+                      className="ml-auto h-4 w-4"
+                      src={close}
+                    />
+
+                    <div className="ml-2 flex flex-col gap-2">
+                      <div onClick={() => onDestMenuChange("AllShoes")}>
+                        All Shoes
+                      </div>
+                      <div onClick={() => onDestMenuChange("AddShoes")}>
+                        Add Shoes
+                      </div>
+                      <div onClick={() => onDestMenuChange("Users")}>Users</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
         <div className="to-transparen h-[0.5px] bg-gradient-to-r from-transparent via-slate-300"></div>

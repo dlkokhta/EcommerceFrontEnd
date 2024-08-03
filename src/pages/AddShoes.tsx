@@ -48,7 +48,7 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
 
   return (
     <div>
-      <div className="grid-flow-col px-16 pt-5 lg:px-60 xl:px-[600px]">
+      <div className="grid-flow-col px-16 pt-5 md:px-60 lg:px-[350px] xl:px-[480px] 2xl:px-[580px] 3xl:px-[750px]">
         <form
           encType="multipart/form-data"
           onSubmit={handleSubmit(onSubmit)}

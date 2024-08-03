@@ -34,11 +34,11 @@ const UsersListForAdminPanel = () => {
   };
 
   return (
-    <div className="mt-24 flex flex-col gap-10 pl-60">
+    <div className="mt-24 px-5 lg:px-40 xl:px-60">
       {fetchedUsers.map((user: any) => (
         <div
           key={user._id}
-          className="duration-400 flex items-center gap-60 rounded-lg border border-gray-200 bg-white p-6 shadow transition duration-200 hover:-translate-y-2 hover:bg-gray-50"
+          className="duration-400 flex justify-between rounded-lg border border-gray-200 bg-white p-2 shadow transition duration-200 hover:-translate-y-2 hover:bg-gray-50 md:gap-8 md:p-8 lg:gap-10 lg:p-10  xl:gap-40 xl:p-6"
         >
           <div>
             <p>Name: {user.name}</p>
