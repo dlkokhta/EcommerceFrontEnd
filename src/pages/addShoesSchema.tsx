@@ -11,7 +11,7 @@ const addShoesSchema = yup.object({
     .required(),
   price: yup.number().min(1, "price must be 1 or more characters").required(),
 
-  sizes: yup.string().min(1, "Size must be 1 or more characters").required(),
+  sizes: yup.array().min(1, "Size must be 1 or more characters").required(),
   //   availability: yup.boolean().default(true).required(),
   image: yup.mixed().required(),
 });

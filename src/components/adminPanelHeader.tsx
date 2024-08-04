@@ -143,7 +143,24 @@ const adminPanelHeader: React.FC<AdminPanelHeaderProps> = ({
                       <div onClick={() => onDestMenuChange("AddShoes")}>
                         Add Shoes
                       </div>
-                      <div onClick={() => onDestMenuChange("Users")}>Users</div>
+                      <div onClick={() => onDestMenuChange("AddShoes")}>
+                        Users
+                      </div>
+
+                      <div
+                        onClick={() => {
+                          setDestMenu("About");
+                          navigate("/");
+                          setTimeout(() => {
+                            window.scrollTo({
+                              top: document.documentElement.scrollHeight,
+                              behavior: "smooth",
+                            });
+                          }, 100);
+                        }}
+                      >
+                        About
+                      </div>
                     </div>
                   </div>
                 </div>

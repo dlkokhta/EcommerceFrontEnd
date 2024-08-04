@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import addShoesSchema from "./addShoesSchema.js";
@@ -8,9 +8,20 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    control,
     reset,
-  } = useForm({ resolver: yupResolver(addShoesSchema) });
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(addShoesSchema),
+    defaultValues: {
+      sizes: [{ size: "", quantity: "" }], // Initial size and quantity fields
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "sizes",
+  });
 
   let url;
   if (process.env.NODE_ENV === "production") {
@@ -20,6 +31,7 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
   }
 
   const onSubmit = async (data: any) => {
+    console.log(data);
     const formData = new FormData();
     formData.append("brand", data.brand);
     formData.append("model", data.model);
@@ -27,7 +39,9 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
     formData.append("color", data.color);
     formData.append("description", data.description);
     formData.append("price", data.price.toString());
-    formData.append("sizes", data.sizes);
+    data.sizes.forEach((size: any) => {
+      formData.append("sizes", JSON.stringify(size)); // or use a different format if necessary
+    });
     for (let i = 0; i < data.image.length; i++) {
       formData.append("image", data.image[i]);
     }
@@ -148,20 +162,42 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
             )}
           </div>
           <div className="w-full">
-            <label className="block text-sm " htmlFor="sizes">
-              sizes
+            <label className="block text-sm" htmlFor="sizes">
+              Sizes
             </label>
-            <input
-              className="w-full border border-slate-400  outline-green-300 "
-              type=""
-              id="sizes"
-              {...register("sizes")}
-              name="sizes"
-              placeholder="Enter sizes separated by comma (e.g., 8,9,10)"
-            />
-            {errors.sizes && (
-              <p className="text-xs text-red">{errors.sizes.message}</p>
-            )}
+            {fields.map((item: any, index: any) => (
+              <div key={item.id} className="mb-2 flex items-center">
+                <input
+                  {...register(`sizes.${index}.size`, {
+                    required: "Size is required",
+                  })}
+                  placeholder="Size"
+                  className="mr-2 w-full border border-slate-400 p-2 outline-green-300"
+                />
+                <input
+                  type="number"
+                  {...register(`sizes.${index}.quantity`, {
+                    required: "Quantity is required",
+                  })}
+                  placeholder="Quantity"
+                  className="mr-2 w-full border border-slate-400 p-2 outline-green-300"
+                />
+                <button
+                  type="button"
+                  onClick={() => remove(index)}
+                  className="bg-red-500 p-1 text-white"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={() => append({ size: "", quantity: "" })}
+              className="mt-2 bg-green-500 p-2 text-white"
+            >
+              Add Size
+            </button>
           </div>
 
           <div className="w-full">
