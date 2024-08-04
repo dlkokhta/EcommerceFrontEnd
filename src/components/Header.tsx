@@ -38,9 +38,9 @@ const Header = () => {
     dispatch(setCartItems([]));
   };
 
-  const [manHovered, setManHovered] = useState(false);
+  const [menHovered, setMenHovered] = useState(false);
   const [allHovered, setAllHovered] = useState(false);
-  const [womanHovered, setWomanHovered] = useState(false);
+  const [womenHovered, setWomenHovered] = useState(false);
   const [newHovered, setNewHovered] = useState(false);
   const [aboutHovered, setAboutHovered] = useState(false);
   const [search, setSearch] = useState("");
@@ -50,8 +50,8 @@ const Header = () => {
     navigate("/cartItems/{email}");
   };
   const dispatch = useDispatch();
-  const manClickhandler = () => {
-    dispatch(setFilterShoes(`Man's`));
+  const menClickhandler = () => {
+    dispatch(setFilterShoes(`Men's`));
     dispatch(setFilterShoesByBrand(""));
     dispatch(setnewShoes(false));
   };
@@ -142,27 +142,27 @@ const Header = () => {
                   )}
                 </div>
                 <div
-                  onMouseEnter={() => setManHovered(true)}
-                  onMouseLeave={() => setManHovered(false)}
+                  onMouseEnter={() => setMenHovered(true)}
+                  onMouseLeave={() => setMenHovered(false)}
                   className=" cursor-pointer items-center"
                   onClick={() => {
                     navigate("/");
-                    setDestMenu("Man"), manClickhandler();
+                    setDestMenu("Men"), menClickhandler();
                   }}
                 >
-                  Man
-                  {destMenu === "Man" ? (
+                  Men
+                  {destMenu === "Men" ? (
                     <div className="w-f h-[2px] bg-yellow-300"></div>
                   ) : (
                     <div
-                      className={`w-f h-[2px] ${manHovered ? "bg-slate-300" : ""}`}
+                      className={`w-f h-[2px] ${menHovered ? "bg-slate-300" : ""}`}
                     ></div>
                   )}
                 </div>
 
                 <div
-                  onMouseEnter={() => setWomanHovered(true)}
-                  onMouseLeave={() => setWomanHovered(false)}
+                  onMouseEnter={() => setWomenHovered(true)}
+                  onMouseLeave={() => setWomenHovered(false)}
                   className=" cursor-pointer"
                   onClick={() => {
                     setDestMenu("Women");
@@ -170,12 +170,12 @@ const Header = () => {
                     navigate("/");
                   }}
                 >
-                  Woman
+                  Women
                   {destMenu === "Women" ? (
                     <div className="w-f h-[2px] bg-yellow-300"></div>
                   ) : (
                     <div
-                      className={`w-f h-[2px] ${womanHovered ? "bg-slate-300" : ""}`}
+                      className={`w-f h-[2px] ${womenHovered ? "bg-slate-300" : ""}`}
                     ></div>
                   )}
                 </div>
@@ -294,8 +294,8 @@ const Header = () => {
                       <div onClick={() => navigate("/")}>Home</div>
                       <div onClick={() => newClickhandler()}>New</div>
                       <div onClick={() => allClickhandler()}>All</div>
-                      <div onClick={() => manClickhandler()}>Man</div>
-                      <div onClick={() => womenClickhandler()}>Woman</div>
+                      <div onClick={() => menClickhandler()}>Men</div>
+                      <div onClick={() => womenClickhandler()}>Women</div>
                       <div
                         onClick={() => {
                           setDestMenu("About");

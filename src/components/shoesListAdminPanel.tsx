@@ -34,7 +34,7 @@ const ShoesListAdminPanel = ({ updateAllShoesForAdmin }: any) => {
           {allShoes.map((shoes, index) => (
             <div
               key={index}
-              className="duration-400 flex gap-2 rounded-lg border border-gray-200 bg-white p-2 shadow transition duration-200 hover:-translate-y-2 hover:bg-gray-50 md:gap-8 md:p-8 lg:gap-10 lg:p-10  xl:gap-40 xl:p-6"
+              className="duration-400 flex justify-between gap-2 rounded-lg border border-gray-200 bg-white p-2 shadow transition duration-200 hover:-translate-y-2 hover:bg-gray-50 md:gap-8 md:p-8 lg:gap-10 lg:p-10 xl:p-6"
             >
               <div className="mb-10">
                 {shoes.image.slice(0, 1).map((image, index) => (

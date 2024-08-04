@@ -16,22 +16,21 @@ const ShoesDetails = () => {
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
   );
+
   const [selectedShoes, setSelectedShoes] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
   const [isSizeSelected, setIsSizeSelected] = useState<boolean>(false);
   // const [unregisteredUserItems, setUnregisteredUserItems] = useState<any>([{}]);
   const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
-
+  console.log("selectedSize", selectedSize);
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
 
   let url;
 
   if (process.env.NODE_ENV === "production") {
-    // Use production backend URL
     url = `https://ecommerceapi-production-7d9c.up.railway.app`;
   } else {
-    // Use local backend URL
     url = `http://localhost:3000`;
   }
 
@@ -154,13 +153,13 @@ const ShoesDetails = () => {
                 </div>
 
                 <div className="mb-7 grid cursor-pointer grid-cols-4 gap-1 lg:gap-2">
-                  {shoes.sizes.map((size) => (
+                  {shoes.sizes.map((item: any) => (
                     <div
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={` inline-block border-2 text-center ${selectedSize === size ? "bg-slate-500 text-white" : ""}`}
+                      key={item.size}
+                      onClick={() => setSelectedSize(item.size)}
+                      className={` inline-block border-2 text-center ${selectedSize === item.size ? "bg-slate-500 text-white" : ""}`}
                     >
-                      {size}
+                      {item.size}
                     </div>
                   ))}
                 </div>
@@ -208,9 +207,9 @@ const ShoesDetails = () => {
                   >
                     Add to cart
                   </button>
-                  <button className=" w-full rounded-full bg-orange-500 px-5 py-2  text-sm hover:bg-orange-600">
+                  {/* <button className=" w-full rounded-full bg-orange-500 px-5 py-2  text-sm hover:bg-orange-600">
                     Buy now
-                  </button>
+                  </button> */}
                 </div>
 
                 <h1 className=" font-normal">description</h1>

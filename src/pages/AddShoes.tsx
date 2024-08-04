@@ -163,7 +163,7 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
           </div>
           <div className="w-full">
             <label className="block text-sm" htmlFor="sizes">
-              Sizes
+              sizes
             </label>
             {fields.map((item: any, index: any) => (
               <div key={item.id} className="mb-2 flex items-center">
@@ -172,7 +172,7 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
                     required: "Size is required",
                   })}
                   placeholder="Size"
-                  className="mr-2 w-full border border-slate-400 p-2 outline-green-300"
+                  className="mr-2 w-full border border-slate-400 outline-green-300"
                 />
                 <input
                   type="number"
@@ -180,12 +180,12 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
                     required: "Quantity is required",
                   })}
                   placeholder="Quantity"
-                  className="mr-2 w-full border border-slate-400 p-2 outline-green-300"
+                  className="mr-2 w-full border border-slate-400  outline-green-300"
                 />
                 <button
                   type="button"
                   onClick={() => remove(index)}
-                  className="bg-red-500 p-1 text-white"
+                  className="text-black hover:text-red"
                 >
                   Remove
                 </button>
@@ -194,7 +194,7 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
             <button
               type="button"
               onClick={() => append({ size: "", quantity: "" })}
-              className="mt-2 bg-green-500 p-2 text-white"
+              className="mt-2 w-full rounded-full bg-green-500 p-2 text-sm text-white"
             >
               Add Size
             </button>
@@ -216,7 +216,7 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
               <p className="text-xs text-red">{errors.image.message}</p>
             )}
           </div>
-          <button className=" w-full rounded-xl bg-yellow-300 px-5  py-2 text-sm">
+          <button className=" mt-3 w-full rounded-full bg-yellow-300  px-5 py-2 text-sm">
             Submit
           </button>
         </form>
