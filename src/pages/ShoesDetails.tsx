@@ -23,7 +23,10 @@ const ShoesDetails = () => {
   const [isSizeSelected, setIsSizeSelected] = useState<boolean>(false);
   // const [unregisteredUserItems, setUnregisteredUserItems] = useState<any>([{}]);
   const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [displayError, setDisplayError] = useState<boolean>(false);
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
+  console.log("errorMessage", errorMessage);
 
   let url;
 
@@ -64,6 +67,11 @@ const ShoesDetails = () => {
       setTimeout(() => setAddToCartAlert(false), 4000);
     }
 
+    if (token && !displayError) {
+      setDisplayError(true);
+      setTimeout(() => setDisplayError(false), 4000);
+    }
+
     //for unregistered users
     // if (!token) {
     //   const cartItems = {
@@ -94,7 +102,9 @@ const ShoesDetails = () => {
 
       fetchItems();
     } catch (error: any) {
-      console.log(error.response.data);
+      const { message, findQuantityToNumber } = error.response.data;
+      setErrorMessage(`${message} ${findQuantityToNumber}`);
+      setDisplayError(true);
     }
   };
 
@@ -204,7 +214,13 @@ const ShoesDetails = () => {
                     <h2 className=" text-red" role="alert">
                       <div className="">please select size</div>
                     </h2>
-                  ) : null}
+                  ) : (
+                    displayError && (
+                      <h2 className=" text-red" role="alert">
+                        <div className="">{errorMessage}</div>
+                      </h2>
+                    )
+                  )}
                 </div>
 
                 <div className="mb-5 flex flex-col justify-center gap-5 font-normal">

@@ -3,7 +3,7 @@ import { RootState } from "../store/store.js";
 import { allShoesTypes } from "../types/allShoesTypes";
 import { useNavigate } from "react-router-dom";
 
-const ShoesForHomePage = () => {
+const ShoesForHomePage = ({ updateAllShoesForAdmin }: any) => {
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
   );
@@ -64,7 +64,12 @@ const ShoesForHomePage = () => {
                       className="cursor-pointer xl:max-h-[429px]"
                       src={`${url}/public/storage/images/${image}`}
                       alt={image}
-                      onClick={() => navigate(`/shoesDetails/${shoes.id}`)}
+                      onClick={() =>
+                        navigate(
+                          `/shoesDetails/${shoes.id}`,
+                          updateAllShoesForAdmin(),
+                        )
+                      }
                     />
                   </div>
                 ))}

@@ -84,7 +84,10 @@ function App() {
         location.pathname !== "/purchasedPage" &&
         location.pathname !== "/registration" && <Header />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={<Home updateAllShoesForAdmin={updateAllShoesForAdmin} />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />

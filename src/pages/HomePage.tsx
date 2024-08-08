@@ -4,10 +4,10 @@ import facebook from "../assets/facebook.png";
 import x from "../assets/x.png";
 import linkedin from "../assets/linkedin.png";
 
-const HomePage = () => {
+const HomePage = ({ updateAllShoesForAdmin }: any) => {
   return (
     <div>
-      <ShoesForHomePage />
+      <ShoesForHomePage updateAllShoesForAdmin={updateAllShoesForAdmin} />
       <footer className="font-light lg:px-10">
         <div>
           <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
