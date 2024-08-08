@@ -18,6 +18,7 @@ import UserVerify from "./components/UserVerify";
 import PasswordRecoveryPage from "./pages/PasswordRecoveryPage";
 import OTPPage from "./pages/OTPPage";
 import PasswordResetPage from "./pages/PasswordResetPage";
+import PurchasedPage from "./pages/PurchasedPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -80,6 +81,7 @@ function App() {
         location.pathname !== "/passwordRecovery" &&
         location.pathname !== "/OTP" &&
         location.pathname !== "/resetPassword" &&
+        location.pathname !== "/purchasedPage" &&
         location.pathname !== "/registration" && <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -103,6 +105,7 @@ function App() {
         <Route path="/passwordRecovery" element={<PasswordRecoveryPage />} />
         <Route path="/OTP" element={<OTPPage />} />
         <Route path="/resetPassword" element={<PasswordResetPage />} />
+        <Route path="/purchased" element={<PurchasedPage />} />
       </Routes>
     </div>
   );

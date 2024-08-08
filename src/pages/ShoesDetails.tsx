@@ -23,7 +23,6 @@ const ShoesDetails = () => {
   const [isSizeSelected, setIsSizeSelected] = useState<boolean>(false);
   // const [unregisteredUserItems, setUnregisteredUserItems] = useState<any>([{}]);
   const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
-  console.log("selectedSize", selectedSize);
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
 
   let url;
@@ -101,7 +100,7 @@ const ShoesDetails = () => {
 
   return (
     <div className="mt-24">
-      <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 lg:px-60">
+      <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 lg:px-60 3xl:px-[420px]">
         {shoesById.map((shoes) => (
           <div key={shoes.id}>
             <div className="md:flex md:gap-10 lg:gap-20 xl:gap-[100px] ">
@@ -152,12 +151,20 @@ const ShoesDetails = () => {
                   {shoes.color}
                 </div>
 
-                <div className="mb-7 grid cursor-pointer grid-cols-4 gap-1 lg:gap-2">
+                <div className="hower:bg-red mb-7 grid cursor-pointer grid-cols-4 gap-1 lg:gap-2">
                   {shoes.sizes.map((item: any) => (
                     <div
                       key={item.size}
-                      onClick={() => setSelectedSize(item.size)}
-                      className={` inline-block border-2 text-center ${selectedSize === item.size ? "bg-slate-500 text-white" : ""}`}
+                      onClick={() =>
+                        item.quantity > 0 && setSelectedSize(item.size)
+                      }
+                      className={`inline-block border-2 text-center ${
+                        selectedSize === item.size
+                          ? "bg-slate-500 text-white"
+                          : item.quantity > 0
+                            ? "cursor-pointer hover:border-green-300"
+                            : "crossed-out cursor-not-allowed bg-slate-100"
+                      }`}
                     >
                       {item.size}
                     </div>

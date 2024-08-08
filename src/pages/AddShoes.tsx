@@ -31,7 +31,10 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
   }
 
   const onSubmit = async (data: any) => {
-    console.log(data);
+    console.log(
+      "quantity",
+      data.sizes.map((item: any) => typeof item.quantity),
+    );
     const formData = new FormData();
     formData.append("brand", data.brand);
     formData.append("model", data.model);

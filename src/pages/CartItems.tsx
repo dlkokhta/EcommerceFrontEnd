@@ -8,7 +8,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
   const cartItems: cartItemsTypes[] = useSelector(
     (state: RootState) => state.cartItems.cartItems,
   );
-
+  console.log("cartItems", cartItems);
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
   );
@@ -24,6 +24,8 @@ const CartItems = ({ handleGetCartItems }: any) => {
     : 0;
 
   const roundedTotalAmount = totalAmount.toFixed(2);
+
+  const cartItemsQuantity = cartItems.map((item: any) => item.quantity);
 
   //for unregistered users
   // const token = localStorage.getItem("authToken");
@@ -51,6 +53,26 @@ const CartItems = ({ handleGetCartItems }: any) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       await handleGetCartItems();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const buyClickHandler = async () => {
+    const userEmail = localStorage.getItem("data.email");
+
+    const updatedCartItems = cartItems.map((item) => ({
+      ...item,
+      quantity: item.quantity.toString(),
+    }));
+
+    const payload = {
+      email: userEmail,
+      cartItems: updatedCartItems,
+    };
+
+    try {
+      await axios.post(`${url}/api/purchased`, payload);
     } catch (error) {
       console.log(error);
     }
@@ -112,8 +134,11 @@ const CartItems = ({ handleGetCartItems }: any) => {
             {totalAmount ? (
               <div className="flex flex-col items-center justify-center pb-10">
                 <div className="mb-5">total amount: ${roundedTotalAmount}</div>
-                <button className=" min-w-[150px] whitespace-normal rounded-xl bg-red px-5 py-[6px] text-sm text-white">
-                  checkout
+                <button
+                  onClick={buyClickHandler}
+                  className=" min-w-[150px] whitespace-normal rounded-full bg-red px-5 py-[6px] text-sm text-white hover:bg-orange-600"
+                >
+                  Buy
                 </button>
               </div>
             ) : (

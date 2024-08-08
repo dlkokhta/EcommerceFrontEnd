@@ -27,5 +27,29 @@
   .animate-slide-in-right {
     animation: slideInFromRight 1s ease-out;
   }
+
+  .crossed-out {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+  }
+  
+  /* .crossed-out::before, */
+  .crossed-out::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgb(173, 171, 171);
+    transform: rotate(9deg);
+  }
+  
+  .crossed-out::after {
+    transform: rotate(-9deg);
+  }
+
+  
   
   

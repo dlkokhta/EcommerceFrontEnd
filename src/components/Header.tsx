@@ -84,9 +84,9 @@ const Header = () => {
 
   return (
     <>
-      <div className="fixed top-0 z-40 w-full bg-white">
+      <div className="fixed top-0 z-40 w-full bg-white ">
         <div className="relative mb-5">
-          <div className="flex items-center gap-3 px-5 pt-5 lg:px-10">
+          <div className="flex items-center gap-3 px-5 pt-5 lg:px-10 3xl:px-60">
             <img
               className="h-5 lg:hidden"
               onClick={() => {
@@ -238,7 +238,7 @@ const Header = () => {
             </div>
 
             {token ? (
-              <div className="font-thint font-roboto">
+              <div className="font-thint font-roboto hover:bg-slate-100">
                 <div
                   onMouseEnter={() => {
                     setIsUserMenuVisible(true);
@@ -248,7 +248,7 @@ const Header = () => {
                   }}
                   className="relative flex cursor-pointer flex-col items-center border py-1 text-xs"
                 >
-                  <div className="min-w-[90px] whitespace-nowrap text-center">
+                  <div className="min-w-[90px] whitespace-nowrap text-center ">
                     hello, {name}
                   </div>
                   {isUserMenuVisible ? (
