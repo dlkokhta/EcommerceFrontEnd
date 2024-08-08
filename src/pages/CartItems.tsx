@@ -25,8 +25,6 @@ const CartItems = ({ handleGetCartItems }: any) => {
 
   const roundedTotalAmount = totalAmount.toFixed(2);
 
-  const cartItemsQuantity = cartItems.map((item: any) => item.quantity);
-
   //for unregistered users
   // const token = localStorage.getItem("authToken");
 
