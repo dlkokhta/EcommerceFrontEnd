@@ -6,10 +6,8 @@ import { useState } from "react";
 import axios from "axios";
 import { setCartItems } from "../store/cartItemsSlice";
 import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 
 const ShoesDetails = () => {
-  // const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -21,12 +19,13 @@ const ShoesDetails = () => {
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
   const [isSizeSelected, setIsSizeSelected] = useState<boolean>(false);
-  // const [unregisteredUserItems, setUnregisteredUserItems] = useState<any>([{}]);
   const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [displayError, setDisplayError] = useState<boolean>(false);
+  const [findQuantityToNumber, setFindQuantityToNumber] = useState<number>(0);
+  console.log("findQuantityToNumber", findQuantityToNumber);
+
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
-  console.log("errorMessage", errorMessage);
 
   let url;
 
@@ -38,7 +37,6 @@ const ShoesDetails = () => {
 
   const fetchItems = async () => {
     const userEmail = localStorage.getItem("data.email");
-    // const url = `http://localhost:3000/api/getCartItems/${userEmail}`;
 
     const token = localStorage.getItem("authToken");
     try {
@@ -53,10 +51,12 @@ const ShoesDetails = () => {
   };
 
   const handleClick = async (shoesId: string) => {
+    const tempQuantity = findQuantityToNumber - selectedQuantity;
+
     const postUrl = `${url}/api/postCart`;
     const token = localStorage.getItem("authToken");
     const userEmail = localStorage.getItem("data.email");
-
+    setDisplayError(false);
     if (token && !selectedSize) {
       setIsSizeSelected(true);
       setTimeout(() => setIsSizeSelected(false), 4000);
@@ -69,22 +69,12 @@ const ShoesDetails = () => {
 
     if (token && !displayError) {
       setDisplayError(true);
-      setTimeout(() => setDisplayError(false), 4000);
+      setTimeout(() => setDisplayError(false), 3000);
+      // setDisplayError(false);
     }
 
-    //for unregistered users
-    // if (!token) {
-    //   const cartItems = {
-    //     itemId: shoesId,
-    //     size: selectedSize,
-    //     quantity: selectedQuantity,
-    //   };
-
-    //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    // }
-
     try {
-      await axios.post(
+      const response = await axios.post(
         postUrl,
         {
           email: userEmail,
@@ -99,13 +89,21 @@ const ShoesDetails = () => {
 
         { headers: { Authorization: `Bearer ${token}` } },
       );
-
+      setFindQuantityToNumber(response.data.findQuantityToNumber);
       fetchItems();
     } catch (error: any) {
       const { message, findQuantityToNumber } = error.response.data;
       setErrorMessage(`${message} ${findQuantityToNumber}`);
-      setDisplayError(true);
+      setFindQuantityToNumber(findQuantityToNumber);
     }
+  };
+
+  const sizeClickHandler = () => {
+    const sizeObject = allShoes
+      .flatMap((shoe: any) => shoe.sizes)
+      .find((size: any) => size.size === selectedSize);
+    const quantityAvailable = Number(sizeObject.quantity);
+    console.log("quantityAvailable", quantityAvailable);
   };
 
   return (
@@ -165,9 +163,10 @@ const ShoesDetails = () => {
                   {shoes.sizes.map((item: any) => (
                     <div
                       key={item.size}
-                      onClick={() =>
-                        item.quantity > 0 && setSelectedSize(item.size)
-                      }
+                      onClick={() => {
+                        item.quantity > 0 && setSelectedSize(item.size),
+                          sizeClickHandler();
+                      }}
                       className={`inline-block border-2 text-center ${
                         selectedSize === item.size
                           ? "bg-slate-500 text-white"
@@ -214,13 +213,11 @@ const ShoesDetails = () => {
                     <h2 className=" text-red" role="alert">
                       <div className="">please select size</div>
                     </h2>
-                  ) : (
-                    displayError && (
-                      <h2 className=" text-red" role="alert">
-                        <div className="">{errorMessage}</div>
-                      </h2>
-                    )
-                  )}
+                  ) : displayError ? (
+                    <h2 className=" text-red" role="alert">
+                      <div className="">{errorMessage}</div>
+                    </h2>
+                  ) : null}
                 </div>
 
                 <div className="mb-5 flex flex-col justify-center gap-5 font-normal">
