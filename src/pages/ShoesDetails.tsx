@@ -52,7 +52,7 @@ const ShoesDetails = () => {
 
   const handleClick = async (shoesId: string) => {
     const tempQuantity = findQuantityToNumber - selectedQuantity;
-
+    console.log(tempQuantity);
     const postUrl = `${url}/api/postCart`;
     const token = localStorage.getItem("authToken");
     const userEmail = localStorage.getItem("data.email");
