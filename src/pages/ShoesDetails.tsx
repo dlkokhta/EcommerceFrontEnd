@@ -59,18 +59,6 @@ const ShoesDetails = () => {
     cartItemQuantity - findCartItemQuantityFromDatabase;
   console.log("concrateItemSizeQuantity", concrateItemSizeQuantity);
 
-  // if (concrateItemSizeQuantity <= 0) {
-  //   if (selectedQuantity > concrateItemSizeQuantity) {
-  //     console.log("only available", concrateItemSizeQuantity);
-  //   }
-  // }
-
-  // const testQuantity = findCartItemId;cartItemQuantity -
-
-  // const filterQuantity = findCartItemId.filter((item:any) => item.itemId)
-
-  // const [temporaryQuantity, setTemporaryCuantity] = useState<number>(0);
-
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
 
   let url;
@@ -205,8 +193,10 @@ const ShoesDetails = () => {
                     <div
                       key={item.size}
                       onClick={() => {
-                        item.quantity > 0 && setSelectedSize(item.size),
-                          setCartItemQuantity(Number(item.quantity));
+                        console.log("Item:", item);
+                        console.log("Shoes:", shoes);
+                        item.quantity > 0 && setSelectedSize(item.size);
+                        setCartItemQuantity(Number(item.quantity));
                         setCartItemId(shoes.id);
                       }}
                       className={`inline-block border-2 text-center ${
