@@ -7,6 +7,13 @@ import axios from "axios";
 import { setCartItems } from "../store/cartItemsSlice";
 import { useDispatch } from "react-redux";
 
+interface CartItem {
+  itemId: string;
+  size: string;
+  quantity: number;
+  _id: string;
+}
+
 const ShoesDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -17,13 +24,52 @@ const ShoesDetails = () => {
 
   const [selectedShoes, setSelectedShoes] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
-  const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
   const [isSizeSelected, setIsSizeSelected] = useState<boolean>(false);
   const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [displayError, setDisplayError] = useState<boolean>(false);
-  const [findQuantityToNumber, setFindQuantityToNumber] = useState<number>(0);
-  console.log("findQuantityToNumber", findQuantityToNumber);
+  const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
+
+  const [cartItemQuantity, setCartItemQuantity] = useState<number>(0); //real quantity from database
+  const [cartItemId, setCartItemId] = useState<string>(""); //this shows me shoes id on the size click
+  console.log("cartItemQuantity", cartItemQuantity);
+  console.log("cartItemId", cartItemId);
+
+  const [cartItemsFromResponse, setCartItemsFromResponse] = useState<
+    CartItem[]
+  >([]); //cart items from response, from ocartitem database
+  // console.log("cartItemsResponse", cartItemsFromResponse);
+
+  const [showQuantityError, setShowQuantityError] = useState<boolean>(false);
+
+  const findCartItemId: CartItem | undefined = cartItemsFromResponse //cart items from response, from ocartitem database
+    .filter((item: CartItem) => item.itemId === cartItemId)
+    .find((item: CartItem) => item.size === selectedSize);
+
+  const findCartItemQuantityFromDatabase = findCartItemId // there is concrate size quantity from cart item , it shows quantity by select size and item id
+    ? findCartItemId.quantity
+    : 0;
+
+  console.log(
+    "findCartItemQuantityFromDatabase",
+    findCartItemQuantityFromDatabase,
+  );
+
+  const concrateItemSizeQuantity =
+    cartItemQuantity - findCartItemQuantityFromDatabase;
+  console.log("concrateItemSizeQuantity", concrateItemSizeQuantity);
+
+  // if (concrateItemSizeQuantity <= 0) {
+  //   if (selectedQuantity > concrateItemSizeQuantity) {
+  //     console.log("only available", concrateItemSizeQuantity);
+  //   }
+  // }
+
+  // const testQuantity = findCartItemId;cartItemQuantity -
+
+  // const filterQuantity = findCartItemId.filter((item:any) => item.itemId)
+
+  // const [temporaryQuantity, setTemporaryCuantity] = useState<number>(0);
 
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
 
@@ -37,26 +83,24 @@ const ShoesDetails = () => {
 
   const fetchItems = async () => {
     const userEmail = localStorage.getItem("data.email");
-
     const token = localStorage.getItem("authToken");
     try {
       const response = await axios.get(`${url}/api/getCartItems/${userEmail}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-
       dispatch(setCartItems(response.data.cartItems));
+      setCartItemsFromResponse(response.data.cartItems);
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleClick = async (shoesId: string) => {
-    const tempQuantity = findQuantityToNumber - selectedQuantity;
-    console.log(tempQuantity);
     const postUrl = `${url}/api/postCart`;
     const token = localStorage.getItem("authToken");
     const userEmail = localStorage.getItem("data.email");
     setDisplayError(false);
+
     if (token && !selectedSize) {
       setIsSizeSelected(true);
       setTimeout(() => setIsSizeSelected(false), 4000);
@@ -66,15 +110,22 @@ const ShoesDetails = () => {
       setAddToCartAlert(true);
       setTimeout(() => setAddToCartAlert(false), 4000);
     }
+    if (selectedQuantity > concrateItemSizeQuantity) {
+      if (concrateItemSizeQuantity !== 0) {
+        setShowQuantityError(true);
+        setTimeout(() => setShowQuantityError(false), 2000);
+      }
+
+      return;
+    }
 
     if (token && !displayError) {
       setDisplayError(true);
-      setTimeout(() => setDisplayError(false), 3000);
-      // setDisplayError(false);
+      setTimeout(() => setDisplayError(false), 2000);
     }
 
     try {
-      const response = await axios.post(
+      await axios.post(
         postUrl,
         {
           email: userEmail,
@@ -89,21 +140,12 @@ const ShoesDetails = () => {
 
         { headers: { Authorization: `Bearer ${token}` } },
       );
-      setFindQuantityToNumber(response.data.findQuantityToNumber);
+
       fetchItems();
     } catch (error: any) {
       const { message, findQuantityToNumber } = error.response.data;
       setErrorMessage(`${message} ${findQuantityToNumber}`);
-      setFindQuantityToNumber(findQuantityToNumber);
     }
-  };
-
-  const sizeClickHandler = () => {
-    const sizeObject = allShoes
-      .flatMap((shoe: any) => shoe.sizes)
-      .find((size: any) => size.size === selectedSize);
-    const quantityAvailable = Number(sizeObject.quantity);
-    console.log("quantityAvailable", quantityAvailable);
   };
 
   return (
@@ -158,14 +200,14 @@ const ShoesDetails = () => {
                   <span className="font-normal">Color: </span>
                   {shoes.color}
                 </div>
-
                 <div className="hower:bg-red mb-7 grid cursor-pointer grid-cols-4 gap-1 lg:gap-2">
                   {shoes.sizes.map((item: any) => (
                     <div
                       key={item.size}
                       onClick={() => {
                         item.quantity > 0 && setSelectedSize(item.size),
-                          sizeClickHandler();
+                          setCartItemQuantity(Number(item.quantity));
+                        setCartItemId(shoes.id);
                       }}
                       className={`inline-block border-2 text-center ${
                         selectedSize === item.size
@@ -179,7 +221,6 @@ const ShoesDetails = () => {
                     </div>
                   ))}
                 </div>
-
                 <div className=" flex items-center justify-between rounded-full border font-normal">
                   <div
                     onClick={() => {
@@ -203,8 +244,7 @@ const ShoesDetails = () => {
                     +
                   </div>
                 </div>
-
-                <div className="flex h-8 items-center justify-center text-xs md:text-base">
+                <div className="md:text-medium text-medium flex h-8 items-center justify-center">
                   {addToCartAlert ? (
                     <h2 className=" text-red" role="alert">
                       <div className="">Please login to add items to cart</div>
@@ -216,6 +256,12 @@ const ShoesDetails = () => {
                   ) : displayError ? (
                     <h2 className=" text-red" role="alert">
                       <div className="">{errorMessage}</div>
+                    </h2>
+                  ) : showQuantityError ? (
+                    <h2 className=" text-red" role="alert">
+                      <div className="">
+                        {`available only ${concrateItemSizeQuantity}`}
+                      </div>
                     </h2>
                   ) : null}
                 </div>
@@ -231,7 +277,6 @@ const ShoesDetails = () => {
                     Buy now
                   </button> */}
                 </div>
-
                 <h1 className=" font-normal">description</h1>
                 <div>{shoes.description}</div>
               </div>

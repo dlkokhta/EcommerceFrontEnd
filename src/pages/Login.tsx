@@ -6,9 +6,6 @@ import { loginTypes } from "../types/loginTypes.js";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-// import { useDispatch } from "react-redux";
-// import { setUserName } from "../store/userNameSlice.js";
-
 const Login = () => {
   const [responseError, setResponseError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -21,7 +18,6 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(loginSchema),
   });
-  // const dispatch = useDispatch();
 
   let url;
   if (process.env.NODE_ENV === "production") {
@@ -55,7 +51,6 @@ const Login = () => {
       localStorage.setItem("userName", response.data.name);
       localStorage.setItem("role", response.data.role);
     } catch (error: any) {
-      // setResponseError(error?.response?.data);old version of error it is working
       if (error?.response?.data?.message) {
         setResponseError(error.response.data.message);
       } else {

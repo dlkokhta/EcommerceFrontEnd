@@ -8,7 +8,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
   const cartItems: cartItemsTypes[] = useSelector(
     (state: RootState) => state.cartItems.cartItems,
   );
-  console.log("cartItems", cartItems);
+
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
   );
@@ -24,17 +24,6 @@ const CartItems = ({ handleGetCartItems }: any) => {
     : 0;
 
   const roundedTotalAmount = totalAmount.toFixed(2);
-
-  //for unregistered users
-  // const token = localStorage.getItem("authToken");
-
-  // const storedCartItems = localStorage.getItem("cartItems") as string;
-  // const parsedCartItems = JSON.parse(storedCartItems);
-
-  //for unregistered users
-  // const unregisteredUserItems = allShoes.find(
-  //   (shoe) => shoe.id === parsedCartItems.itemId,
-  // );
 
   let url;
   if (process.env.NODE_ENV === "production") {
@@ -71,6 +60,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
 
     try {
       await axios.post(`${url}/api/purchased`, payload);
+      handleGetCartItems();
     } catch (error) {
       console.log(error);
     }
@@ -78,21 +68,6 @@ const CartItems = ({ handleGetCartItems }: any) => {
 
   return (
     <>
-      {/* {!token ? (  //for unregistered users
-        <div className="text-md mb-3 flex gap-3 font-light">
-          <img
-            className="w-40"
-            src={`http://localhost:3000/public/storage/images/${unregisteredUserItems?.image[0]}`}
-          />
-          <div>
-            <h1>size: {parsedCartItems.size}</h1>
-            <h1>quantity: {parsedCartItems.quantity}</h1>
-            <p>Model: {unregisteredUserItems?.model}</p>
-            <p>Color: {unregisteredUserItems?.color}</p>
-            <p>Price: ${unregisteredUserItems?.price}</p>
-          </div>
-        </div>
-      ) : ( */}
       <div className="mt-24">
         {cartItems ? (
           <div className="px-5 pt-5 md:grid-cols-2 md:gap-2 xl:mt-20 xl:grid-cols-3 xl:px-20 3xl:px-[400px]">
