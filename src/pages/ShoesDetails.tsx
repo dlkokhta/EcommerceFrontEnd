@@ -30,11 +30,12 @@ const ShoesDetails = () => {
   const [displayError, setDisplayError] = useState<boolean>(false);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
+  const [sizeClickIsDisable, setSizeClickIsDisable] = useState<boolean>(false);
 
   const [cartItemQuantity, setCartItemQuantity] = useState<number>(0); //real quantity from database
   const [cartItemId, setCartItemId] = useState<string>(""); //this shows me shoes id on the size click
-  console.log("cartItemQuantity", cartItemQuantity);
-  console.log("cartItemId", cartItemId);
+  // console.log("cartItemQuantity", cartItemQuantity);
+  // console.log("cartItemId", cartItemId);
 
   const [cartItemsFromResponse, setCartItemsFromResponse] = useState<
     CartItem[]
@@ -51,14 +52,14 @@ const ShoesDetails = () => {
     ? findCartItemId.quantity
     : 0;
 
-  console.log(
-    "findCartItemQuantityFromDatabase",
-    findCartItemQuantityFromDatabase,
-  );
+  // console.log(
+  //   "findCartItemQuantityFromDatabase",
+  //   findCartItemQuantityFromDatabase,
+  // );
 
   const concrateItemSizeQuantity =
     cartItemQuantity - findCartItemQuantityFromDatabase;
-  console.log("concrateItemSizeQuantity", concrateItemSizeQuantity);
+  // console.log("concrateItemSizeQuantity", concrateItemSizeQuantity);
 
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
 
@@ -206,23 +207,15 @@ const ShoesDetails = () => {
                         item.quantity > 0 && setSelectedSize(item.size);
                         setCartItemQuantity(Number(item.quantity));
                         setCartItemId(shoes.id);
-                        setLoading(true);
-
-                        {
-                          loading && (
-                            <div className="fixed inset-0 z-50 flex h-full w-full items-center  justify-center bg-slate-400/20">
-                              <div className="loading-spinner left-[50%] top-[40%]"></div>
-                            </div>
-                          );
-                          setTimeout(() => setLoading(false), 500);
-                        }
+                        item.quantity > 0 && setLoading(true);
+                        setTimeout(() => setLoading(false), 500);
                       }}
                       className={`inline-block border-2 text-center ${
                         selectedSize === item.size
                           ? "bg-slate-500 text-white"
                           : item.quantity > 0
                             ? "cursor-pointer hover:border-green-300"
-                            : "crossed-out cursor-not-allowed bg-slate-100"
+                            : "crossed-out disabled:focus: cursor-not-allowed bg-slate-100"
                       }`}
                     >
                       {item.size}
