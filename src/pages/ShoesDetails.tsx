@@ -206,6 +206,16 @@ const ShoesDetails = () => {
                         item.quantity > 0 && setSelectedSize(item.size);
                         setCartItemQuantity(Number(item.quantity));
                         setCartItemId(shoes.id);
+                        setLoading(true);
+
+                        {
+                          loading && (
+                            <div className="fixed inset-0 z-50 flex h-full w-full items-center  justify-center bg-slate-400/20">
+                              <div className="loading-spinner left-[50%] top-[40%]"></div>
+                            </div>
+                          );
+                          setTimeout(() => setLoading(false), 500);
+                        }
                       }}
                       className={`inline-block border-2 text-center ${
                         selectedSize === item.size

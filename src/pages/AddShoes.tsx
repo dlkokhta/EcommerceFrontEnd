@@ -43,7 +43,7 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
     formData.append("description", data.description);
     formData.append("price", data.price.toString());
     data.sizes.forEach((size: any) => {
-      formData.append("sizes", JSON.stringify(size)); // or use a different format if necessary
+      formData.append("sizes", JSON.stringify(size));
     });
     for (let i = 0; i < data.image.length; i++) {
       formData.append("image", data.image[i]);

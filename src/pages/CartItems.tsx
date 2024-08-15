@@ -3,8 +3,10 @@ import { allShoesTypes } from "../types/allShoesTypes.js";
 import { useSelector } from "react-redux";
 import { cartItemsTypes } from "../types/cartItemsTypes";
 import axios from "axios";
+import { useState } from "react";
 
 const CartItems = ({ handleGetCartItems }: any) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const cartItems: cartItemsTypes[] = useSelector(
     (state: RootState) => state.cartItems.cartItems,
   );
@@ -33,16 +35,20 @@ const CartItems = ({ handleGetCartItems }: any) => {
   }
 
   const handleClick = async (id: string) => {
+    setLoading(true);
+
     const userEmail = localStorage.getItem("data.email");
     const token = localStorage.getItem("authToken");
     try {
       await axios.delete(`${url}/api/deleteShoes/${userEmail}/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      await handleGetCartItems();
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
+    await handleGetCartItems();
   };
 
   const buyClickHandler = async () => {
@@ -70,6 +76,11 @@ const CartItems = ({ handleGetCartItems }: any) => {
   return (
     <>
       <div className="mt-24">
+        {loading && (
+          <div className="fixed inset-0 z-50 flex h-full w-full items-center  justify-center bg-slate-400/20">
+            <div className="loading-spinner left-[50%] top-[40%]"></div>
+          </div>
+        )}
         {cartItems ? (
           <div className="px-5 pt-5 md:grid-cols-2 md:gap-2 xl:mt-20 xl:grid-cols-3 xl:px-20 3xl:px-[400px]">
             {cartItems.map((item, index) => {

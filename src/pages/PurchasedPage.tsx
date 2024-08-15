@@ -49,7 +49,6 @@ const PurchasedPage = () => {
           <div className="px-5 pt-5 md:grid-cols-2 md:gap-2 xl:mt-20 xl:grid-cols-3 xl:px-20 3xl:px-[400px]">
             {purchasedItems.map((item: any) =>
               item.cartItems.map((cartItem: any) => {
-                // Find the corresponding shoe
                 const shoe = allShoes.find(
                   (shoe) => shoe.id === cartItem.itemId,
                 );
