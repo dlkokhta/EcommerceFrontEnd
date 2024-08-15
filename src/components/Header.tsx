@@ -259,6 +259,12 @@ const Header = () => {
                           direction="/resetPassword"
                         />
                       </div>
+                      <div className="mt-5 cursor-pointer hover:text-red hover:underline">
+                        <ChangePassword
+                          message="Purchased Shoes"
+                          direction="/purchase"
+                        />
+                      </div>
                       <div
                         className="mt-5 cursor-pointer hover:text-red hover:underline "
                         onClick={logOutClickhandler}

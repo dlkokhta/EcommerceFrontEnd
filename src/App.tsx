@@ -81,7 +81,6 @@ function App() {
         location.pathname !== "/passwordRecovery" &&
         location.pathname !== "/OTP" &&
         location.pathname !== "/resetPassword" &&
-        location.pathname !== "/purchasedPage" &&
         location.pathname !== "/registration" && <Header />}
       <Routes>
         <Route
@@ -108,7 +107,7 @@ function App() {
         <Route path="/passwordRecovery" element={<PasswordRecoveryPage />} />
         <Route path="/OTP" element={<OTPPage />} />
         <Route path="/resetPassword" element={<PasswordResetPage />} />
-        <Route path="/purchased" element={<PurchasedPage />} />
+        <Route path="/purchase" element={<PurchasedPage />} />
       </Routes>
     </div>
   );

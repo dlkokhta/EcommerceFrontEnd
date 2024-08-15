@@ -52,10 +52,11 @@ const CartItems = ({ handleGetCartItems }: any) => {
       ...item,
       quantity: item.quantity.toString(),
     }));
-
+    console.log("roundedTotalAmount", roundedTotalAmount);
     const payload = {
       email: userEmail,
       cartItems: updatedCartItems,
+      totalAmount: roundedTotalAmount,
     };
 
     try {

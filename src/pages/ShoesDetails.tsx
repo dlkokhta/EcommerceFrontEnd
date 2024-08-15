@@ -193,8 +193,6 @@ const ShoesDetails = () => {
                     <div
                       key={item.size}
                       onClick={() => {
-                        console.log("Item:", item);
-                        console.log("Shoes:", shoes);
                         item.quantity > 0 && setSelectedSize(item.size);
                         setCartItemQuantity(Number(item.quantity));
                         setCartItemId(shoes.id);
