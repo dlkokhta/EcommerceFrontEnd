@@ -29,6 +29,7 @@ const ShoesDetails = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [displayError, setDisplayError] = useState<boolean>(false);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [cartItemQuantity, setCartItemQuantity] = useState<number>(0); //real quantity from database
   const [cartItemId, setCartItemId] = useState<string>(""); //this shows me shoes id on the size click
@@ -112,6 +113,8 @@ const ShoesDetails = () => {
       setTimeout(() => setDisplayError(false), 2000);
     }
 
+    setLoading(true);
+
     try {
       await axios.post(
         postUrl,
@@ -133,11 +136,18 @@ const ShoesDetails = () => {
     } catch (error: any) {
       const { message, findQuantityToNumber } = error.response.data;
       setErrorMessage(`${message} ${findQuantityToNumber}`);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="mt-24">
+    <div className="relative mt-24">
+      {loading && (
+        <div className="fixed inset-0 z-50 flex h-full w-full items-center  justify-center bg-slate-400/20">
+          <div className="loading-spinner left-[50%] top-[40%]"></div>
+        </div>
+      )}
       <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 lg:px-60 3xl:px-[420px]">
         {shoesById.map((shoes) => (
           <div key={shoes.id}>
@@ -258,6 +268,7 @@ const ShoesDetails = () => {
                   <button
                     onClick={() => handleClick(shoes.id)}
                     className=" w-full rounded-full bg-yellow-300 px-5 py-2  text-sm hover:bg-yellow-400"
+                    disabled={loading}
                   >
                     Add to cart
                   </button>

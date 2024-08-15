@@ -84,7 +84,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="fixed top-0 z-40 w-full bg-white ">
+      <div className="fixed top-0 z-10 w-full bg-white ">
         <div className="relative mb-5">
           <div className="flex items-center gap-3 px-5 pt-5 lg:px-10 3xl:px-60">
             <img
