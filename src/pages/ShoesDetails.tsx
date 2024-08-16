@@ -30,7 +30,6 @@ const ShoesDetails = () => {
   const [displayError, setDisplayError] = useState<boolean>(false);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
-  const [sizeClickIsDisable, setSizeClickIsDisable] = useState<boolean>(false);
 
   const [cartItemQuantity, setCartItemQuantity] = useState<number>(0); //real quantity from database
   const [cartItemId, setCartItemId] = useState<string>(""); //this shows me shoes id on the size click
