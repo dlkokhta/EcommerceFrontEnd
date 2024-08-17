@@ -25,7 +25,7 @@ const ShoesDetails = () => {
   const [selectedShoes, setSelectedShoes] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [isSizeSelected, setIsSizeSelected] = useState<boolean>(false);
-  const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
+  // const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [displayError, setDisplayError] = useState<boolean>(false);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
@@ -267,11 +267,7 @@ const ShoesDetails = () => {
                   </div>
                 </div>
                 <div className="md:text-medium text-medium flex h-8 items-center justify-center">
-                  {addToCartAlert ? (
-                    <h2 className=" text-red" role="alert">
-                      <div className="">Please login to add items to cart</div>
-                    </h2>
-                  ) : isSizeSelected ? (
+                  {isSizeSelected ? (
                     <h2 className=" text-red" role="alert">
                       <div className="">please select size</div>
                     </h2>
