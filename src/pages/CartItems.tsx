@@ -11,9 +11,31 @@ const CartItems = ({ handleGetCartItems }: any) => {
     (state: RootState) => state.cartItems.cartItems,
   );
 
+  //guest
+  const updatedGuestCartItems: Array<{
+    itemId: string;
+    size: string;
+    quantity: number;
+    _id: string;
+  }> = JSON.parse(localStorage.getItem("guestCart") || "[]");
+  console.log("updatedGuestCartItems", updatedGuestCartItems);
+
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
   );
+  //guest
+  const guestTotalAmount = cartItems
+    ? updatedGuestCartItems.reduce((total, item) => {
+        const shoe = allShoes.find((shoe) => shoe.id === item.itemId);
+        if (!shoe) {
+          return total;
+        }
+        return total + item.quantity * shoe.price;
+      }, 0)
+    : 0;
+
+  console.log("guestTotalAmount", guestTotalAmount);
+  const guestRoundedTotalAmount = guestTotalAmount.toFixed(2);
 
   const totalAmount = cartItems
     ? cartItems.reduce((total, item) => {
@@ -72,7 +94,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
       console.log(error);
     }
   };
-
+  const token = localStorage.getItem("authToken");
   return (
     <>
       <div className="mt-24">
@@ -81,7 +103,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
             <div className="loading-spinner left-[50%] top-[40%]"></div>
           </div>
         )}
-        {cartItems ? (
+        {cartItems && token ? (
           <div className="px-5 pt-5 md:grid-cols-2 md:gap-2 xl:mt-20 xl:grid-cols-3 xl:px-20 3xl:px-[400px]">
             {cartItems.map((item, index) => {
               const shoe = allShoes.find((shoe) => shoe.id === item.itemId);
@@ -132,9 +154,63 @@ const CartItems = ({ handleGetCartItems }: any) => {
               </div>
             )}
           </div>
+        ) : //guest
+        updatedGuestCartItems ? (
+          <div className="px-5 pt-5 md:grid-cols-2 md:gap-2 xl:mt-20 xl:grid-cols-3 xl:px-20 3xl:px-[400px]">
+            {updatedGuestCartItems.map((item, index) => {
+              const shoe = allShoes.find((shoe) => shoe.id === item.itemId);
+
+              if (!shoe) {
+                return null;
+              }
+
+              return (
+                <div key={index} className="text-md mb-3 flex gap-3 font-light">
+                  <div>
+                    <img
+                      className="w-40"
+                      src={`${url}/public/storage/images/${shoe.image[0]}`}
+                      alt={shoe.model}
+                    />
+                  </div>
+
+                  <div>
+                    <h1>size: {item.size}</h1>
+                    <h1>quantity: {item.quantity}</h1>
+                    <p>Model: {shoe.model}</p>
+                    <p>Color: {shoe.color}</p>
+                    <p>Price: ${shoe.price}</p>
+                    <div
+                      onClick={() => handleClick(item._id)}
+                      className="mt-2 cursor-pointer text-red"
+                    >
+                      Remove
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            {guestTotalAmount ? (
+              <div className="flex flex-col items-center justify-center pb-10">
+                <div className="mb-5">
+                  total amount: ${guestRoundedTotalAmount}
+                </div>
+                <button
+                  onClick={buyClickHandler}
+                  className=" min-w-[150px] whitespace-normal rounded-full bg-red px-5 py-[6px] text-sm text-white hover:bg-orange-600"
+                >
+                  Buy
+                </button>
+              </div>
+            ) : (
+              <div className=" mt-10 flex justify-center">
+                <h1>Cart is empty</h1>
+              </div>
+            )}
+          </div>
         ) : (
           <div className=" mt-10 flex justify-center">
-            <h1>Cart is empty</h1>
+            <h1>Cart is empty!!</h1>
           </div>
         )}
       </div>

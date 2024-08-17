@@ -280,7 +280,7 @@ const Header = () => {
             ) : (
               <button
                 onClick={() => handleClick("/login")}
-                className="min-w-[90px] whitespace-normal rounded-xl bg-yellow-300 px-5 py-[6px] text-sm hover:bg-yellow-400"
+                className="button-animation min-w-[90px] whitespace-normal rounded-xl bg-yellow-300 px-5 py-[6px] text-sm hover:bg-yellow-400"
               >
                 Sign in
               </button>

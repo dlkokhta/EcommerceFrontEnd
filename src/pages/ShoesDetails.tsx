@@ -96,8 +96,30 @@ const ShoesDetails = () => {
     }
 
     if (!token) {
-      setAddToCartAlert(true);
-      setTimeout(() => setAddToCartAlert(false), 4000);
+      let guestCartItems = JSON.parse(
+        localStorage.getItem("guestCart") || "[]",
+      );
+
+      console.log("guestCartItems before adding:", guestCartItems);
+
+      const newCartItem = {
+        itemId: shoesId,
+        size: selectedSize,
+        quantity: selectedQuantity,
+      };
+
+      guestCartItems = [...guestCartItems, newCartItem];
+
+      localStorage.setItem("guestCart", JSON.stringify(guestCartItems));
+
+      const updatedGuestCartItems = JSON.parse(
+        localStorage.getItem("guestCart") || "[]",
+      );
+      console.log("guestCartItems after adding:", updatedGuestCartItems);
+
+      // setAddToCartAlert(true);
+      // setTimeout(() => setAddToCartAlert(false), 4000);
+      // return;
     }
     if (selectedQuantity > concrateItemSizeQuantity) {
       if (concrateItemSizeQuantity !== 0) {
