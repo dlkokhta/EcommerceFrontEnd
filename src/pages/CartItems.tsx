@@ -4,13 +4,15 @@ import { useSelector } from "react-redux";
 import { cartItemsTypes } from "../types/cartItemsTypes";
 import axios from "axios";
 import { useState } from "react";
+import { setrenderHeader } from "../store/headerRenderSlice.js";
+import { useDispatch } from "react-redux";
 
 const CartItems = ({ handleGetCartItems }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
   const cartItems: cartItemsTypes[] = useSelector(
     (state: RootState) => state.cartItems.cartItems,
   );
-
+  const dispatch = useDispatch();
   //guest
   const updatedGuestCartItems: Array<{
     itemId: string;
@@ -18,7 +20,6 @@ const CartItems = ({ handleGetCartItems }: any) => {
     quantity: number;
     _id: string;
   }> = JSON.parse(localStorage.getItem("guestCart") || "[]");
-  console.log("updatedGuestCartItems", updatedGuestCartItems);
 
   const allShoes: allShoesTypes[] = useSelector(
     (state: RootState) => state.allShoes.shoes,
@@ -34,7 +35,6 @@ const CartItems = ({ handleGetCartItems }: any) => {
       }, 0)
     : 0;
 
-  console.log("guestTotalAmount", guestTotalAmount);
   const guestRoundedTotalAmount = guestTotalAmount.toFixed(2);
 
   const totalAmount = cartItems
@@ -56,8 +56,22 @@ const CartItems = ({ handleGetCartItems }: any) => {
     url = `http://localhost:3000`;
   }
 
-  const handleClick = async (id: string) => {
+  const handleClick = async (id: string, size: string) => {
     setLoading(true);
+    //guest
+    dispatch(setrenderHeader(true));
+
+    //guest
+    const storedGuestCartItems = JSON.parse(
+      localStorage.getItem("guestCart") || "[]",
+    );
+
+    const updatedGuestCartItems = storedGuestCartItems.filter(
+      (item: { itemId: string; size: string }) =>
+        !(item.itemId === id && item.size === size),
+    );
+    console.log("updatedGuestCartItems!!!!!", updatedGuestCartItems);
+    localStorage.setItem("guestCart", JSON.stringify(updatedGuestCartItems));
 
     const userEmail = localStorage.getItem("data.email");
     const token = localStorage.getItem("authToken");
@@ -129,7 +143,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
                     <p>Color: {shoe.color}</p>
                     <p>Price: ${shoe.price}</p>
                     <div
-                      onClick={() => handleClick(item._id)}
+                      onClick={() => handleClick(item._id, item.size)}
                       className="mt-2 cursor-pointer text-red"
                     >
                       Remove
@@ -181,7 +195,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
                     <p>Color: {shoe.color}</p>
                     <p>Price: ${shoe.price}</p>
                     <div
-                      onClick={() => handleClick(item._id)}
+                      onClick={() => handleClick(item.itemId, item.size)}
                       className="mt-2 cursor-pointer text-red"
                     >
                       Remove

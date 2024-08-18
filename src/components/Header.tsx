@@ -36,7 +36,7 @@ const Header = () => {
   const isHeaderRender: boolean = useSelector(
     (state: RootState) => state.renderHeader.initialValue,
   );
-  console.log("isHeaderRender", isHeaderRender);
+
   const [guestCart, setGuestCart] = useState<guestCartTypes[]>([]);
   //guest
   useEffect(() => {
@@ -47,7 +47,6 @@ const Header = () => {
       _id: string;
     }> = JSON.parse(localStorage.getItem("guestCart") || "[]");
     setGuestCart(updatedGuestCartItems);
-    console.log("updatedGuestCartItems", updatedGuestCartItems);
   }, [isHeaderRender]);
 
   setTimeout(() => dispatch(setrenderHeader(false)), 100);

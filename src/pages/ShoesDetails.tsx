@@ -30,14 +30,11 @@ const ShoesDetails = () => {
   const [displayError, setDisplayError] = useState<boolean>(false);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
-
   const [cartItemQuantity, setCartItemQuantity] = useState<number>(0); //real quantity from database
   const [cartItemId, setCartItemId] = useState<string>(""); //this shows me shoes id on the size click
-
   const [cartItemsFromResponse, setCartItemsFromResponse] = useState<
     CartItem[]
   >([]);
-
   const [showQuantityError, setShowQuantityError] = useState<boolean>(false);
 
   const findCartItemId: CartItem | undefined = cartItemsFromResponse //cart items from response, from ocartitem database
@@ -87,12 +84,11 @@ const ShoesDetails = () => {
       setTimeout(() => setIsSizeSelected(false), 4000);
     }
 
+    //guest
     if (!token) {
       let guestCartItems = JSON.parse(
         localStorage.getItem("guestCart") || "[]",
       );
-
-      console.log("guestCartItems before adding:", guestCartItems);
 
       const newCartItem = {
         itemId: shoesId,
@@ -100,7 +96,15 @@ const ShoesDetails = () => {
         quantity: selectedQuantity,
       };
 
-      guestCartItems = [...guestCartItems, newCartItem];
+      const existingItemIndex = guestCartItems.findIndex(
+        (item: any) => item.itemId === shoesId && item.size === selectedSize,
+      );
+
+      if (existingItemIndex !== -1) {
+        guestCartItems[existingItemIndex].quantity += selectedQuantity;
+      } else {
+        guestCartItems = [...guestCartItems, newCartItem];
+      }
 
       localStorage.setItem("guestCart", JSON.stringify(guestCartItems));
 
