@@ -5,6 +5,7 @@ import cartItemsSlice from "./cartItemsSlice";
 import filterShoesSlice from "./filterShoesSlice";
 import filterShoesByBrandSlice from "./filterShoesByBrandSlice";
 import newShoesSlice from "./newShoesSlice";
+import headerRenderSlice from "./headerRenderSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     filterShoes: filterShoesSlice,
     filterShoesByBrand: filterShoesByBrandSlice,
     newShoes: newShoesSlice,
+    renderHeader: headerRenderSlice,
   },
 });
 

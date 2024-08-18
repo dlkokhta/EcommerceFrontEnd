@@ -14,7 +14,7 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
   } = useForm({
     resolver: yupResolver(addShoesSchema),
     defaultValues: {
-      sizes: [{ size: "", quantity: "" }], // Initial size and quantity fields
+      sizes: [{ size: "", quantity: "" }],
     },
   });
 

@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { setCartItems } from "../store/cartItemsSlice";
+import { setrenderHeader } from "../store/headerRenderSlice.js";
 import { useDispatch } from "react-redux";
 
 interface CartItem {
@@ -25,7 +26,6 @@ const ShoesDetails = () => {
   const [selectedShoes, setSelectedShoes] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [isSizeSelected, setIsSizeSelected] = useState<boolean>(false);
-  // const [addToCartAlert, setAddToCartAlert] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [displayError, setDisplayError] = useState<boolean>(false);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
@@ -33,13 +33,10 @@ const ShoesDetails = () => {
 
   const [cartItemQuantity, setCartItemQuantity] = useState<number>(0); //real quantity from database
   const [cartItemId, setCartItemId] = useState<string>(""); //this shows me shoes id on the size click
-  // console.log("cartItemQuantity", cartItemQuantity);
-  // console.log("cartItemId", cartItemId);
 
   const [cartItemsFromResponse, setCartItemsFromResponse] = useState<
     CartItem[]
-  >([]); //cart items from response, from ocartitem database
-  // console.log("cartItemsResponse", cartItemsFromResponse);
+  >([]);
 
   const [showQuantityError, setShowQuantityError] = useState<boolean>(false);
 
@@ -51,14 +48,8 @@ const ShoesDetails = () => {
     ? findCartItemId.quantity
     : 0;
 
-  // console.log(
-  //   "findCartItemQuantityFromDatabase",
-  //   findCartItemQuantityFromDatabase,
-  // );
-
   const concrateItemSizeQuantity =
     cartItemQuantity - findCartItemQuantityFromDatabase;
-  // console.log("concrateItemSizeQuantity", concrateItemSizeQuantity);
 
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
 
@@ -85,6 +76,7 @@ const ShoesDetails = () => {
   };
 
   const handleClick = async (shoesId: string) => {
+    dispatch(setrenderHeader(true));
     const postUrl = `${url}/api/postCart`;
     const token = localStorage.getItem("authToken");
     const userEmail = localStorage.getItem("data.email");
@@ -116,10 +108,6 @@ const ShoesDetails = () => {
         localStorage.getItem("guestCart") || "[]",
       );
       console.log("guestCartItems after adding:", updatedGuestCartItems);
-
-      // setAddToCartAlert(true);
-      // setTimeout(() => setAddToCartAlert(false), 4000);
-      // return;
     }
     if (selectedQuantity > concrateItemSizeQuantity) {
       if (concrateItemSizeQuantity !== 0) {

@@ -1,6 +1,6 @@
 import hamburher from "../assets/hamburger.svg";
 import close from "../assets/close.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import cartIcon from "../assets/shoppingCart.png";
 import searchicon from "../assets/search.svg";
@@ -13,6 +13,14 @@ import { setFilterShoesByBrand } from "../store/filterShoesByBrandSlice.js";
 import { setnewShoes } from "../store/newShoesSlice.js";
 import { setCartItems } from "../store/cartItemsSlice";
 import ChangePassword from "./ChangePassword.js";
+import { setrenderHeader } from "../store/headerRenderSlice.js";
+
+interface guestCartTypes {
+  itemId: string;
+  size: string;
+  quantity: number;
+  _id: string;
+}
 
 const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
@@ -21,6 +29,32 @@ const Header = () => {
 
   const cartItems: cartItemsTypes[] = useSelector(
     (state: RootState) => state.cartItems.cartItems || [],
+  );
+  const dispatch = useDispatch();
+
+  //guest
+  const isHeaderRender: boolean = useSelector(
+    (state: RootState) => state.renderHeader.initialValue,
+  );
+  console.log("isHeaderRender", isHeaderRender);
+  const [guestCart, setGuestCart] = useState<guestCartTypes[]>([]);
+  //guest
+  useEffect(() => {
+    const updatedGuestCartItems: Array<{
+      itemId: string;
+      size: string;
+      quantity: number;
+      _id: string;
+    }> = JSON.parse(localStorage.getItem("guestCart") || "[]");
+    setGuestCart(updatedGuestCartItems);
+    console.log("updatedGuestCartItems", updatedGuestCartItems);
+  }, [isHeaderRender]);
+
+  setTimeout(() => dispatch(setrenderHeader(false)), 100);
+
+  const guestQuantity = guestCart.reduce(
+    (total, item) => total + item.quantity,
+    0,
   );
 
   const quantity = cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -49,7 +83,7 @@ const Header = () => {
   const cartIconClickhandler = () => {
     navigate("/cartItems/{email}");
   };
-  const dispatch = useDispatch();
+
   const menClickhandler = () => {
     dispatch(setFilterShoes(`Men's`));
     dispatch(setFilterShoesByBrand(""));
@@ -231,7 +265,11 @@ const Header = () => {
                 />
                 {
                   <div className=" absolute top-[13px] ml-3 flex h-4 w-4 items-center justify-center rounded-full bg-red text-xs font-bold text-white lg:top-[15px]">
-                    {quantity === undefined ? 0 : quantity}
+                    {quantity && token
+                      ? quantity
+                      : guestQuantity && !token
+                        ? guestQuantity
+                        : 0}
                   </div>
                 }
               </div>
