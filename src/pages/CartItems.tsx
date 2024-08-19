@@ -13,6 +13,8 @@ const CartItems = ({ handleGetCartItems }: any) => {
     (state: RootState) => state.cartItems.cartItems,
   );
   const dispatch = useDispatch();
+  const token = localStorage.getItem("authToken");
+
   //guest
   const updatedGuestCartItems: Array<{
     itemId: string;
@@ -59,32 +61,35 @@ const CartItems = ({ handleGetCartItems }: any) => {
   const handleClick = async (id: string, size: string) => {
     setLoading(true);
     //guest
-    dispatch(setrenderHeader(true));
+    if (!token) {
+      //guest
+      dispatch(setrenderHeader(true));
 
-    //guest
-    const storedGuestCartItems = JSON.parse(
-      localStorage.getItem("guestCart") || "[]",
-    );
+      //guest
+      const storedGuestCartItems = JSON.parse(
+        localStorage.getItem("guestCart") || "[]",
+      );
 
-    const updatedGuestCartItems = storedGuestCartItems.filter(
-      (item: { itemId: string; size: string }) =>
-        !(item.itemId === id && item.size === size),
-    );
-    console.log("updatedGuestCartItems!!!!!", updatedGuestCartItems);
-    localStorage.setItem("guestCart", JSON.stringify(updatedGuestCartItems));
+      const updatedGuestCartItems = storedGuestCartItems.filter(
+        (item: { itemId: string; size: string }) =>
+          !(item.itemId === id && item.size === size),
+      );
+
+      localStorage.setItem("guestCart", JSON.stringify(updatedGuestCartItems));
+    }
 
     const userEmail = localStorage.getItem("data.email");
-    const token = localStorage.getItem("authToken");
+
     try {
       await axios.delete(`${url}/api/deleteShoes/${userEmail}/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      await handleGetCartItems();
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
-    await handleGetCartItems();
   };
 
   const buyClickHandler = async () => {
@@ -108,7 +113,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
       console.log(error);
     }
   };
-  const token = localStorage.getItem("authToken");
+
   return (
     <>
       <div className="mt-24">

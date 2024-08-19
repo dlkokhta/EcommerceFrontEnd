@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store.js";
 import { allShoesTypes } from "../types/allShoesTypes.js";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { setCartItems } from "../store/cartItemsSlice";
 import { setrenderHeader } from "../store/headerRenderSlice.js";
@@ -36,6 +36,8 @@ const ShoesDetails = () => {
     CartItem[]
   >([]);
   const [showQuantityError, setShowQuantityError] = useState<boolean>(false);
+  const [guestExistingShoesQuantity, setGuestExistingShoesQuantity] =
+    useState(0);
 
   const findCartItemId: CartItem | undefined = cartItemsFromResponse //cart items from response, from ocartitem database
     .filter((item: CartItem) => item.itemId === cartItemId)
@@ -44,9 +46,40 @@ const ShoesDetails = () => {
   const findCartItemQuantityFromDatabase = findCartItemId // there is concrate size quantity from cart item , it shows quantity by select size and item id
     ? findCartItemId.quantity
     : 0;
+  const token = localStorage.getItem("authToken");
 
   const concrateItemSizeQuantity =
     cartItemQuantity - findCartItemQuantityFromDatabase;
+
+  //guest
+  if (!token) {
+    const updatedGuestCartItems = JSON.parse(
+      localStorage.getItem("guestCart") || "[]",
+    );
+
+    const findCartItemId = updatedGuestCartItems
+      .filter((item: any) => item.itemId === cartItemId)
+      .find((item: any) => item.size === selectedSize);
+
+    const findCartItemQuantityFromDatabase = findCartItemId
+      ? findCartItemId.quantity
+      : 0;
+
+    const concrateItemSizeQuantity =
+      cartItemQuantity - findCartItemQuantityFromDatabase;
+
+    useEffect(() => {
+      if (selectedQuantity > concrateItemSizeQuantity) {
+        if (concrateItemSizeQuantity >= 0) {
+          // setShowQuantityError(true);
+          dispatch(setrenderHeader(false));
+          setGuestExistingShoesQuantity(concrateItemSizeQuantity);
+          setTimeout(() => setShowQuantityError(false), 2000);
+        }
+        return;
+      }
+    }, [selectedQuantity, concrateItemSizeQuantity]);
+  }
 
   const shoesById = allShoes.filter((shoes) => shoes.id === id);
 
@@ -86,6 +119,29 @@ const ShoesDetails = () => {
 
     //guest
     if (!token) {
+      const updatedGuestCartItems = JSON.parse(
+        localStorage.getItem("guestCart") || "[]",
+      );
+
+      const findCartItemId = updatedGuestCartItems
+        .filter((item: any) => item.itemId === shoesId)
+        .find((item: any) => item.size === selectedSize);
+
+      const findCartItemQuantityFromDatabase = findCartItemId
+        ? findCartItemId.quantity
+        : 0;
+
+      const concrateItemSizeQuantity =
+        cartItemQuantity - findCartItemQuantityFromDatabase;
+
+      if (selectedQuantity > concrateItemSizeQuantity) {
+        setShowQuantityError(true);
+        dispatch(setrenderHeader(false));
+        setGuestExistingShoesQuantity(concrateItemSizeQuantity);
+        setTimeout(() => setShowQuantityError(false), 2000);
+        return;
+      }
+
       let guestCartItems = JSON.parse(
         localStorage.getItem("guestCart") || "[]",
       );
@@ -107,14 +163,10 @@ const ShoesDetails = () => {
       }
 
       localStorage.setItem("guestCart", JSON.stringify(guestCartItems));
-
-      const updatedGuestCartItems = JSON.parse(
-        localStorage.getItem("guestCart") || "[]",
-      );
-      console.log("guestCartItems after adding:", updatedGuestCartItems);
     }
+
     if (selectedQuantity > concrateItemSizeQuantity) {
-      if (concrateItemSizeQuantity !== 0) {
+      if (concrateItemSizeQuantity >= 0) {
         setShowQuantityError(true);
         setTimeout(() => setShowQuantityError(false), 2000);
       }
@@ -270,7 +322,7 @@ const ShoesDetails = () => {
                   ) : showQuantityError ? (
                     <h2 className=" text-red" role="alert">
                       <div className="">
-                        {`available only ${concrateItemSizeQuantity}`}
+                        {`available only ${token ? concrateItemSizeQuantity : guestExistingShoesQuantity}`}
                       </div>
                     </h2>
                   ) : null}

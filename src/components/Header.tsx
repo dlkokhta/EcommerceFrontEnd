@@ -26,6 +26,7 @@ const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<Boolean>(false);
   const [destMenu, setDestMenu] = useState<string>("All");
   const navigate = useNavigate();
+  const token = localStorage.getItem("authToken");
 
   const cartItems: cartItemsTypes[] = useSelector(
     (state: RootState) => state.cartItems.cartItems || [],
@@ -61,7 +62,7 @@ const Header = () => {
   const handleClick = (path: string) => {
     navigate(path);
   };
-  const token = localStorage.getItem("authToken");
+
   const name = localStorage.getItem("userName");
 
   const logOutClickhandler = () => {
