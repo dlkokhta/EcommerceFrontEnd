@@ -1,12 +1,20 @@
 import ShoesForHomePage from "../components/ShoesForHomePage";
 import instagram from "../assets/instagram.png";
+import instagramColor from "../assets/instagramColor.png";
+import facebookColor from "../assets/facebookColor.png";
 import facebook from "../assets/facebook.png";
 import x from "../assets/x.png";
+import xSecond from "../assets/xSecond.png";
+import linkedinColor from "../assets/linkedinColor.png";
 import linkedin from "../assets/linkedin.png";
 import { useEffect, useState } from "react";
 
 const HomePage = ({ updateAllShoesForAdmin }: any) => {
   const token = localStorage.getItem("authToken");
+  const [facebookHover, setFacebookHover] = useState(false);
+  const [xHover, setXHover] = useState(false);
+  const [linkedinHover, setLinkedinHover] = useState(false);
+  const [instagramHover, setInstagramHover] = useState(false);
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -49,10 +57,38 @@ const HomePage = ({ updateAllShoesForAdmin }: any) => {
             <div>Mobile: +995555331167</div>
           </div>
           <div className="flex gap-5">
-            <img src={instagram} className="h-6 w-6 cursor-pointer" />
-            <img src={facebook} className="h-6 w-6 cursor-pointer" />
-            <img src={x} className="h-6 w-6 cursor-pointer" />
-            <img src={linkedin} className="h-6 w-6 cursor-pointer" />
+            <div className="duration-400 relative h-6 w-6  cursor-pointer transition hover:-translate-y-1">
+              <img
+                src={instagramHover ? instagramColor : instagram}
+                alt="instagramHover"
+                onMouseEnter={() => setInstagramHover(true)}
+                onMouseLeave={() => setInstagramHover(false)}
+              />
+            </div>
+            <div className="duration-400 relative h-6 w-6  cursor-pointer transition hover:-translate-y-1">
+              <img
+                src={facebookHover ? facebookColor : facebook}
+                alt="Facebook"
+                onMouseEnter={() => setFacebookHover(true)}
+                onMouseLeave={() => setFacebookHover(false)}
+              />
+            </div>
+            <div className="duration-400 relative h-6 w-6  cursor-pointer transition hover:-translate-y-1">
+              <img
+                src={xHover ? xSecond : x}
+                alt="x"
+                onMouseEnter={() => setXHover(true)}
+                onMouseLeave={() => setXHover(false)}
+              />
+            </div>
+            <div className="duration-400 relative h-6 w-6  cursor-pointer transition hover:-translate-y-1">
+              <img
+                src={linkedinHover ? linkedinColor : linkedin}
+                alt="linkedin"
+                onMouseEnter={() => setLinkedinHover(true)}
+                onMouseLeave={() => setLinkedinHover(false)}
+              />
+            </div>
           </div>
         </div>
       </footer>

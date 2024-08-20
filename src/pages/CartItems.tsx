@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const CartItems = ({ handleGetCartItems }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [success, setSuccess] = useState(false);
 
   const cartItems: cartItemsTypes[] = useSelector(
     (state: RootState) => state.cartItems.cartItems,
@@ -100,13 +101,14 @@ const CartItems = ({ handleGetCartItems }: any) => {
       navigate("/registration");
       return;
     }
+    setSuccess(true);
     const userEmail = localStorage.getItem("data.email");
 
     const updatedCartItems = cartItems.map((item) => ({
       ...item,
       quantity: item.quantity.toString(),
     }));
-    console.log("roundedTotalAmount", roundedTotalAmount);
+
     const payload = {
       email: userEmail,
       cartItems: updatedCartItems,
@@ -120,6 +122,9 @@ const CartItems = ({ handleGetCartItems }: any) => {
     } catch (error) {
       console.log(error);
     }
+
+    navigate("/");
+    setTimeout(() => setSuccess(false), 3000);
   };
 
   return (
@@ -128,6 +133,14 @@ const CartItems = ({ handleGetCartItems }: any) => {
         {loading && (
           <div className="fixed inset-0 z-50 flex h-full w-full items-center  justify-center bg-slate-400/20">
             <div className="loading-spinner left-[50%] top-[40%]"></div>
+          </div>
+        )}
+        {success && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75">
+            <div className="w-1/3 rounded bg-white p-6 shadow-lg">
+              <h2 className="mb-4 text-lg font-bold">Success!</h2>
+              <p className="mb-4">{"Your purchase was successful!"}</p>
+            </div>
           </div>
         )}
         {cartItems && token ? (
@@ -237,7 +250,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
           </div>
         ) : (
           <div className=" mt-10 flex justify-center">
-            <h1>Cart is empty!!</h1>
+            <h1>Cart is empty</h1>
           </div>
         )}
       </div>

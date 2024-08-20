@@ -140,7 +140,7 @@ const Header = () => {
                 <div
                   onMouseEnter={() => setNewHovered(true)}
                   onMouseLeave={() => setNewHovered(false)}
-                  className=" cursor-pointer"
+                  className=" duration-400 cursor-pointer transition hover:-translate-y-1"
                   onClick={() => {
                     navigate("/");
                     setDestMenu("New");
@@ -159,7 +159,7 @@ const Header = () => {
                 <div
                   onMouseEnter={() => setAllHovered(true)}
                   onMouseLeave={() => setAllHovered(false)}
-                  className=" cursor-pointer"
+                  className=" duration-400 cursor-pointer transition hover:-translate-y-1"
                   onClick={() => {
                     navigate("/");
                     setDestMenu("All");
@@ -178,7 +178,7 @@ const Header = () => {
                 <div
                   onMouseEnter={() => setMenHovered(true)}
                   onMouseLeave={() => setMenHovered(false)}
-                  className=" cursor-pointer items-center"
+                  className=" duration-400 cursor-pointer items-center transition hover:-translate-y-1"
                   onClick={() => {
                     navigate("/");
                     setDestMenu("Men"), menClickhandler();
@@ -197,7 +197,7 @@ const Header = () => {
                 <div
                   onMouseEnter={() => setWomenHovered(true)}
                   onMouseLeave={() => setWomenHovered(false)}
-                  className=" cursor-pointer"
+                  className=" duration-400 cursor-pointer transition hover:-translate-y-1"
                   onClick={() => {
                     setDestMenu("Women");
                     womenClickhandler();
@@ -217,7 +217,7 @@ const Header = () => {
                 <div
                   onMouseEnter={() => setAboutHovered(true)}
                   onMouseLeave={() => setAboutHovered(false)}
-                  className=" cursor-pointer"
+                  className=" duration-400 cursor-pointer transition hover:-translate-y-1"
                   onClick={() => {
                     setDestMenu("About");
                     navigate("/");
@@ -290,21 +290,27 @@ const Header = () => {
                     hello, {name}
                   </div>
                   {isUserMenuVisible ? (
-                    <div className="absolute top-[25px] bg-white  px-3 pb-2">
-                      <div className="mt-5 cursor-pointer hover:text-red hover:underline">
+                    <div className="absolute top-[25px] bg-white  px-3 pb-2 ">
+                      <div className="duration-400 mt-5 cursor-pointer transition hover:-translate-x-1 hover:text-red hover:underline">
                         <ChangePassword
                           message="reset password"
                           direction="/resetPassword"
                         />
                       </div>
-                      <div className="mt-5 cursor-pointer hover:text-red hover:underline">
+                      <div className="duration-400 mt-5 cursor-pointer transition hover:-translate-x-2 hover:text-red hover:underline">
                         <ChangePassword
                           message="Purchased Shoes"
                           direction="/purchase"
                         />
                       </div>
+                      <div className="duration-400 mt-5 cursor-pointer transition hover:-translate-x-2 hover:text-red hover:underline">
+                        <ChangePassword
+                          message="Cart Items"
+                          direction="/cartItems/id"
+                        />
+                      </div>
                       <div
-                        className="mt-5 cursor-pointer hover:text-red hover:underline "
+                        className="duration-400 mt-5 cursor-pointer transition hover:-translate-x-2 hover:text-red hover:underline"
                         onClick={logOutClickhandler}
                       >
                         log out
@@ -318,7 +324,7 @@ const Header = () => {
             ) : (
               <button
                 onClick={() => handleClick("/login")}
-                className="button-animation min-w-[90px] whitespace-normal rounded-xl bg-yellow-300 px-5 py-[6px] text-sm hover:bg-yellow-400"
+                className="duration-400 button-animation min-w-[90px] cursor-pointer whitespace-normal rounded-xl bg-yellow-300 px-5 py-[6px] text-sm transition hover:-translate-y-1 hover:bg-yellow-400"
               >
                 Sign in
               </button>

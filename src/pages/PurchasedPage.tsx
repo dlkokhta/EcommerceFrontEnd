@@ -48,7 +48,7 @@ const PurchasedPage = () => {
         {purchasedItems ? (
           <div className="px-5 pt-5 md:grid-cols-2 md:gap-2 xl:mt-20 xl:grid-cols-3 xl:px-20 3xl:px-[400px]">
             {purchasedItems.map((item: any) =>
-              item.cartItems.map((cartItem: any) => {
+              item.cartItems.map((cartItem: any, index: any) => {
                 const shoe = allShoes.find(
                   (shoe) => shoe.id === cartItem.itemId,
                 );
@@ -59,7 +59,7 @@ const PurchasedPage = () => {
 
                 return (
                   <div
-                    key={cartItem.itemId}
+                    key={index}
                     className="text-md mb-3 flex gap-3 font-light"
                   >
                     <div>
