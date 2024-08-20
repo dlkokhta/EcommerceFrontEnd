@@ -6,14 +6,17 @@ import axios from "axios";
 import { useState } from "react";
 import { setrenderHeader } from "../store/headerRenderSlice.js";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const CartItems = ({ handleGetCartItems }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
+
   const cartItems: cartItemsTypes[] = useSelector(
     (state: RootState) => state.cartItems.cartItems,
   );
   const dispatch = useDispatch();
   const token = localStorage.getItem("authToken");
+  const navigate = useNavigate();
 
   //guest
   const updatedGuestCartItems: Array<{
@@ -93,6 +96,10 @@ const CartItems = ({ handleGetCartItems }: any) => {
   };
 
   const buyClickHandler = async () => {
+    if (!token) {
+      navigate("/registration");
+      return;
+    }
     const userEmail = localStorage.getItem("data.email");
 
     const updatedCartItems = cartItems.map((item) => ({
@@ -108,6 +115,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
 
     try {
       await axios.post(`${url}/api/purchased`, payload);
+
       handleGetCartItems();
     } catch (error) {
       console.log(error);
@@ -174,7 +182,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
             )}
           </div>
         ) : //guest
-        updatedGuestCartItems ? (
+        updatedGuestCartItems && !token ? (
           <div className="px-5 pt-5 md:grid-cols-2 md:gap-2 xl:mt-20 xl:grid-cols-3 xl:px-20 3xl:px-[400px]">
             {updatedGuestCartItems.map((item, index) => {
               const shoe = allShoes.find((shoe) => shoe.id === item.itemId);

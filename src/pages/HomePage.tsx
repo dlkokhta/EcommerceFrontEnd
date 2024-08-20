@@ -3,12 +3,31 @@ import instagram from "../assets/instagram.png";
 import facebook from "../assets/facebook.png";
 import x from "../assets/x.png";
 import linkedin from "../assets/linkedin.png";
+import { useEffect, useState } from "react";
 
 const HomePage = ({ updateAllShoesForAdmin }: any) => {
+  const token = localStorage.getItem("authToken");
+
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (token) {
+      setLoading(true);
+    }
+  }, [token]);
+
+  setTimeout(() => setLoading(false), 700);
+
   return (
     <div>
       <ShoesForHomePage updateAllShoesForAdmin={updateAllShoesForAdmin} />
       <footer className="font-light lg:px-10">
+        {loading && (
+          <div className="fixed inset-0 z-50 flex h-full w-full items-center  justify-center bg-slate-400/20">
+            <div className="loading-spinner left-[50%] top-[40%]"></div>
+          </div>
+        )}
+
         <div>
           <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
         </div>

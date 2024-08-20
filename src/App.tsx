@@ -58,19 +58,12 @@ function App() {
       });
 
       dispatch(setCartItems(response.data.cartItems));
-      // const itemsQuantity = response.data.cartItems.length;
-      // localStorage.setItem("itemsQuantity", itemsQuantity);
     } catch (error) {
       console.log(error);
     }
   };
 
   handleGetCartItems();
-
-  // console.log("data.email", localStorage.getItem("data.email"));
-  // if (localStorage.getItem("data.email")) {
-  // }
-  // handleGetCartItems();
 
   return (
     <div>
@@ -87,7 +80,10 @@ function App() {
           path="/"
           element={<Home updateAllShoesForAdmin={updateAllShoesForAdmin} />}
         />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={<Login handleGetCartItems={handleGetCartItems} />}
+        />
         <Route path="/registration" element={<Registration />} />
         <Route path="/shoesDetails/:id" element={<ShoesDetails />} />
         {localStorage.getItem("role") === "admin" &&

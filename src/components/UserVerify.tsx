@@ -11,8 +11,6 @@ const UserVerify = () => {
     const queryParams = new URLSearchParams(location.search);
     const param = queryParams.get("param");
 
-    console.log("parammmmmmm", param);
-
     if (param) {
       let url;
       if (process.env.NODE_ENV === "production") {

@@ -6,10 +6,10 @@ import { loginTypes } from "../types/loginTypes.js";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const Login = () => {
+const Login = ({ handleGetCartItems }: any) => {
   const [responseError, setResponseError] = useState<string | null>(null);
   const navigate = useNavigate();
-
+  const token = localStorage.getItem("authToken");
   const {
     register,
     handleSubmit,
@@ -27,6 +27,14 @@ const Login = () => {
   }
 
   const onSubmit = async (data: loginTypes) => {
+    //guest
+    let guestCart = JSON.parse(localStorage.getItem("guestCart") || "[]");
+    const formattedCartItems = guestCart.map((item: any) => ({
+      itemId: item.itemId,
+      size: item.size,
+      quantity: item.quantity,
+    }));
+
     const userData = {
       email: data.email,
       password: data.password,
@@ -50,6 +58,19 @@ const Login = () => {
       localStorage.setItem("data.email", data.email);
       localStorage.setItem("userName", response.data.name);
       localStorage.setItem("role", response.data.role);
+
+      //guest item to the cart during login
+      await axios.post(
+        `${url}/api/postCart`,
+        {
+          email: data.email,
+          cartItems: formattedCartItems,
+        },
+
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+      localStorage.removeItem("guestCart");
+      handleGetCartItems();
     } catch (error: any) {
       if (error?.response?.data?.message) {
         setResponseError(error.response.data.message);
