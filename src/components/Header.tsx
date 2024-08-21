@@ -330,14 +330,14 @@ const Header = () => {
               </button>
             )}
             {hamburgerOpen && (
-              <div className=" absolute left-0  top-0  w-full bg-black bg-opacity-15 lg:hidden">
-                <div className="h-screen w-[150px] bg-slate-50 p-2 transition-all	 duration-200">
+              <div className=" absolute left-0  top-0  w-full bg-black bg-opacity-15 lg:hidden ">
+                <div className="h-screen w-[150px] cursor-pointer bg-white bg-opacity-5 p-2 backdrop-blur-2xl">
                   <div className="flex flex-col">
                     <img
                       onClick={() => {
                         setHamburgerOpen(false);
                       }}
-                      className="ml-auto h-4 w-4"
+                      className=" ml-auto h-4 w-4 "
                       src={close}
                     />
                     <div className="ml-2 flex flex-col gap-2">

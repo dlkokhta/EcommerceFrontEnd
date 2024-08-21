@@ -116,7 +116,9 @@ const CartItems = ({ handleGetCartItems }: any) => {
     };
 
     try {
-      await axios.post(`${url}/api/purchased`, payload);
+      await axios.post(`${url}/api/purchased`, payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       handleGetCartItems();
     } catch (error) {

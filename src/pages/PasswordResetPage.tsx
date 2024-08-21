@@ -22,6 +22,7 @@ const PasswordResetPage = () => {
   } = useForm({
     resolver: yupResolver(PasswordResetPageSchema),
   });
+  const token = localStorage.getItem("authToken");
 
   let url;
   if (process.env.NODE_ENV === "production") {
@@ -34,10 +35,14 @@ const PasswordResetPage = () => {
 
   const onSubmit = async (data: passwordResetTypes) => {
     try {
-      const response = await axios.post(`${url}/api/resetPassword`, {
-        email: userEmail,
-        password: data.password,
-      });
+      const response = await axios.post(
+        `${url}/api/resetPassword`,
+        {
+          email: userEmail,
+          password: data.password,
+        },
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
       setResponseMessage(response.data.message);
       console.log("responseeee", response.data);
       localStorage.removeItem("authToken");
