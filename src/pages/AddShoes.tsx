@@ -2,6 +2,7 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import addShoesSchema from "./addShoesSchema.js";
 import axios from "axios";
+import AddShoesInputFields from "../components/AddShoesInputFields";
 
 const AddShoes = ({ updateAllShoesForAdmin }: any) => {
   const {
@@ -71,98 +72,49 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
           className="mb-10 flex flex-col gap-2 border border-slate-400 px-5 py-5"
         >
           <h1 className="text-xl ">Add Shoes</h1>
-          <div className="w-full ">
-            <label className="block text-sm " htmlFor="brand">
-              brand
-            </label>
-            <input
-              className="w-full border border-slate-400  outline-green-300 "
-              type="text"
-              id="brand"
-              {...register("brand")}
-              name="brand"
-            />
-            {errors.brand && (
-              <p className="text-xs text-red">{errors.brand.message}</p>
-            )}
-          </div>
 
-          <div className="w-full">
-            <label className="block text-sm" htmlFor="model">
-              model
-            </label>
-            <input
-              className="w-full border  border-slate-400  outline-green-300  "
-              type="text"
-              id="model"
-              {...register("model")}
-              name="model"
-            />
-            {errors.model && (
-              <p className="text-xs text-red">{errors.model.message}</p>
-            )}
-          </div>
+          <AddShoesInputFields
+            label="Brand"
+            id="brand"
+            register={register}
+            errors={errors}
+          />
 
-          <div className="w-full">
-            <label className="block text-sm" htmlFor="gender">
-              gender
-            </label>
-            <input
-              className="w-full border  border-slate-400  outline-green-300  "
-              type="text"
-              id="gender"
-              {...register("gender")}
-              name="gender"
-            />
-            {errors.gender && (
-              <p className="text-xs text-red">{errors.gender.message}</p>
-            )}
-          </div>
-          <div className="w-full">
-            <label className="block text-sm" htmlFor="color">
-              color
-            </label>
-            <input
-              className="w-full border  border-slate-400   outline-green-300 "
-              type="text"
-              id="color"
-              {...register("color")}
-              name="color"
-            />
-            {errors.color && (
-              <p className="text-xs text-red">{errors.color.message}</p>
-            )}
-          </div>
-          <div className="w-full">
-            <label className="block text-sm " htmlFor="description">
-              description
-            </label>
-            <input
-              className="w-full border border-slate-400  outline-green-300 "
-              type="text"
-              id="description"
-              {...register("description")}
-              name="description"
-            />
-            {errors.description && (
-              <p className="text-xs text-red">{errors.description.message}</p>
-            )}
-          </div>
-          <div className="w-full">
-            <label className="block text-sm " htmlFor="price">
-              price
-            </label>
-            <input
-              className="w-full border border-slate-400  outline-green-300 "
-              type="text"
-              id="price"
-              {...register("price")}
-              name="price"
-            />
-            {errors.price && (
-              <p className="text-xs text-red">{errors.price.message}</p>
-            )}
-          </div>
+          <AddShoesInputFields
+            label="Model"
+            id="model"
+            register={register}
+            errors={errors}
+          />
+
+          <AddShoesInputFields
+            label="Gender"
+            id="gender"
+            register={register}
+            errors={errors}
+          />
+
+          <AddShoesInputFields
+            label="Color"
+            id="color"
+            register={register}
+            errors={errors}
+          />
+
+          <AddShoesInputFields
+            label="Description"
+            id="description"
+            register={register}
+            errors={errors}
+          />
+
+          <AddShoesInputFields
+            label="Price"
+            id="price"
+            register={register}
+            errors={errors}
+          />
+
           <div className="w-full">
             <label className="block text-sm" htmlFor="sizes">
               sizes
