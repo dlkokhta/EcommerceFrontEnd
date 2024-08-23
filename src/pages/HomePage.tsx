@@ -57,7 +57,7 @@ const HomePage = ({ updateAllShoesForAdmin }: any) => {
             <div>Mobile: +995555331167</div>
           </div>
           <div className="flex gap-5">
-            <div className="duration-400 relative h-6 w-6  cursor-pointer transition hover:-translate-y-1">
+            <div className="duration-600 relative h-6 w-6  cursor-pointer transition hover:-translate-y-1">
               <img
                 src={instagramHover ? instagramColor : instagram}
                 alt="instagramHover"
@@ -65,7 +65,7 @@ const HomePage = ({ updateAllShoesForAdmin }: any) => {
                 onMouseLeave={() => setInstagramHover(false)}
               />
             </div>
-            <div className="duration-400 relative h-6 w-6  cursor-pointer transition hover:-translate-y-1">
+            <div className="duration-600 relative h-6 w-6  cursor-pointer transition hover:-translate-y-1">
               <img
                 src={facebookHover ? facebookColor : facebook}
                 alt="Facebook"
@@ -73,7 +73,7 @@ const HomePage = ({ updateAllShoesForAdmin }: any) => {
                 onMouseLeave={() => setFacebookHover(false)}
               />
             </div>
-            <div className="duration-400 relative h-6 w-6  cursor-pointer transition hover:-translate-y-1">
+            <div className="duration-600 relative h-6 w-6  cursor-pointer transition hover:-translate-y-1">
               <img
                 src={xHover ? xSecond : x}
                 alt="x"
@@ -81,7 +81,7 @@ const HomePage = ({ updateAllShoesForAdmin }: any) => {
                 onMouseLeave={() => setXHover(false)}
               />
             </div>
-            <div className="duration-400 relative h-6 w-6  cursor-pointer transition hover:-translate-y-1">
+            <div className="duration-600 relative h-6 w-6  cursor-pointer transition hover:-translate-y-1">
               <img
                 src={linkedinHover ? linkedinColor : linkedin}
                 alt="linkedin"

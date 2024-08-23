@@ -39,7 +39,10 @@ const OTPPage = () => {
   };
   return (
     <div className="pt-10">
-      <h1 className="cursor-pointer text-center font-roboto font-medium">
+      <h1
+        onClick={() => navigate("/")}
+        className="cursor-pointer text-center font-roboto font-medium"
+      >
         eCommerce
       </h1>
 
