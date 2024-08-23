@@ -13,7 +13,6 @@ const AddShoesInputFields: React.FC<AddShoesInputFieldsTypes> = ({
   register,
   errors,
 }) => {
-  console.log("register", id);
   return (
     <div className="w-full">
       <label className="block text-sm" htmlFor={id}>

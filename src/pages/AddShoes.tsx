@@ -3,6 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import addShoesSchema from "./addShoesSchema.js";
 import axios from "axios";
 import AddShoesInputFields from "../components/AddShoesInputFields";
+import AddShoesSizesInputField from "../components/AddShoesSizesInputField.js";
 
 const AddShoes = ({ updateAllShoesForAdmin }: any) => {
   const {
@@ -31,10 +32,6 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
   }
 
   const onSubmit = async (data: any) => {
-    console.log(
-      "quantity",
-      data.sizes.map((item: any) => typeof item.quantity),
-    );
     const formData = new FormData();
     formData.append("brand", data.brand);
     formData.append("model", data.model);
@@ -115,44 +112,13 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
             errors={errors}
           />
 
-          <div className="w-full">
-            <label className="block text-sm" htmlFor="sizes">
-              sizes
-            </label>
-            {fields.map((item: any, index: any) => (
-              <div key={item.id} className="mb-2 flex items-center">
-                <input
-                  {...register(`sizes.${index}.size`, {
-                    required: "Size is required",
-                  })}
-                  placeholder="Size"
-                  className="mr-2 w-full border border-slate-400 outline-green-300"
-                />
-                <input
-                  type="number"
-                  {...register(`sizes.${index}.quantity`, {
-                    required: "Quantity is required",
-                  })}
-                  placeholder="Quantity"
-                  className="mr-2 w-full border border-slate-400  outline-green-300"
-                />
-                <button
-                  type="button"
-                  onClick={() => remove(index)}
-                  className="text-black hover:text-red"
-                >
-                  Remove
-                </button>
-              </div>
-            ))}
-            <button
-              type="button"
-              onClick={() => append({ size: "", quantity: "" })}
-              className="mt-2 w-full rounded-full bg-green-500 p-2 text-sm text-white"
-            >
-              Add Size
-            </button>
-          </div>
+          <AddShoesSizesInputField
+            register={register}
+            errors={errors}
+            fields={fields}
+            append={append}
+            remove={remove}
+          />
 
           <div className="w-full">
             <label className="block text-sm " htmlFor="image">
