@@ -4,6 +4,7 @@ import addShoesSchema from "./addShoesSchema.js";
 import axios from "axios";
 import AddShoesInputFields from "../components/AddShoesInputFields";
 import AddShoesSizesInputField from "../components/AddShoesSizesInputField.js";
+import AddShoesAddImageField from "../components/AddShoesAddImageField";
 
 const AddShoes = ({ updateAllShoesForAdmin }: any) => {
   const {
@@ -120,22 +121,7 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
             remove={remove}
           />
 
-          <div className="w-full">
-            <label className="block text-sm " htmlFor="image">
-              image
-            </label>
-            <input
-              className="w-full border border-slate-400  outline-green-300 "
-              type="file"
-              id="image"
-              {...register("image")}
-              name="image"
-              multiple
-            />
-            {errors.image && (
-              <p className="text-xs text-red">{errors.image.message}</p>
-            )}
-          </div>
+          <AddShoesAddImageField register={register} errors={errors} />
           <button className=" mt-3 w-full rounded-full bg-yellow-300  px-5 py-2 text-sm">
             Submit
           </button>
