@@ -8,33 +8,25 @@ import xSecond from "../assets/xSecond.png";
 import linkedinColor from "../assets/linkedinColor.png";
 import linkedin from "../assets/linkedin.png";
 import { useEffect, useState } from "react";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const HomePage = ({ updateAllShoesForAdmin }: any) => {
-  const token = localStorage.getItem("authToken");
   const [facebookHover, setFacebookHover] = useState(false);
   const [xHover, setXHover] = useState(false);
   const [linkedinHover, setLinkedinHover] = useState(false);
   const [instagramHover, setInstagramHover] = useState(false);
-
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    if (token) {
-      setLoading(true);
-    }
-  }, [token]);
-
+    setLoading(true);
+  }, []);
   setTimeout(() => setLoading(false), 700);
 
   return (
     <div>
       <ShoesForHomePage updateAllShoesForAdmin={updateAllShoesForAdmin} />
       <footer className="font-light lg:px-10">
-        {loading && (
-          <div className="fixed inset-0 z-50 flex h-full w-full items-center  justify-center bg-slate-400/20">
-            <div className="loading-spinner left-[50%] top-[40%]"></div>
-          </div>
-        )}
+        {loading && <LoadingSpinner />}
 
         <div>
           <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>

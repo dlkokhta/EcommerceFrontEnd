@@ -7,6 +7,7 @@ import axios from "axios";
 import { setCartItems } from "../store/cartItemsSlice";
 import { setrenderHeader } from "../store/headerRenderSlice.js";
 import { useDispatch } from "react-redux";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 interface CartItem {
   itemId: string;
@@ -209,11 +210,7 @@ const ShoesDetails = () => {
 
   return (
     <div className="relative mt-24">
-      {loading && (
-        <div className="fixed inset-0 z-50 flex h-full w-full items-center  justify-center bg-slate-400/20">
-          <div className="loading-spinner left-[50%] top-[40%]"></div>
-        </div>
-      )}
+      {loading && <LoadingSpinner />}
       <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 lg:px-60 3xl:px-[420px]">
         {shoesById.map((shoes) => (
           <div key={shoes.id}>

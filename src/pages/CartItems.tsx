@@ -7,6 +7,8 @@ import { useState } from "react";
 import { setrenderHeader } from "../store/headerRenderSlice.js";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../components/LoadingSpinner";
+import SuccessMessage from "../components/SuccessMessage";
 
 const CartItems = ({ handleGetCartItems }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -132,19 +134,8 @@ const CartItems = ({ handleGetCartItems }: any) => {
   return (
     <>
       <div className="mt-24">
-        {loading && (
-          <div className="fixed inset-0 z-50 flex h-full w-full items-center  justify-center bg-slate-400/20">
-            <div className="loading-spinner left-[50%] top-[40%]"></div>
-          </div>
-        )}
-        {success && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75">
-            <div className="w-1/3 rounded bg-white p-6 shadow-lg">
-              <h2 className="mb-4 text-lg font-bold">Success!</h2>
-              <p className="mb-4">{"Your purchase was successful!"}</p>
-            </div>
-          </div>
-        )}
+        {loading && <LoadingSpinner />}
+        {success && <SuccessMessage message="Your purchase was successful!" />}
         {cartItems && token ? (
           <div className="px-5 pt-5 md:grid-cols-2 md:gap-2 xl:mt-20 xl:grid-cols-3 xl:px-20 3xl:px-[400px]">
             {cartItems.map((item, index) => {
