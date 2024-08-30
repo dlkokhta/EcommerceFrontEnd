@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import RegistrationSuccess from "../components/RegistrationSuccess";
+import RegistrationInputField from "../components/RegistrationInputField";
 
 const Registration = () => {
   const [responseError, setResponseError] = useState<string | null>("");
@@ -69,21 +70,16 @@ const Registration = () => {
           className="mb-10 flex flex-col gap-4 border border-slate-400 px-5 py-5"
         >
           <h1 className="text-xl ">Create account</h1>
-          <div className="w-full ">
-            <label className="block text-sm " htmlFor="name">
-              Your name
-            </label>
-            <input
-              className={`w-full border  ${errors.name ? ` border-red` : ` border-slate-400`}   outline-none`}
-              type="text"
-              id="name"
-              {...register("name")}
-              name="name"
-            />
-            {errors.name && (
-              <div className="text-xs text-red">{errors.name.message}</div>
-            )}
-          </div>
+
+          <RegistrationInputField
+            label="Your name"
+            errors={errors.name}
+            type="text"
+            id="name"
+            register={register}
+            name="name"
+            errorMessage={errors.name?.message}
+          />
 
           <div className="w-full">
             <label className="block text-sm" htmlFor="email">
@@ -104,38 +100,27 @@ const Registration = () => {
               )
             )}
           </div>
-          <div className="w-full">
-            <label className="block text-sm" htmlFor="password">
-              password
-            </label>
-            <input
-              className={`w-full border ${errors.password ? `border-red` : `border-slate-400`} outline-none`}
-              type="password"
-              id="password"
-              {...register("password")}
-              name="password"
-            />
-            {errors.password && (
-              <div className="text-xs text-red">{errors.password.message}</div>
-            )}
-          </div>
-          <div className="w-full">
-            <label className="block text-sm " htmlFor="confirm-password">
-              Repeat Password
-            </label>
-            <input
-              className={`w-full border ${errors.repeatPassword ? `border-red` : `border-slate-400`} outline-none`}
-              type="password"
-              id="confirm-password"
-              {...register("repeatPassword")}
-              name="repeatPassword"
-            />
-            {errors.repeatPassword && (
-              <div className="text-xs text-red">
-                {errors.repeatPassword.message}
-              </div>
-            )}
-          </div>
+
+          <RegistrationInputField
+            label="password"
+            errors={errors.password}
+            type="password"
+            id="password"
+            register={register}
+            name="password"
+            errorMessage={errors.password?.message}
+          />
+
+          <RegistrationInputField
+            label="Repeat Password"
+            errors={errors.repeatPassword}
+            type="password"
+            id="confirm-password"
+            register={register}
+            name="repeatPassword"
+            errorMessage={errors.repeatPassword?.message}
+          />
+
           <button className=" w-full rounded-xl bg-yellow-300 px-5 py-2  text-sm hover:bg-yellow-400">
             Submit
           </button>
