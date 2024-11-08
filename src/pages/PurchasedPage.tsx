@@ -19,7 +19,7 @@ const PurchasedPage = () => {
 
   let url;
   if (process.env.NODE_ENV === "production") {
-    url = `https://ecommerceapi-production-7d9c.up.railway.app`;
+    url = `https://dimitrikokhtashvili.site`;
   } else {
     url = `http://localhost:3000`;
   }

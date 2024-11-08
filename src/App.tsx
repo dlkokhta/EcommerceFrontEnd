@@ -26,7 +26,7 @@ function App() {
 
   let url;
   if (process.env.NODE_ENV === "production") {
-    url = `https://ecommerceapi-production-7d9c.up.railway.app/api`;
+    url = `https://dimitrikokhtashvili.site/api`;
   } else {
     url = `http://localhost:3000/api`;
   }
