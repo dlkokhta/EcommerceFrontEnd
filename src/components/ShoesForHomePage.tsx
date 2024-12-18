@@ -50,18 +50,13 @@ const ShoesForHomePage = ({ updateAllShoesForAdmin }: any) => {
           {filteredShoes.map((shoes, index) => (
             <div
               key={index}
-              className="duration-400 transition hover:-translate-y-2"
+             
             >
-              {/* className={`duration-400 transition hover:-translate-y-2 ${
-                index % 4 < 2
-                  ? "animate-slide-in-left"
-                  : "animate-slide-in-right"
-              } `} */}
-              <div className="mb-2">
+              <div className="mb-2 overflow-hidden group">
                 {shoes.image.slice(0, 1).map((image, index) => (
                   <div key={index} className="">
                     <img
-                      className="cursor-pointer xl:max-h-[429px]"
+                      className="cursor-pointer xl:max-h-[429px] transition-transform duration-700  transform group-hover:filter-none group-hover:scale-105"
                       src={`${url}/public/storage/images/${image}`}
                       alt={image}
                       onClick={() =>

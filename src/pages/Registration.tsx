@@ -64,7 +64,7 @@ const Registration = () => {
         eCommerce
       </h1>
 
-      <div className="px-16 pt-16 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[600px]">
+      <div className="px-16 pt-16 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[700px] 3xl:px-[750px]">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mb-10 flex flex-col gap-4 border border-slate-400 px-5 py-5"
