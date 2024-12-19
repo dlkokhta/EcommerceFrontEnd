@@ -12,6 +12,13 @@ export default {
         semyDarck: "#161D2F",
         white: "#FFFFFF",
       },
+
+      boxShadow: {
+        "inner-all-sides":
+          "inset 0 2px 5px rgba(0, 0, 0, 0.1), inset 0 -2px 5px rgba(0, 0, 0, 0), inset -2px 0 5px rgba(0, 0, 0, 0.1), inset 2px 0 5px rgba(0, 0, 0, 0.1)",
+        "outer-all-sides":
+          "0 4px 10px rgba(0, 0, 0, 0.05), 4px 0 10px rgba(0, 0, 0, 0.05), -4px 0 10px rgba(0, 0, 0, 0.05), 0 -4px 10px rgba(0, 0, 0, 0.05)",
+      },
     },
 
     fontFamily: {
@@ -24,6 +31,7 @@ export default {
       medium: 500,
       bold: 700,
     },
+    
 
     // <uniquifier>: Use a unique and descriptive class name
 

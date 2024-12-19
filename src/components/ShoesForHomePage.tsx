@@ -46,17 +46,17 @@ const ShoesForHomePage = ({ updateAllShoesForAdmin }: any) => {
   return (
     <div className="mt-24">
       {allShoes && allShoes.length > 0 ? (
-        <div className="mt-5 px-5 pt-5 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-4 lg:px-10 2xl:grid-cols-4">
+        <div className="mt-5 px-5 pt-5 sm:px-14 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-4 lg:px-10 2xl:grid-cols-4">
           {filteredShoes.map((shoes, index) => (
             <div
               key={index}
-             
+             className="border transition-transform duration-500 transform hover:scale-105 hover:shadow-outer-all-sides rounded-xl mb-5 sm:mb-8 md:mb-2"
             >
-              <div className="mb-2 overflow-hidden group">
+              <div className="mb-2 ">
                 {shoes.image.slice(0, 1).map((image, index) => (
                   <div key={index} className="">
                     <img
-                      className="cursor-pointer xl:max-h-[429px] transition-transform duration-700  transform group-hover:filter-none group-hover:scale-105"
+                      className="cursor-pointer xl:max-h-[429px] w-full "
                       src={`${url}/public/storage/images/${image}`}
                       alt={image}
                       onClick={() =>
@@ -70,7 +70,7 @@ const ShoesForHomePage = ({ updateAllShoesForAdmin }: any) => {
                 ))}
               </div>
 
-              <div className="mb-10 font-roboto text-sm font-light">
+              <div className="mb-2 font-roboto text-sm font-light">
                 {shoes.isShoesNew && (
                   <div className="text-sm font-bold text-red">New</div>
                 )}
