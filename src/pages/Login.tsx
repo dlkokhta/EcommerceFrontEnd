@@ -85,7 +85,7 @@ const Login = ({ handleGetCartItems }: any) => {
   };
 
   return (
-    <div className="pt-10">
+    <div className="pt-10 px-16 sm:px-40 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[600px] 3xl:px-[750px]  4xl:px-[790px]">
       <h1
         onClick={() => navigate("/")}
         className="cursor-pointer text-center font-roboto font-medium"
@@ -93,7 +93,7 @@ const Login = ({ handleGetCartItems }: any) => {
         eCommerce
       </h1>
 
-      <div className="px-16 pt-16 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[700px] 3xl:px-[750px]">
+      <div className="pt-16">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mb-5 flex flex-col gap-3 border border-slate-400 px-5 py-5"
@@ -154,7 +154,7 @@ const Login = ({ handleGetCartItems }: any) => {
         </form>
       </div>
 
-      <div className="px-16 md:px-60 lg:px-[350px] xl:px-[470px] 2xl:px-[580px] 3xl:px-[750px]">
+      <div className="">
         <button
           onClick={() => handleClick("/registration")}
           className="mb-5 w-full rounded-xl bg-gradient-to-r from-transparent via-slate-200  to-transparent px-5 py-2  text-sm hover:via-slate-300"

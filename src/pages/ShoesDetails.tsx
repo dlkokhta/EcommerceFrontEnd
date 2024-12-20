@@ -211,10 +211,10 @@ const ShoesDetails = () => {
   return (
     <div className="relative mt-24">
       {loading && <LoadingSpinner />}
-      <div className="mt-5 px-10 pb-5 pt-5 md:grid-cols-2 md:gap-2 lg:px-60 3xl:px-[420px]">
+      <div className="mt-5 px-10 pb-5 pt-5 sm:px-28 lg:px-20 xl:px-40 2xl:px-[250px] 3xl:px-[420px]">
         {shoesById.map((shoes) => (
           <div key={shoes.id}>
-            <div className="md:flex md:gap-10 lg:gap-20 xl:gap-[100px] ">
+            <div className="lg:flex md:gap-10 lg:gap-20 xl:gap-[100px] ">
               <div className="flex flex-col">
                 <div className="mb-2">
                   {shoes.image.slice(0, 1).map((image, index) => (
