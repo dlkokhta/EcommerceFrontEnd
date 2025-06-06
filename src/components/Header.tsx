@@ -140,7 +140,7 @@ const Header = () => {
                 <div
                   onMouseEnter={() => setNewHovered(true)}
                   onMouseLeave={() => setNewHovered(false)}
-                  className=" duration-400 cursor-pointer transition hover:-translate-y-1"
+                  className=" duration-400 cursor-pointer transition"
                   onClick={() => {
                     navigate("/");
                     setDestMenu("New");
@@ -159,7 +159,7 @@ const Header = () => {
                 <div
                   onMouseEnter={() => setAllHovered(true)}
                   onMouseLeave={() => setAllHovered(false)}
-                  className=" duration-400 cursor-pointer transition hover:-translate-y-1"
+                  className=" duration-400 cursor-pointer transition "
                   onClick={() => {
                     navigate("/");
                     setDestMenu("All");
@@ -178,7 +178,7 @@ const Header = () => {
                 <div
                   onMouseEnter={() => setMenHovered(true)}
                   onMouseLeave={() => setMenHovered(false)}
-                  className=" duration-400 cursor-pointer items-center transition hover:-translate-y-1"
+                  className=" duration-400 cursor-pointer items-center transition "
                   onClick={() => {
                     navigate("/");
                     setDestMenu("Men"), menClickhandler();
@@ -197,7 +197,7 @@ const Header = () => {
                 <div
                   onMouseEnter={() => setWomenHovered(true)}
                   onMouseLeave={() => setWomenHovered(false)}
-                  className=" duration-400 cursor-pointer transition hover:-translate-y-1"
+                  className=" duration-400 cursor-pointer transition "
                   onClick={() => {
                     setDestMenu("Women");
                     womenClickhandler();
@@ -217,7 +217,7 @@ const Header = () => {
                 <div
                   onMouseEnter={() => setAboutHovered(true)}
                   onMouseLeave={() => setAboutHovered(false)}
-                  className=" duration-400 cursor-pointer transition hover:-translate-y-1"
+                  className=" duration-400 cursor-pointer transition "
                   onClick={() => {
                     setDestMenu("About");
                     navigate("/");

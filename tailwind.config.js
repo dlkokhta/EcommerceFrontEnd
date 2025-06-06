@@ -31,7 +31,6 @@ export default {
       medium: 500,
       bold: 700,
     },
-    
 
     // <uniquifier>: Use a unique and descriptive class name
 
