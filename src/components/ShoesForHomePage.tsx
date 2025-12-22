@@ -25,7 +25,7 @@ const ShoesForHomePage = ({ updateAllShoesForAdmin }: any) => {
 
   let url;
   if (process.env.NODE_ENV === "production") {
-    url = `https://dimitrikokhtashvili.site`;
+    url = `https://api.shop.dimitrikokhtashvili.com`;
   } else {
     url = `http://localhost:3000`;
   }
