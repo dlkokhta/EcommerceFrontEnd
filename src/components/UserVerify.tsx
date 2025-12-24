@@ -14,7 +14,7 @@ const UserVerify = () => {
     if (param) {
       let url;
       if (process.env.NODE_ENV === "production") {
-        url = `https://api.shop.dimitrikokhtashvili.com`;
+        url = `https://api.shop.dimitrikokhtashvili.com/api`;
       } else {
         url = `http://localhost:3000`;
       }
