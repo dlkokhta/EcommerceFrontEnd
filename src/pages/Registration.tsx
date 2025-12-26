@@ -37,7 +37,9 @@ const Registration = () => {
     };
 
     try {
-      const response = await axios.post(`${url}/api/register`, userData);
+      const response = await axios.post(`${url}/api/register`, userData, {
+        withCredentials: true,
+      });
       setResponseMessage(response.data.message);
       reset();
     } catch (error: any) {

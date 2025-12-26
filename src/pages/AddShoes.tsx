@@ -52,6 +52,7 @@ const AddShoes = ({ updateAllShoesForAdmin }: any) => {
     try {
       await axios.post(`${url}/api/addItem`, formData, {
         headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
       await updateAllShoesForAdmin();
 

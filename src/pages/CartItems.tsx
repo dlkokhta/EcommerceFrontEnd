@@ -79,6 +79,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
     try {
       await axios.delete(`${url}/api/deleteShoes/${userEmail}/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
       await handleGetCartItems();
     } catch (error) {
@@ -111,6 +112,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
     try {
       await axios.post(`${url}/api/purchased`, payload, {
         headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
 
       handleGetCartItems();

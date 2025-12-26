@@ -20,6 +20,7 @@ const ShoesListAdminPanel = ({ updateAllShoesForAdmin }: any) => {
     try {
       await axios.delete(`${url}/api/deleteShoesByAdmin/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
       await updateAllShoesForAdmin();
     } catch (error) {

@@ -15,6 +15,7 @@ const UsersListForAdminPanel = () => {
     try {
       const response = await axios.get(`${url}/api/getAllUsers`, {
         headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
       setFetchedusers(response.data);
     } catch (error) {
@@ -29,6 +30,7 @@ const UsersListForAdminPanel = () => {
   const handleClick = async (userid: string) => {
     await axios.delete(`${url}/api/deleteUserByAdmin/${userid}`, {
       headers: { Authorization: `Bearer ${token}` },
+      withCredentials: true,
     });
     fetchusers();
   };

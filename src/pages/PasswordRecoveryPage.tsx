@@ -30,6 +30,8 @@ const PasswordRecoveryPage = () => {
     try {
       await axios.post(`${url}/api/GenerateOTP`, {
         email: data.email,
+      }, {
+        withCredentials: true,
       });
 
       navigate("/OTP");

@@ -21,7 +21,9 @@ const UserVerify = () => {
       navigate("/login");
       const sendRandomString = async () => {
         try {
-          await axios.post(`${url}/api/verify`, { param: param });
+          await axios.post(`${url}/api/verify`, { param: param }, {
+            withCredentials: true,
+          });
           navigate("/login");
         } catch (error: any) {
           console.error(

@@ -98,6 +98,7 @@ const ShoesDetails = () => {
     try {
       const response = await axios.get(`${url}/api/getCartItems/${userEmail}`, {
         headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
       dispatch(setCartItems(response.data.cartItems));
       setCartItemsFromResponse(response.data.cartItems);
@@ -195,8 +196,10 @@ const ShoesDetails = () => {
             },
           ],
         },
-
-        { headers: { Authorization: `Bearer ${token}` } },
+        { 
+          headers: { Authorization: `Bearer ${token}` },
+          withCredentials: true,
+        },
       );
 
       fetchItems();

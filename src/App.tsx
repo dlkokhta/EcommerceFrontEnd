@@ -39,8 +39,11 @@ function App() {
   useEffect(() => {
     const fetchAllShoes = async () => {
       try {
-        const response = await axios.get(`${url}/getAllShoes`);
+        const response = await axios.get(`${url}/getAllShoes`, {
+          withCredentials: true,
+        });
         dispatch(setAllShoes(response.data));
+        console.log("all shoes fetched", response.data.length);
       } catch (error) {
         console.error(error);
       }
@@ -55,6 +58,7 @@ function App() {
     try {
       const response = await axios.get(`${url}/getCartItems/${userEmail}`, {
         headers: { Authorization: `Bearer ${token}`, Email: userEmail },
+        withCredentials: true,
       });
 
       dispatch(setCartItems(response.data.cartItems));

@@ -41,7 +41,9 @@ const Login = ({ handleGetCartItems }: any) => {
     };
 
     try {
-      const response = await axios.post(`${url}/api/login`, userData);
+      const response = await axios.post(`${url}/api/login`, userData, {
+        withCredentials: true,
+      });
 
       if (response.data.role === "admin") {
         navigate("/adminPanel");
@@ -66,8 +68,10 @@ const Login = ({ handleGetCartItems }: any) => {
           email: data.email,
           cartItems: formattedCartItems,
         },
-
-        { headers: { Authorization: `Bearer ${token}` } },
+        { 
+          headers: { Authorization: `Bearer ${token}` },
+          withCredentials: true,
+        },
       );
       localStorage.removeItem("guestCart");
       handleGetCartItems();

@@ -29,6 +29,8 @@ const OTPPage = () => {
     try {
       await axios.post(`${url}/api/recoverPassword`, {
         otp: data.otp,
+      }, {
+        withCredentials: true,
       });
 
       navigate("/login");

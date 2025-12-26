@@ -41,7 +41,10 @@ const PasswordResetPage = () => {
           email: userEmail,
           password: data.password,
         },
-        { headers: { Authorization: `Bearer ${token}` } },
+        { 
+          headers: { Authorization: `Bearer ${token}` },
+          withCredentials: true,
+        },
       );
       setResponseMessage(response.data.message);
       console.log("responseeee", response.data);

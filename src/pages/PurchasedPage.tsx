@@ -31,6 +31,7 @@ const PurchasedPage = () => {
       try {
         const response = await axios.get(`${url}/api/purchaseGet/${email}`, {
           headers: { Authorization: `Bearer ${token}` },
+          withCredentials: true,
         });
         setPurchasedItems(response.data);
       } catch (error) {
