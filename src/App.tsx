@@ -40,7 +40,11 @@ function App() {
     const fetchAllShoes = async () => {
       try {
         const response = await axios.get(`${url}/getAllShoes`);
-        dispatch(setAllShoes(response.data));
+        if (Array.isArray(response.data)) {
+          dispatch(setAllShoes(response.data));
+        } else {
+          console.error("getAllShoes did not return an array", response.data);
+        }
       } catch (error) {
         console.error(error);
       }

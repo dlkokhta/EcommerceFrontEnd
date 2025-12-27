@@ -30,7 +30,7 @@ const ShoesForHomePage = ({ updateAllShoesForAdmin }: any) => {
     url = `http://localhost:3000`;
   }
 
-  const filteredShoes = allShoes.filter((shoe) => {
+  const filteredShoes = Array.isArray(allShoes) ? allShoes.filter((shoe) => {
     const genderMatch = shoesFilter ? shoe.gender === shoesFilter : true;
     const brandMatch = shoesFilterByBrand
       ? shoe.brand
@@ -41,7 +41,7 @@ const ShoesForHomePage = ({ updateAllShoesForAdmin }: any) => {
 
     const newShoesMatch = isShoesNew ? shoe.isShoesNew === isShoesNew : true;
     return genderMatch && brandMatch && newShoesMatch;
-  });
+  }) : [];
 
   return (
     <div className="mt-24">
