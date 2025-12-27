@@ -26,7 +26,7 @@ function App() {
 
   let url;
   if (process.env.NODE_ENV === "production") {
-    url = `https://api.shop.dimitrikokhtashvili.com/api`;
+    url = `https://api.shop.dimitrikokhtashvili.com`;
   } else {
     url = `http://localhost:3000/api`;
   }
@@ -39,11 +39,8 @@ function App() {
   useEffect(() => {
     const fetchAllShoes = async () => {
       try {
-        const response = await axios.get(`${url}/getAllShoes`, {
-          withCredentials: true,
-        });
+        const response = await axios.get(`${url}/getAllShoes`);
         dispatch(setAllShoes(response.data));
-        console.log("all shoes fetched", response.data.length);
       } catch (error) {
         console.error(error);
       }
@@ -53,8 +50,13 @@ function App() {
 
   const handleGetCartItems = async () => {
     const userEmail = localStorage.getItem("data.email");
-
     const token = localStorage.getItem("authToken");
+    
+    // Check for null, undefined, or string "null"
+    if (!userEmail || !token || userEmail === "null" || token === "null") {
+      return;
+    }
+
     try {
       const response = await axios.get(`${url}/getCartItems/${userEmail}`, {
         headers: { Authorization: `Bearer ${token}`, Email: userEmail },
@@ -67,7 +69,9 @@ function App() {
     }
   };
 
-  handleGetCartItems();
+  useEffect(() => {
+    handleGetCartItems();
+  }, []);
 
   return (
     <div>
