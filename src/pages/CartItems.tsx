@@ -48,7 +48,7 @@ const CartItems = ({ handleGetCartItems }: any) => {
 
   let url;
   if (process.env.NODE_ENV === "production") {
-    url = `https://api.shop.dimitrikokhtashvili.com/api`;
+    url = `https://api.shop.dimitrikokhtashvili.com`;
   } else {
     url = `http://localhost:3000`;
   }
